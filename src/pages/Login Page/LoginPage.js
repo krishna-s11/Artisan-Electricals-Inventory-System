@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import './loginPage.css'
 import imgCover from '../../assets/login-cover3.jpg'
+import {Link} from 'react-router-dom'
+
 const LoginPage = () => {
 
     const [start,setStart] = useState(false);
@@ -45,7 +47,7 @@ const LoginPage = () => {
                         <label for="password" class="form__label">Password</label>
                     </div>
                     </div>
-                    <button className='btn btn-login'>Login</button>
+                    <Link to='/dashboard'><button className='btn btn-login'>Login</button></Link>
                 </div>
                 <div class='cover-lg'>
                         <img src={imgCover} className='cover-img'></img>

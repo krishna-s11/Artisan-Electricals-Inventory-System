@@ -3,3 +3,12 @@
   height: 100vh;
   background-color: #3c6198;
 }
+.company-logo-lp {
+  width: 100%;
+  padding: 20px;
+  color: #fff;
+  background-color: #334f79;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 18px;
+}

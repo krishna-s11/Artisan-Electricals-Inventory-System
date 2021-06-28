@@ -1,10 +1,15 @@
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/Login Page/LoginPage';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <LoginPage/>
+      <Switch>
+        <Route exact path='/' component={LoginPage}/>
+        <Route exact path='/dashboard' component={Dashboard}/>
+      </Switch>
     </div>
   );
 }
