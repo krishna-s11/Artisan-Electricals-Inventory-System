@@ -120,13 +120,18 @@
   display: flex;
   position: relative;
   padding: 20px;
+  align-items: center;
 }
 .cover-lg h3 {
   margin: 30px auto;
   font-size: 35px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  display: flex;
+  align-items: center;
   word-wrap: break-word;
+  background-color: rgba(255, 255, 255, 0.4);
+  height: 150px;
 }
 
 .cover-container {
@@ -141,8 +146,8 @@
   top: 0;
   left: 0;
   z-index: -1;
-  /* -webkit-filter: brightness(60%);
-  filter: brightness(80%); */
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
 }
 
 @keyframes slide {

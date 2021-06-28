@@ -49,7 +49,7 @@ const LoginPage = () => {
                 </div>
                 <div class='cover-lg'>
                         <img src={imgCover} className='cover-img'></img>
-                        {/* <h3>Artisan inventory system</h3> */}
+                        <h3>Artisan inventory system</h3>
                 </div>
             </div>
         </div>
