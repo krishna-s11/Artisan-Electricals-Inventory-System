@@ -92,9 +92,6 @@
   display: block;
   transition: all 0.3s ease;
 }
-.btn {
-  border: none;
-}
 .btn-login {
   background-color: #fca311;
   color: #fff;

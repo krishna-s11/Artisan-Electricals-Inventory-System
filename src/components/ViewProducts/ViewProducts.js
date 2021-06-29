@@ -1,12 +1,19 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './viewProducts.css'
 import {FaSearch} from 'react-icons/fa'
 import tool1 from '../../assets/tool-1.jpg'
 import tool2 from '../../assets/tool-2.jpg'
+import AddProducts from '../AddProducts/AddProducts'
 
 const ViewProducts = () => {
+
+    const [display,setDisplay] = useState(false);
+
     return (
         <div className='view-products'>
+            {
+                display?<AddProducts close={() => {setDisplay(false)}} />:null
+            }
             <div className='vp-top'>
                 <h2>Inventory list</h2>
                 <div className='vp-action-bar'>
@@ -14,7 +21,7 @@ const ViewProducts = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items'>New +</button>
+                    <button className='btn btn-add_items' onClick={() => setDisplay(true)}>New +</button>
                 </div>
             </div>
                 <table class="fl-table">

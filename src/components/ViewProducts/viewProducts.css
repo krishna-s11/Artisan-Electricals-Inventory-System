@@ -3,6 +3,7 @@
   height: 80vh;
   padding: 30px;
   padding-left: 50px;
+  position: relative;
 }
 .vp-top {
   width: 100%;
@@ -34,14 +35,14 @@
 }
 .input-search {
   height: 50px;
-  width: 50px;
+  width: 300px;
   border-style: none;
   padding: 10px;
   font-size: 16px;
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: #22a6b3;
+  background-color: #fff;
   padding-right: 40px;
   color: #555;
 }
