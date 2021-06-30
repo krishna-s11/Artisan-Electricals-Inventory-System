@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './leftPane.css'
+import {Link} from 'react-router-dom'
 import inventory from '../../assets/inventory-ico.png';
 import order from '../../assets/order-ico.png';
 import reports from '../../assets/reports-ico.png';
@@ -14,6 +15,8 @@ const LeftPane = ({mobileNav}) => {
         transition: 'all 0.5s',
     }
 
+    const [filter,setFilter] = useState(0);
+
     return (
         <div className = 'left-pane' style={mobileNav?mobileSide:desktopSide}>
             {
@@ -27,39 +30,39 @@ const LeftPane = ({mobileNav}) => {
                 </div>
             }
             <ul className='side-nav' style={mobileNav?{transform: 'translateX(-5px)', width: '109%'}:null}>
-                    <li>
+                    <Link to='/dashboard/products'><li onClick={() => setFilter(0)} style={{backgroundColor: filter === 0 ? '#2e538a' : null}} >
                         <span>
                             <img src={inventory}></img>
                         </span>
                         {
                             !mobileNav?<p>Inventory Management</p>:null
                         }
-                    </li>
-                    <li>
+                    </li></Link>
+                    <Link to='/dashboard/orders'><li onClick={() => setFilter(1)} style={{backgroundColor: filter === 1 ? '#2e538a' : null}}>
                         <span>
                             <img src={order}></img>
                         </span>
                         {
-                            !mobileNav?<p>Order Form</p>:null
+                            !mobileNav?<p>Orders</p>:null
                         }
-                    </li>
-                    <li>
+                    </li></Link>
+                    <Link to='/dashboard/reports'><li onClick={() => setFilter(2)} style={{backgroundColor: filter === 2 ? '#2e538a' : null}}>
                         <span>
                             <img src={reports}></img>
                         </span>
                         {
                             !mobileNav?<p>Reports</p>:null
                         }
-                    </li>
-                    <li>
+                    </li></Link>
+                    <Link to='/dashboard/settings'><li onClick={() => setFilter(3)} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
                         <span>
                             <img src={inventory}></img>
                         </span>
                         {
                             !mobileNav?<p>Settings</p>:null
                         }
-                    </li>
-                    <li>
+                    </li></Link>
+                    <Link to='/dashboard/services'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
                         <span>
                             <img src={inventory}></img>
                         </span>
@@ -67,6 +70,7 @@ const LeftPane = ({mobileNav}) => {
                             !mobileNav?<p>Services</p>:null
                         }
                     </li>
+                    </Link>
                 </ul>
         </div>
     )

@@ -9,3 +9,7 @@
   border: none;
   cursor: pointer;
 }
+ul a {
+  text-decoration: none;
+  color: #fff;
+}

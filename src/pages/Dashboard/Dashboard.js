@@ -9,7 +9,7 @@ const Dashboard = () => {
     return (
         <div className='dashboard'>
             <LeftPane mobileNav={mobileNav} />
-            <RightPane setView ={() => {setMobileNav(!mobileNav)}}/>
+            <RightPane setView={() => setMobileNav(!mobileNav)} />
         </div>
     )
 }
