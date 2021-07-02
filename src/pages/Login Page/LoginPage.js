@@ -47,7 +47,7 @@ const LoginPage = () => {
                         <label for="password" class="form__label">Password</label>
                     </div>
                     </div>
-                    <Link to='/dashboard'><button className='btn btn-login'>Login</button></Link>
+                    <Link to='/dashboard/products'><button className='btn btn-login'>Login</button></Link>
                 </div>
                 <div class='cover-lg'>
                         <img src={imgCover} className='cover-img'></img>

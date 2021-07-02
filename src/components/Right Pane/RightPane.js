@@ -4,6 +4,8 @@ import {Switch,Route} from 'react-router-dom'
 import TopPane from '../TopPane/TopPane'
 import ViewProducts from '../ViewProducts/ViewProducts'
 import OrderList from '../OrderList/OrderList'
+import Reports from '../ReportDashboard/Reports'
+import Profile from '../Profile/Profile'
 
 const RightPane = ({setView}) => {
     return (
@@ -19,6 +21,16 @@ const RightPane = ({setView}) => {
                     exact
                     path='/dashboard/orders'
                     component={OrderList}
+                />
+                <Route
+                    exact
+                    path='/dashboard/reports'
+                    component={Reports}
+                />
+                <Route
+                    exact
+                    path='/dashboard/profile'
+                    component={Profile}
                 />
             </Switch>
         </div>

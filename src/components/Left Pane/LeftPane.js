@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import inventory from '../../assets/inventory-ico.png';
 import order from '../../assets/order-ico.png';
 import reports from '../../assets/reports-ico.png';
+import projects from '../../assets/project-ico.png';
 
 const LeftPane = ({mobileNav}) => {
 
@@ -54,15 +55,15 @@ const LeftPane = ({mobileNav}) => {
                             !mobileNav?<p>Reports</p>:null
                         }
                     </li></Link>
-                    <Link to='/dashboard/settings'><li onClick={() => setFilter(3)} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
+                    <Link to='/dashboard/Projects'><li onClick={() => setFilter(3)} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
                         <span>
-                            <img src={inventory}></img>
+                            <img src={projects}></img>
                         </span>
                         {
-                            !mobileNav?<p>Settings</p>:null
+                            !mobileNav?<p>Projects</p>:null
                         }
                     </li></Link>
-                    <Link to='/dashboard/services'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
+                    {/* <Link to='/dashboard/services'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
                         <span>
                             <img src={inventory}></img>
                         </span>
@@ -70,7 +71,7 @@ const LeftPane = ({mobileNav}) => {
                             !mobileNav?<p>Services</p>:null
                         }
                     </li>
-                    </Link>
+                    </Link> */}
                 </ul>
         </div>
     )

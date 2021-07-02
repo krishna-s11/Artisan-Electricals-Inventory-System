@@ -1,0 +1,61 @@
+.reports-pg {
+  width: 100%;
+  padding: 30px;
+  padding-left: 50px;
+  position: relative;
+}
+.stat-top-sec {
+  width: 100%;
+  background-color: white;
+  margin-top: 20px;
+  display: flex;
+}
+.top-stats {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+.top-stats p {
+  font-weight: 600;
+}
+#order-req-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(97, 126, 233);
+  padding: 30px 0;
+  height: 100%;
+}
+.req-stat-top {
+  display: flex;
+}
+.req-stat-top img {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+#approved-stat {
+  display: flex;
+  background-color: rgb(247, 212, 107);
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  height: 100%;
+}
+#pending-stat {
+  display: flex;
+  background-color: rgb(140, 227, 250);
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  height: 100%;
+}
+#rejected-stat {
+  display: flex;
+  background-color: rgb(253, 137, 138);
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  height: 100%;
+}
