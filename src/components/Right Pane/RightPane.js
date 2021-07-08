@@ -6,6 +6,7 @@ import ViewProducts from '../ViewProducts/ViewProducts'
 import OrderList from '../OrderList/OrderList'
 import Reports from '../ReportDashboard/Reports'
 import Profile from '../Profile/Profile'
+import ProjectManagement from '../ProjectManagement/ProjectManagement'
 
 const RightPane = ({setView}) => {
     return (
@@ -31,6 +32,11 @@ const RightPane = ({setView}) => {
                     exact
                     path='/dashboard/profile'
                     component={Profile}
+                />
+                <Route
+                    exact
+                    path='/dashboard/manage-projects'
+                    component={ProjectManagement}
                 />
             </Switch>
         </div>

@@ -33,7 +33,7 @@ const LeftPane = ({mobileNav}) => {
             <ul className='side-nav' style={mobileNav?{transform: 'translateX(-5px)', width: '109%'}:null}>
                     <Link to='/dashboard/products'><li onClick={() => setFilter(0)} style={{backgroundColor: filter === 0 ? '#2e538a' : null}} >
                         <span>
-                            <img src={inventory}></img>
+                            <img alt='' src={inventory}></img>
                         </span>
                         {
                             !mobileNav?<p>Inventory Management</p>:null
@@ -41,7 +41,7 @@ const LeftPane = ({mobileNav}) => {
                     </li></Link>
                     <Link to='/dashboard/orders'><li onClick={() => setFilter(1)} style={{backgroundColor: filter === 1 ? '#2e538a' : null}}>
                         <span>
-                            <img src={order}></img>
+                            <img alt='' src={order}></img>
                         </span>
                         {
                             !mobileNav?<p>Orders</p>:null
@@ -49,15 +49,15 @@ const LeftPane = ({mobileNav}) => {
                     </li></Link>
                     <Link to='/dashboard/reports'><li onClick={() => setFilter(2)} style={{backgroundColor: filter === 2 ? '#2e538a' : null}}>
                         <span>
-                            <img src={reports}></img>
+                            <img alt='' src={reports}></img>
                         </span>
                         {
                             !mobileNav?<p>Reports</p>:null
                         }
                     </li></Link>
-                    <Link to='/dashboard/Projects'><li onClick={() => setFilter(3)} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
+                    <Link to='/dashboard/manage-projects'><li onClick={() => setFilter(3)} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
                         <span>
-                            <img src={projects}></img>
+                            <img alt='' src={projects}></img>
                         </span>
                         {
                             !mobileNav?<p>Projects</p>:null

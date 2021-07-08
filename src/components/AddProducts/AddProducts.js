@@ -4,6 +4,9 @@ import {AiOutlineClose} from 'react-icons/ai'
 import {RiImageAddFill} from 'react-icons/ri'
 
 const AddProducts = ({close}) => {
+
+
+
     return (
         <div className='add-products'>
             <div className='add-products-card'>
@@ -45,7 +48,7 @@ const AddProducts = ({close}) => {
                             </div>
                         </div>
                         <div className='add-group'>
-                            <p style={{fontWeight: '600'}}>Units of management:</p>
+                            <p style={{fontWeight: '600'}}>Units of measurement:</p>
                             <input type="text" class="form__input" id="add-input" placeholder="Unit" required></input>
                         </div>
                         <div className='add-group sub-category'>

@@ -25,7 +25,7 @@ const NewOrder = ({close}) => {
                             <input type="text" class="form__input order" id="add-input" placeholder="Address Line 3" required></input>
                         </div>
                         <div className='form-row'>
-                            <p>Needed by:</p>
+                            <p>Required by:</p>
                             <input type="date" class="form__input order" id="add-input" placeholder="Category" required></input>
                         </div>
                     </div>

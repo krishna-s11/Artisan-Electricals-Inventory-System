@@ -50,7 +50,7 @@ const LoginPage = () => {
                     <Link to='/dashboard/products'><button className='btn btn-login'>Login</button></Link>
                 </div>
                 <div class='cover-lg'>
-                        <img src={imgCover} className='cover-img'></img>
+                        <img alt='' src={imgCover} className='cover-img'></img>
                         <h3>Artisan inventory system</h3>
                 </div>
             </div>

@@ -1,18 +1,33 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './viewProducts.css'
 import {FaSearch} from 'react-icons/fa'
 import tool1 from '../../assets/tool-1.jpg'
 import tool2 from '../../assets/tool-2.jpg'
 import AddProducts from '../AddProducts/AddProducts'
+import ProductInfo from '../ProductInfo/ProductInfo'
+import firebase from '../../firebase'
 
 const ViewProducts = () => {
 
     const [display,setDisplay] = useState(false);
+    const [details,setDetails] = useState(false);
+
+    useEffect(() => {
+        firebase.firestore().collection('products').get()
+        .then((querySnap) => {
+            querySnap.docs.map((doc) => {
+                return console.log(doc.data());
+            })
+        })
+    },[])
 
     return (
         <div className='view-products'>
             {
                 display?<AddProducts close={() => {setDisplay(false)}} />:null
+            }
+            {
+                details?<ProductInfo close={() => {setDetails(false)}} />:null
             }
             <div className='vp-top'>
                 <h2>Inventory list</h2>
@@ -37,10 +52,10 @@ const ViewProducts = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    <tr onClick={() => {setDetails(true)}}>
                         <td>1</td>
                         <td>
-                            <img src={tool1} className='product-preview'></img>
+                            <img alt='' src={tool1} className='product-preview'></img>
                         </td>
                         <td>Measurement Items</td>
                         <td>38401dkdkfe</td>
@@ -51,7 +66,7 @@ const ViewProducts = () => {
                     <tr>
                         <td>2</td>
                         <td>
-                            <img src={tool2} className='product-preview'></img>
+                            <img alt='' src={tool2} className='product-preview'></img>
                         </td>
                         <td>Hammer</td>
                         <td>38401dkdkfe</td>

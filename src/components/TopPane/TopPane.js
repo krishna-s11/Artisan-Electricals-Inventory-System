@@ -25,7 +25,7 @@ const TopPane = ({setView}) => {
                 </div>
                 <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-dp'>
-                        <img src={userDp}></img>
+                        <img alt='' src={userDp}></img>
                     </div>
                     <div className='user-info'>
                         <p>Krishna S.</p>
@@ -34,10 +34,10 @@ const TopPane = ({setView}) => {
                     <IoMdArrowDropdown style={{fontSize:'20px'}}/>
                     <div className='drop-down' style={display?{display:'block'}:null}>
                         <ul>
-                            <Link to='/dashboard/profile'><li><img src={userDrop}></img>Profile</li></Link>
-                            <li><img src={orderDrop}></img>My orders</li>
-                            <li><img src={projectDrop}></img>My projects</li>
-                            <li><img src={signout}></img>Sign out</li>
+                            <Link to='/dashboard/profile'><li><img alt='' src={userDrop}></img>Profile</li></Link>
+                            <li><img alt='' src={orderDrop}></img>My orders</li>
+                            <li><img alt='' src={projectDrop}></img>My projects</li>
+                            <li><img alt='' src={signout}></img>Sign out</li>
                         </ul>
                     </div>
                 </div>

@@ -92,6 +92,9 @@
   max-width: 100%;
   white-space: nowrap;
 }
+.fl-table tbody tr {
+  cursor: pointer;
+}
 .product-preview {
   width: 60px;
   height: 60px;
