@@ -83,14 +83,14 @@
 .add-group:not(:first-child) {
   margin-top: 15px;
 }
-#add-input {
+.add-input {
   width: 350px;
   margin-top: 10px;
   margin-left: 0;
   background-color: #fff;
   border: 1px solid #999;
 }
-#add-input:focus {
+.add-input:focus {
   box-shadow: none;
 }
 .sub-category {

@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './orderList.css'
 import {FaSearch} from 'react-icons/fa'
 import NewOrder from '../NewOrder/NewOrder'
+import firebase from '../../firebase'
+
+const db = firebase.firestore();
 
 const OrderList = () => {
     const [display,setDisplay] = useState(false);
+    const [orders,setOrders] = useState([]);
+
+    useEffect(() => {
+        db.collection('orders').get()
+        .then(querySnap => {
+            setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
+        })
+    },[])
 
     return (
         <div className='order-list'>
@@ -34,7 +45,23 @@ const OrderList = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    {
+                        orders && orders.map((order,i) => {
+                            const data = order.data;
+                            return(
+                                <tr key={i}>
+                                    <td>{i+1}</td>
+                                    <td>Trial Name 1</td>
+                                    <td>{data.add1} {data.add2} {data.add3}</td>
+                                    <td>{data.requiredBy}</td>
+                                    <td>{data.material}</td>
+                                    <td>{data.note}</td>
+                                    <td style={{color: '#529DA6', fontWeight: '600'}}>{data.status}</td>
+                                </tr>
+                            )
+                        })
+                    }
+                    {/* <tr>
                         <td>1</td>
                         <td>Harry Potter</td>
                         <td>10 Downing Street</td>
@@ -51,7 +78,7 @@ const OrderList = () => {
                         <td>Measurement Items</td>
                         <td>Extra note here</td>
                         <td style={{color: '#529DA6', fontWeight: '600'}}>Accepted</td>
-                    </tr>
+                    </tr> */}
                     </tbody>
                 </table>
         </div>

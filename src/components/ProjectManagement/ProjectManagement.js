@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './projectManagement.css'
 import {FaSearch} from 'react-icons/fa'
 import AssignProject from '../AssignProject/AssignProject'
+import firebase from '../../firebase'
 
 const ProjectManagement = () => {
 
     const [display,setDisplay] = useState(false);
+    const [projects,setProjects] = useState([]);
+
+    useEffect(() => {
+        firebase.firestore().collection('projects').get()
+        .then(querySnap => {
+            setProjects(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})));
+        })
+    })
 
     return (
         <div className='project-management'>
@@ -35,24 +44,22 @@ const ProjectManagement = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Electrical Vehicle Charging</td>
-                        <td>10 Downing Street</td>
-                        <td>10/07/2021</td>
-                        <td>Sherlock Holmes</td>
-                        <td>Job description here</td>
-                        <td style={{color: '#529DA6', fontWeight: '600'}}>Processing</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Fire alarm installation</td>
-                        <td>221 B Baker Street</td>
-                        <td>12/07/2021</td>
-                        <td>Harry Potter</td>
-                        <td>Job description here</td>
-                        <td style={{color: '#529DA6', fontWeight: '600'}}>Accepted</td>
-                    </tr>
+                    {
+                        projects && projects.map((project,i) => {
+                            const data = project.data;
+                            return( 
+                                <tr key={i}>
+                                    <td>{i+1}</td>
+                                    <td>{data.name}</td>
+                                    <td>{data.add1} {data.add2}</td>
+                                    <td>{data.visit}</td>
+                                    <td>{data.assigned}</td>
+                                    <td>{data.description}</td>
+                                    <td style={{color: '#529DA6', fontWeight: '600'}}>{data.status}</td>
+                                </tr>
+                            )
+                        })
+                    }
                     </tbody>
                 </table>
         </div>
