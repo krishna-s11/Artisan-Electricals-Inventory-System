@@ -59,3 +59,25 @@
   padding: 30px 0;
   height: 100%;
 }
+.chart-container {
+  width: 100%;
+  height: 400px;
+  background-color: #fff;
+  margin-top: 30px;
+  display: flex;
+  padding: 30px;
+}
+.line-chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doughnut-chart-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
