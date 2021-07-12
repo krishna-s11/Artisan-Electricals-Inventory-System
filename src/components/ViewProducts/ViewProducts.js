@@ -12,10 +12,11 @@ const ViewProducts = () => {
     const [details,setDetails] = useState(false);
     const [products,setProducts] = useState([]);
     const [id,setId] = useState('');
+    const [edit,setEdit] = useState(false);
 
     useEffect(() => {
-        firebase.firestore().collection('products').get()
-        .then((querySnap) => {
+        firebase.firestore().collection('products')
+        .onSnapshot((querySnap) => {
             setProducts(querySnap.docs.map(doc => ({data: doc.data(), id: doc.id})))
         })
     },[])
@@ -24,12 +25,11 @@ const ViewProducts = () => {
         await firebase.firestore().collection('products').doc(id).delete()
     }
     
-    console.log(products);
 
     return (
         <div className='view-products'>
             {
-                display?<AddProducts close={() => {setDisplay(false)}} />:null
+                display?<AddProducts close={() => {setDisplay(false)}} id={id} />:null
             }
             {
                 details?<ProductInfo close={() => {setDetails(false)}} id={id} />:null
@@ -41,7 +41,7 @@ const ViewProducts = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items' onClick={() => setDisplay(true)}>New +</button>
+                    <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
                 </div>
             </div>
                 <table class="fl-table">
@@ -51,10 +51,11 @@ const ViewProducts = () => {
                         <th>Preview</th>
                         <th>Name</th>
                         <th>SKU</th>
+                        <th>Quantity</th>
                         <th>Category</th>
                         <th>Serial No.</th>
-                        <th>Action</th>
-                    </tr>
+                        <th colspan='2'>Action</th>
+                    </tr>   
                     </thead>
                     <tbody>
                     {
@@ -68,9 +69,11 @@ const ViewProducts = () => {
                                     </td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}} >{data.name}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.sku}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.quantity}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.category}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.serial}</td>
                                     <td onClick={(id) => {setDetails(false); deleteProducts(product.id)}}><p className='btn-del'>Delete</p></td>
+                                    <td onClick={(id) => {setDetails(false); setId(product.id); setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
                                 </tr>
                             )
                         })

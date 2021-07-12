@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import './newOrder.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
 
 const db = firebase.firestore();
 
-const NewOrder = ({close}) => {
+const NewOrder = ({close, id}) => {
 
     const [order,setOrder] = useState({
         add1: '',
@@ -26,8 +26,26 @@ const NewOrder = ({close}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await db.collection('orders').add(order);
+        if(!id){
+            await db.collection('orders').add(order);
+        }else{
+            await db.collection('orders').doc(id).update(order);
+        }
+
     }
+
+    useEffect(() => {
+        if(id){
+            db.collection('orders').doc(id).get()
+            .then((doc) => {
+                if(doc.exists){
+                    setOrder(doc.data());
+                }else{
+                    console.log('no data found');
+                }
+            })
+        }
+    },[id])
 
     return (
         <div className='new-order'>
@@ -40,29 +58,29 @@ const NewOrder = ({close}) => {
                     <div className='add-col-1'>
                         <div className='form-row'>
                             <p>Project Address Line 1:</p>
-                            <input type="text" class="form__input order add-input" id="add1" onChange={handleChange} placeholder="Address Line 1" required></input>
+                            <input type="text" class="form__input order add-input" id="add1" onChange={handleChange} placeholder="Address Line 1" defaultValue={order.add1} required></input>
                         </div>
                         <div className='form-row'>
                             <p>Project Address Line 2:</p>
-                            <input type="text" class="form__input order add-input" id="add2" onChange={handleChange} placeholder="Address Line 2" required></input>
+                            <input type="text" class="form__input order add-input" id="add2" onChange={handleChange} placeholder="Address Line 2" defaultValue={order.add2} required></input>
                         </div>
                         <div className='form-row'>
                             <p>Project Address Line 3:</p>
-                            <input type="text" class="form__input order add-input" id="add3" onChange={handleChange} placeholder="Address Line 3" required></input>
+                            <input type="text" class="form__input order add-input" id="add3" onChange={handleChange} placeholder="Address Line 3" defaultValue={order.add3} required></input>
                         </div>
                         <div className='form-row'>
                             <p>Required by:</p>
-                            <input type="date" class="form__input order add-input" id="requiredBy" onChange={handleChange} placeholder="Category" required></input>
+                            <input type="date" class="form__input order add-input" id="requiredBy" onChange={handleChange} defaultValue={order.requiredBy} required></input>
                         </div>
                     </div>
                     <div className='add-col-2'>
                         <div className='form-row'>
                             <p>Material Item:</p>
-                            <input type="text" class="form__input order add-input" id="material" onChange={handleChange} placeholder="Select Item" required></input>
+                            <input type="text" class="form__input order add-input" id="material" onChange={handleChange} placeholder="Select Item" defaultValue={order.material} required></input>
                         </div>
                         <div className='form-row'>
                             <p>Extra Note :</p>
-                            <textarea type="text" class="form__input order textarea add-input" id="note" onChange={handleChange} placeholder="Write your note here" required></textarea>
+                            <textarea type="text" class="form__input order textarea add-input" id="note" onChange={handleChange} placeholder="Write your note here" defaultValue={order.note} required></textarea>
                         </div>
                     </div>
                 </div>

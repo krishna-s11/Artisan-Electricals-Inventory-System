@@ -10,6 +10,10 @@
   align-items: center;
   justify-content: space-between;
 }
+.btn-edit {
+  color: #22a6b3;
+  font-weight: 600;
+}
 .vp-action-bar {
   display: flex;
   align-items: center;

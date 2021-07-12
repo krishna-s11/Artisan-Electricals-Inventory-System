@@ -9,18 +9,23 @@ const db = firebase.firestore();
 const OrderList = () => {
     const [display,setDisplay] = useState(false);
     const [orders,setOrders] = useState([]);
+    const [id,setId] = useState('')
 
     useEffect(() => {
-        db.collection('orders').get()
-        .then(querySnap => {
+        db.collection('orders')
+        .onSnapshot(querySnap => {
             setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
         })
     },[])
 
+    const deleteOrder = async (id) => {
+        await firebase.firestore().collection('orders').doc(id).delete()
+    }
+
     return (
         <div className='order-list'>
             {
-                display?<NewOrder close={() => setDisplay(false)} />:null
+                display?<NewOrder close={() => setDisplay(false)} id={id} />:null
             }
             <div className='ol-top'>
                 <h2>Order list</h2>
@@ -29,7 +34,7 @@ const OrderList = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items' onClick={() => setDisplay(true)}>New +</button>
+                    <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
                 </div>
             </div>
             <table class="fl-table">
@@ -42,6 +47,7 @@ const OrderList = () => {
                         <th>Material Item</th>
                         <th>Notes</th>
                         <th>Status</th>
+                        <th colspan='2'>Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,28 +63,12 @@ const OrderList = () => {
                                     <td>{data.material}</td>
                                     <td>{data.note}</td>
                                     <td style={{color: '#529DA6', fontWeight: '600'}}>{data.status}</td>
+                                    <td className='btn-del' onClick={(id) => {deleteOrder(order.id)}} >Delete</td>
+                                    <td className='btn-edit' onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
                                 </tr>
                             )
                         })
                     }
-                    {/* <tr>
-                        <td>1</td>
-                        <td>Harry Potter</td>
-                        <td>10 Downing Street</td>
-                        <td>10/07/2021</td>
-                        <td>Hammer</td>
-                        <td>Extra note here</td>
-                        <td style={{color: '#529DA6', fontWeight: '600'}}>Processing</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sherlock Holmes</td>
-                        <td>221 B Baker Street</td>
-                        <td>12/07/2021</td>
-                        <td>Measurement Items</td>
-                        <td>Extra note here</td>
-                        <td style={{color: '#529DA6', fontWeight: '600'}}>Accepted</td>
-                    </tr> */}
                     </tbody>
                 </table>
         </div>

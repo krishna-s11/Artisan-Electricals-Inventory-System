@@ -45,6 +45,7 @@ const ProductInfo = ({close, id}) => {
                 <p>SKU: <span>{product.sku}</span></p>
                 <p>Category: <span>{product.category}</span></p>
                 <p>Sub-category: <span>{product.subCategory} </span></p>
+                <p>Quantity: <span>{product.quantity} </span></p>
                 <p>Units of measurement: <span>{product.uom}</span></p>
                 <p>Dimensions: <span>{product.ln} x {product.wd}</span> </p>
                 <p>Serial number: <span>{product.serial}</span> </p>
