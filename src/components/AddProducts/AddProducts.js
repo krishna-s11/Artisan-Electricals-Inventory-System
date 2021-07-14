@@ -31,9 +31,23 @@ const AddProducts = ({close,id}) => {
         e.preventDefault();
         if(!id){
             await db.collection('products').add(details);
+            await db.collection('notification').add({
+                emp_id: '12345',
+                emp_name: 'Krishna Saxena',
+                emp_photoUrl: '',
+                mssg: 'added a new inventory',
+                time: Date.now()
+            })
         }
         else{
             await db.collection('products').doc(id).update(details)
+            await db.collection('notification').add({
+                emp_id: '12345',
+                emp_name: 'Krishna Saxena',
+                emp_photoUrl: '',
+                mssg: 'updated an inventory',
+                time: Date.now()
+            })
         }
     }
 
@@ -115,7 +129,7 @@ const AddProducts = ({close,id}) => {
                             <input type="text" class="form__input add-input" id="serial" onChange={handleChange} placeholder="Serial Number" defaultValue={details.serial} required></input>
                         </div>
                         <div style={{width: '350px', display: 'flex', justifyContent: 'center'}}>
-                            <button className='btn btn-add-product' onClick={() => {handleSubmit(); close()}}>Submit</button>
+                            <button className='btn btn-add-product' onClick={handleSubmit}>Submit</button>
                         </div>
                     </div>
                 </div>

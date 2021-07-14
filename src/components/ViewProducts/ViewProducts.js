@@ -12,17 +12,23 @@ const ViewProducts = () => {
     const [details,setDetails] = useState(false);
     const [products,setProducts] = useState([]);
     const [id,setId] = useState('');
-    const [edit,setEdit] = useState(false);
 
     useEffect(() => {
         firebase.firestore().collection('products')
-        .onSnapshot((querySnap) => {
+        .get().then((querySnap) => {
             setProducts(querySnap.docs.map(doc => ({data: doc.data(), id: doc.id})))
         })
     },[])
 
     const deleteProducts = async (id) => {
         await firebase.firestore().collection('products').doc(id).delete()
+        await firebase.firestore().collection('notification').add({
+            emp_id: '12345',
+            emp_name: 'Krishna Saxena',
+            emp_photoUrl: '',
+            mssg: 'deleted an inventory',
+            time: Date.now()
+        })
     }
     
 
@@ -54,7 +60,7 @@ const ViewProducts = () => {
                         <th>Quantity</th>
                         <th>Category</th>
                         <th>Serial No.</th>
-                        <th colspan='2'>Action</th>
+                        <th colSpan='2'>Action</th>
                     </tr>   
                     </thead>
                     <tbody>
@@ -62,7 +68,7 @@ const ViewProducts = () => {
                         products && products.map((product,i) => {
                             const data = product.data;
                             return(
-                                <tr>
+                                <tr key={i}>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}} >{i+1}</td>
                                     <td>
                                         <img alt='' src={tool1} className='product-preview'></img>

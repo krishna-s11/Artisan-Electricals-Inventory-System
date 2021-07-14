@@ -25,6 +25,13 @@ const AssignProject = ({ close }) => {
 
     const handleSubmit = async (e) => {
         await db.collection('projects').add(data);
+        await firebase.firestore().collection('notification').add({
+            emp_id: '12345',
+            emp_name: 'Krishna Saxena',
+            emp_photoUrl: '',
+            mssg: 'assigned an project to Shelock',
+            time: Date.now()
+        })
     }
 
     return (

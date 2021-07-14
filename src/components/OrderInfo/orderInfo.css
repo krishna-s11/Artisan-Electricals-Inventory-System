@@ -1,0 +1,19 @@
+.pd-info-action-container {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+.btn-accept {
+  padding: 10px 20px;
+  background-color: #4fc3a1;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.btn-decline {
+  padding: 10px 20px;
+  margin-left: 20px;
+  background-color: #f88379;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

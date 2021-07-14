@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './topPane.css'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdNotificationsNone} from 'react-icons/md'
@@ -9,10 +9,12 @@ import userDrop from '../../assets/user-drop.png'
 import orderDrop from '../../assets/myorders-drop.png'
 import projectDrop from '../../assets/myprojects-drop.png'
 import signout from '../../assets/sign-out.png'
+import Notification from '../Notification/Notification'
 
 const TopPane = ({setView}) => {
 
     const [display,setDisplay] = useState(false);
+    const [notification,setNotification] = useState(false);
 
     return (
         <div className='top-pane'>
@@ -20,8 +22,13 @@ const TopPane = ({setView}) => {
                     <GiHamburgerMenu/>
             </div>
             <div className='top-right-sec'>
-                <div className='notification-container'>
+                <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification)}}>
                     <MdNotificationsNone/>
+                    {
+                        notification?(
+                            <Notification/>
+                        ):null
+                    }
                 </div>
                 <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-dp'>
@@ -31,7 +38,7 @@ const TopPane = ({setView}) => {
                         <p>Krishna S.</p>
                         <p>Admin</p>
                     </div>
-                    <IoMdArrowDropdown style={{fontSize:'20px'}}/>
+                        <IoMdArrowDropdown style={{fontSize:'20px'}}/>
                     <div className='drop-down' style={display?{display:'block'}:null}>
                         <ul>
                             <Link to='/dashboard/profile'><li><img alt='' src={userDrop}></img>Profile</li></Link>
