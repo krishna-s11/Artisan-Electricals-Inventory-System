@@ -35,7 +35,7 @@ const NewOrder = ({close, id}) => {
     }
 
     const handleQuantity = (e) => {
-        if(order.material == ''){
+        if(order.material === ''){
             console.log('select an item first')
         }
         else{

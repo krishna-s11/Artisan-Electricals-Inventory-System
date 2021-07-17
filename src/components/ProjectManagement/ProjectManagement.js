@@ -8,6 +8,7 @@ const ProjectManagement = () => {
 
     const [display,setDisplay] = useState(false);
     const [projects,setProjects] = useState([]);
+    const [id,setId] = useState('');
 
     useEffect(() => {
         firebase.firestore().collection('projects').get()
@@ -19,7 +20,7 @@ const ProjectManagement = () => {
     return (
         <div className='project-management'>
         {
-            display?<AssignProject close={() => {setDisplay(false)}} />:null   
+            display?<AssignProject close={() => {setDisplay(false)}} id={id} />:null   
         }
              <div className='ol-top'>
                 <h2>Manage Projects</h2>
@@ -40,7 +41,7 @@ const ProjectManagement = () => {
                         <th>Visit Scheduled</th>
                         <th>Assigned to</th>
                         <th>Description</th>
-                        <th>Status</th>
+                        <th colSpan='2'>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,7 +56,8 @@ const ProjectManagement = () => {
                                     <td>{data.visit}</td>
                                     <td>{data.assigned}</td>
                                     <td>{data.description}</td>
-                                    <td style={{color: '#529DA6', fontWeight: '600'}}>{data.status}</td>
+                                    <td><p className='btn-del'>Delete</p></td>
+                                    <td onClick={() => {setId(project.id);setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
                                 </tr>
                             )
                         })

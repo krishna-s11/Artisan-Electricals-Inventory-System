@@ -5,6 +5,7 @@ import inventory from '../../assets/inventory-ico.png';
 import order from '../../assets/order-ico.png';
 import reports from '../../assets/reports-ico.png';
 import projects from '../../assets/project-ico.png';
+import manageUsers from '../../assets/manage-users.png';
 
 const LeftPane = ({mobileNav}) => {
 
@@ -63,15 +64,14 @@ const LeftPane = ({mobileNav}) => {
                             !mobileNav?<p>Projects</p>:null
                         }
                     </li></Link>
-                    {/* <Link to='/dashboard/services'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
+                    <Link to='/dashboard/manage-users'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
                         <span>
-                            <img src={inventory}></img>
+                            <img alt='' src={manageUsers}></img>
                         </span>
                         {
-                            !mobileNav?<p>Services</p>:null
+                            !mobileNav?<p>Manage Users</p>:null
                         }
-                    </li>
-                    </Link> */}
+                    </li></Link>
                 </ul>
         </div>
     )

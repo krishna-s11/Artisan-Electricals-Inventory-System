@@ -73,7 +73,7 @@ const ViewProducts = () => {
                                     <td>
                                         <img alt='' src={tool1} className='product-preview'></img>
                                     </td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}} >{data.name}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.name}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.sku}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.quantity}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.category}</td>

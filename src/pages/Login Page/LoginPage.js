@@ -1,11 +1,20 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import './loginPage.css'
+import { useHistory } from 'react-router-dom';
 import imgCover from '../../assets/login-cover3.jpg'
-import {Link} from 'react-router-dom'
+import firebase from '../../firebase';
+import { AuthContext } from '../../Auth';
 
 const LoginPage = () => {
 
     const [start,setStart] = useState(false);
+    const [users,setUsers] = useState([]);
+    const {currentUser,setCurrentUser} = useContext(AuthContext)
+
+    const history = useHistory();
+
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
 
     const employee = {
         backgroundColor: '#58c0ca',
@@ -18,6 +27,34 @@ const LoginPage = () => {
         backgroundColor: '#58c0ca',
         transform: 'translateX(0)',
         transition: 'all 0.4s ease-in'
+    }
+
+    useEffect(() => {
+        if(currentUser){
+            history.goForward();
+        }
+        firebase.firestore().collection('users').get().then((querySnap)  => {
+            setUsers(querySnap.docs.map(doc => (doc.data())));
+        })
+    },[])
+
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+    }
+    const handlePass = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        for(var i=0; i<users.length; i++){
+            if(users[i].email === email){
+                if(users[i].password === password){
+                    setCurrentUser(users[i]);
+                    history.push('/dashboard/products');
+                }
+            }
+        }
     }
 
     return (
@@ -39,15 +76,17 @@ const LoginPage = () => {
                     </div>
                     <div>
                     <div class="form__group">
-                        <input type="text" class="form__input" id="text" placeholder="Username" required></input>
+                        <input type="text" class="form__input" id="text" onChange={handleEmail} placeholder="Username" required></input>
                         <label for="text" class="form__label">Username</label>
                     </div>
                     <div class="form__group">
-                        <input type="password" class="form__input" id="password" placeholder="Password" required></input>
+                        <input type="password" class="form__input" id="password" onChange={handlePass} placeholder="Password" required></input>
                         <label for="password" class="form__label">Password</label>
                     </div>
                     </div>
-                    <Link to='/dashboard/products'><button className='btn btn-login'>Login</button></Link>
+                    {/* <Link to='/dashboard/products'><button className='btn btn-login'>Login</button></Link>
+                     */}
+                     <button className='btn btn-login' onClick={handleSubmit}>Login</button>
                 </div>
                 <div class='cover-lg'>
                         <img alt='' src={imgCover} className='cover-img'></img>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './topPane.css'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdNotificationsNone} from 'react-icons/md'
@@ -10,11 +10,17 @@ import orderDrop from '../../assets/myorders-drop.png'
 import projectDrop from '../../assets/myprojects-drop.png'
 import signout from '../../assets/sign-out.png'
 import Notification from '../Notification/Notification'
+import { AuthContext } from '../../Auth'
 
 const TopPane = ({setView}) => {
 
     const [display,setDisplay] = useState(false);
     const [notification,setNotification] = useState(false);
+    const { currentUser ,setCurrentUser } = useContext(AuthContext);
+
+    const signOut = () => {
+        setCurrentUser(null);
+    }
 
     return (
         <div className='top-pane'>
@@ -35,7 +41,7 @@ const TopPane = ({setView}) => {
                         <img alt='' src={userDp}></img>
                     </div>
                     <div className='user-info'>
-                        <p>Krishna S.</p>
+                        <p>{currentUser.name.slice(' ')}</p>
                         <p>Admin</p>
                     </div>
                         <IoMdArrowDropdown style={{fontSize:'20px'}}/>
@@ -44,7 +50,7 @@ const TopPane = ({setView}) => {
                             <Link to='/dashboard/profile'><li><img alt='' src={userDrop}></img>Profile</li></Link>
                             <li><img alt='' src={orderDrop}></img>My orders</li>
                             <li><img alt='' src={projectDrop}></img>My projects</li>
-                            <li><img alt='' src={signout}></img>Sign out</li>
+                            <li onClick={signOut}><img alt='' src={signout}></img>Sign out</li>
                         </ul>
                     </div>
                 </div>
