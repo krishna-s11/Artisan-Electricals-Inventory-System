@@ -3,7 +3,7 @@ import './dashboard.css'
 import LeftPane from '../../components/Left Pane/LeftPane'
 import RightPane from '../../components/Right Pane/RightPane'
 import { AuthContext } from '../../Auth'
-import {useHistory} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 
 const Dashboard = () => {
     const [mobileNav,setMobileNav] = useState(false);
@@ -18,14 +18,21 @@ const Dashboard = () => {
         else{
             history.push('/');
         }
-    },[currentUser,history])
+    },[])
 
+    if(currentUser){
     return (
         <div className='dashboard'>
             <LeftPane mobileNav={mobileNav} />
             <RightPane setView={() => setMobileNav(!mobileNav)} />
         </div>
     )
+    }
+    else{
+        return (
+               <Redirect to='/' />
+        )
+    }
 }
 
 export default Dashboard

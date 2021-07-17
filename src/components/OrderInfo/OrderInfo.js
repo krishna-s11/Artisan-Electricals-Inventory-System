@@ -1,11 +1,14 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import './orderInfo.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
+import { AuthContext } from '../../Auth'
 
 const OrderInfo = ({close,id}) => {
 
     const [order,setOrder] = useState([]);
+    const {currentUser} = useContext(AuthContext);
+
     console.log(id);
     useEffect(() => {
         firebase.firestore().collection('orders').doc(id).get()
@@ -45,10 +48,15 @@ const OrderInfo = ({close,id}) => {
                     <p>Meterial SKU: <span>{order.sku} </span></p>
                     <p>Meterial ID: <span>{order.productId} </span></p>
                 </div>
-                <div className='pd-info-action-container'>
-                    <button className='btn btn-accept' onClick={acceptBtn}>Accept</button>
-                    <button className='btn btn-decline' onClick={declineBtn}>Decline</button>
-                </div>
+                {
+                    currentUser && currentUser.order?(
+                        <div className='pd-info-action-container'>
+                            <button className='btn btn-accept' onClick={acceptBtn}>Accept</button>
+                            <button className='btn btn-decline' onClick={declineBtn}>Decline</button>
+                        </div>
+                    )
+                    :null   
+                }
             </div>
         </div>
     )

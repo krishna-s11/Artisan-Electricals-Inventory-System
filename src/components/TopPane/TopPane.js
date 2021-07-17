@@ -3,7 +3,7 @@ import './topPane.css'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdNotificationsNone} from 'react-icons/md'
 import {IoMdArrowDropdown} from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import userDp from '../../assets/user-dp.jpg'
 import userDrop from '../../assets/user-drop.png'
 import orderDrop from '../../assets/myorders-drop.png'
@@ -17,9 +17,11 @@ const TopPane = ({setView}) => {
     const [display,setDisplay] = useState(false);
     const [notification,setNotification] = useState(false);
     const { currentUser ,setCurrentUser } = useContext(AuthContext);
+    const history = useHistory();
 
     const signOut = () => {
         setCurrentUser(null);
+        history.push('/')
     }
 
     return (

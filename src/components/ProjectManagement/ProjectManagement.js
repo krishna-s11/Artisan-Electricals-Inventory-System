@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './projectManagement.css'
 import {FaSearch} from 'react-icons/fa'
 import AssignProject from '../AssignProject/AssignProject'
 import firebase from '../../firebase'
+import { AuthContext } from '../../Auth'
 
 const ProjectManagement = () => {
 
     const [display,setDisplay] = useState(false);
     const [projects,setProjects] = useState([]);
     const [id,setId] = useState('');
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         firebase.firestore().collection('projects').get()
@@ -29,7 +31,12 @@ const ProjectManagement = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items' onClick={() => {setDisplay(true)}}>New +</button>
+                    {
+                        currentUser && currentUser.projects?(
+                            <button className='btn btn-add_items' onClick={() => {setDisplay(true)}}>New +</button>
+                        ):
+                        null
+                    }
                 </div>
             </div>
             <table class="fl-table">
@@ -41,7 +48,12 @@ const ProjectManagement = () => {
                         <th>Visit Scheduled</th>
                         <th>Assigned to</th>
                         <th>Description</th>
-                        <th colSpan='2'>Actions</th>
+                        {
+                            currentUser && currentUser.projects?(
+                                <th colSpan='2'>Actions</th>
+                            ):
+                            null
+                        }
                     </tr>
                     </thead>
                     <tbody>
@@ -56,8 +68,16 @@ const ProjectManagement = () => {
                                     <td>{data.visit}</td>
                                     <td>{data.assigned}</td>
                                     <td>{data.description}</td>
-                                    <td><p className='btn-del'>Delete</p></td>
-                                    <td onClick={() => {setId(project.id);setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
+                                    {
+                                        currentUser && currentUser.projects?(
+                                            <td><p className='btn-del'>Delete</p></td>
+                                        ):null
+                                    }
+                                    {
+                                        currentUser && currentUser.projects?(
+                                            <td onClick={() => {setId(project.id);setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
+                                        ):null
+                                    }
                                 </tr>
                             )
                         })

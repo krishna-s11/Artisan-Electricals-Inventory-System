@@ -1,10 +1,11 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import './viewProducts.css'
 import {FaSearch} from 'react-icons/fa'
 import tool1 from '../../assets/tool-1.jpg'
 import AddProducts from '../AddProducts/AddProducts'
 import ProductInfo from '../ProductInfo/ProductInfo'
 import firebase from '../../firebase'
+import {AuthContext} from '../../Auth';
 
 const ViewProducts = () => {
 
@@ -12,6 +13,7 @@ const ViewProducts = () => {
     const [details,setDetails] = useState(false);
     const [products,setProducts] = useState([]);
     const [id,setId] = useState('');
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         firebase.firestore().collection('products')
@@ -47,7 +49,11 @@ const ViewProducts = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
+                    {
+                        currentUser && currentUser.inventory?
+                        (<button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>)
+                        :null
+                    }
                 </div>
             </div>
                 <table class="fl-table">
@@ -60,7 +66,12 @@ const ViewProducts = () => {
                         <th>Quantity</th>
                         <th>Category</th>
                         <th>Serial No.</th>
-                        <th colSpan='2'>Action</th>
+                        {
+                            currentUser && currentUser.inventory?(
+                                <th colSpan='2'>Action</th>
+                            )
+                            :null
+                        }
                     </tr>   
                     </thead>
                     <tbody>
@@ -78,8 +89,16 @@ const ViewProducts = () => {
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.quantity}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.category}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.serial}</td>
-                                    <td onClick={(id) => {setDetails(false); deleteProducts(product.id)}}><p className='btn-del'>Delete</p></td>
-                                    <td onClick={(id) => {setDetails(false); setId(product.id); setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
+                                    {
+                                        currentUser && currentUser.inventory?(
+                                        <td onClick={(id) => {setDetails(false); deleteProducts(product.id)}}><p className='btn-del'>Delete</p></td>       
+                                        ):null
+                                    }
+                                    {
+                                        currentUser && currentUser.inventory?(
+                                        <td onClick={(id) => {setDetails(false); setId(product.id); setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
+                                        ):null
+                                    }
                                 </tr>
                             )
                         })

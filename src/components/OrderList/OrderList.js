@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './orderList.css'
 import {FaSearch} from 'react-icons/fa'
 import NewOrder from '../NewOrder/NewOrder'
 import firebase from '../../firebase'
 import OrderInfo from '../OrderInfo/OrderInfo'
+import { AuthContext } from '../../Auth'
 
 const db = firebase.firestore();
 
@@ -11,7 +12,8 @@ const OrderList = () => {
     const [display,setDisplay] = useState(false);
     const [orders,setOrders] = useState([]);
     const [id,setId] = useState('')
-    const [details,setDetails] = useState(false)
+    const [details,setDetails] = useState(false);
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         db.collection('orders')
@@ -39,7 +41,12 @@ const OrderList = () => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
-                    <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
+                    {
+                        currentUser && currentUser.order?(
+                            <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
+                        )
+                        :null
+                    }
                 </div>
             </div>
             <table class="fl-table">
@@ -54,7 +61,12 @@ const OrderList = () => {
                         <th>Quantity</th>
                         <th>Notes</th>
                         <th>Status</th>
-                        <th colspan='2'>Action</th>
+                        {
+                            currentUser && currentUser.order?(
+                                <th colspan='2'>Action</th>
+                            )
+                            :null
+                        }
                     </tr>
                     </thead>
                     <tbody>
@@ -72,8 +84,19 @@ const OrderList = () => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.quantity}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.note}</td>
                                     <td style={data.status==='declined'?(data.outOfStock?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(data.outOfStock?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
-                                    <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={(id) => {deleteOrder(order.id)}} >Delete</td>
-                                    <td className='btn-edit' style={data.outOfStock?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
+                                    {
+                                        currentUser && currentUser.order?(
+                                            <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={(id) => {deleteOrder(order.id)}} >Delete</td>
+                                        )
+                                        :null
+                                    }
+                                    {
+                                        currentUser && currentUser.order?(
+                                            <td className='btn-edit' style={data.outOfStock?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
+                                        ):
+                                        null
+                                    }
+                                    
                                 </tr>
                             )
                         })
