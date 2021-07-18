@@ -3,6 +3,7 @@ import './addProducts.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import {RiImageAddFill} from 'react-icons/ri'
 import firebase from '../../firebase';
+import { toast } from 'react-toastify';
 
 const db = firebase.firestore();
 
@@ -20,7 +21,6 @@ const AddProducts = ({close,id}) => {
         serial: '',
     })
     const [images,setImages] = useState([]);
-    const [urls,setUrls] = useState([]);
 
     const defaultBtn = () => {
         const defaultBtn = document.querySelector('#choose-input');
@@ -41,17 +41,15 @@ const AddProducts = ({close,id}) => {
         }
     }
 
-    console.log(urls);
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(details.name === '' || details.sku === '' || details.category === '' || details.subCategory === '' || details.quantity === '' || details.uom === '' || details.ln === '' || details.wd === ''){
+            return toast.error('Fill all the required fields');
+        }
         if(!id){
             images.map(async (image,i) => {
                 const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
                 await storageRef.put(image)
-                await storageRef.getDownloadURL().then((url) => {
-                    setDetails(prevState => [...prevState, {downloadUrl: url}]);
-                });
             })
 
             await db.collection('products').add(details);
@@ -62,6 +60,8 @@ const AddProducts = ({close,id}) => {
                 mssg: 'added a new inventory',
                 time: Date.now()
             })
+            toast.success('Product successfully added. ')
+            close();
         }
         else{
             await db.collection('products').doc(id).update(details)
@@ -72,6 +72,8 @@ const AddProducts = ({close,id}) => {
                 mssg: 'updated an inventory',
                 time: Date.now()
             })
+            toast.success('Product successfully updated');
+            close();
         }
     }
 

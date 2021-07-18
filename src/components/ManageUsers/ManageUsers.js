@@ -1,16 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './manageUsers.css'
 import {FaSearch} from 'react-icons/fa'
 import AddUsers from '../AddUsers/AddUsers';
+import firebase from '../../firebase';
+import { AuthContext } from '../../Auth';
 
 const ManageUsers = () => {
     
     const [display,setDisplay] = useState(false);
+    const [users,setUsers] = useState([]);
+    const [id,setId] = useState('');
+
+    useEffect(() => {
+        firebase.firestore().collection('users').onSnapshot((querySnap) => {
+            setUsers(querySnap.docs.map(doc => ({id: doc.id, user: doc.data()})));
+        });
+    },[])
+
+    const deleteUsers = async (id) => {
+        await firebase.firestore().collection('users').doc(id).delete();
+    }
 
     return (
         <div className='manage-users'>
             {
-                display?<AddUsers close={() => {setDisplay(false)}}/>:null
+                display?<AddUsers close={() => {setDisplay(false)}} id={id} />:null
             }
             <div className='vp-top'>
                 <h2>Manage Users</h2>
@@ -33,22 +47,20 @@ const ManageUsers = () => {
                 </tr>   
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Krishna Saxena</td>
-                        <td>krishnsaxena69@gmail.com</td>
-                        <td>Inventory, Orders, Users</td>
-                        <td><p className='btn-del'>Delete</p></td>
-                        <td><p className='btn-edit'>Edit</p></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Sherlock Holmes</td>
-                        <td>sherlock@gmail.com</td>
-                        <td>Inventory, Orders, Projects, Users</td>
-                        <td><p className='btn-del'>Delete</p></td>
-                        <td><p className='btn-edit'>Edit</p></td>
-                    </tr>
+                    {
+                        users && users.map((user,i) => {
+                                return(
+                                    <tr>
+                                    <td>{i+1}</td>
+                                    <td>{user.user.name}</td>
+                                    <td>{user.user.email}</td>
+                                    <td>{user.user.inventory?'Inventory,':null} {user.user.orders?'Orders,': null} {user.user.projects?'Projects,': null} {user.user.users?'Users': null}</td>
+                                    <td><p className='btn-del' onClick={(id) => {deleteUsers(user.id)}}>Delete</p></td>
+                                    <td><p className='btn-edit' onClick={() => {setId(user.id); setDisplay(true)}}>Edit</p></td>
+                                </tr>
+                                )
+                        })   
+                    }
                 </tbody>
             </table>
         </div>

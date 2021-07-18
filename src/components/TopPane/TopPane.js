@@ -43,7 +43,7 @@ const TopPane = ({setView}) => {
                         <img alt='' src={userDp}></img>
                     </div>
                     <div className='user-info'>
-                        <p>{currentUser.name.slice(' ')}</p>
+                        <p>{currentUser.user.name.slice(' ')}</p>
                         <p>Admin</p>
                     </div>
                         <IoMdArrowDropdown style={{fontSize:'20px'}}/>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './assignProject.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
+import { toast } from 'react-toastify';
 
 const db = firebase.firestore();
 
@@ -13,8 +14,12 @@ const AssignProject = ({ close, id}) => {
         add2: '',
         visit: '',
         assigned: '',
+        emp_id: '',
         description: ''
     })
+
+    const [users,setUsers] = useState([]);
+    const [display,setDisplay] = useState(false);
 
     const handleChange = (e) => {
         setData({
@@ -26,14 +31,17 @@ const AssignProject = ({ close, id}) => {
     const handleSubmit = async (e) => {
         if(!id){
             await db.collection('projects').add(data);
+            toast.success('Project created successfully.');
+            close();
         }
         else{
             await db.collection('projects').doc(id).update(data);
+            toast.success('Project created successfully.');
+            close();
         }
         await firebase.firestore().collection('notification').add({
-            emp_id: '12345',
-            emp_name: 'Krishna Saxena',
-            emp_photoUrl: '',
+            emp_id: data.emp_id,
+            emp_name: data.assigned,
             mssg: 'assigned an project to Shelock',
             time: Date.now()
         })
@@ -50,7 +58,10 @@ const AssignProject = ({ close, id}) => {
                 }
             })
         }
-    })
+        db.collection('users').get().then((querySnap) => {
+            setUsers(querySnap.docs.map(doc => ({id:doc.id, user:doc.data()})));
+        })
+    },[id])
 
     return (
         <div className='assign-project'>    
@@ -81,7 +92,34 @@ const AssignProject = ({ close, id}) => {
                     <div className='add-col-2'>
                         <div className='form-row'>
                             <p>Assign to:</p>
-                            <input type="text" class="form__input order add-input" id="assigned" onChange={handleChange} placeholder="Select employee" defaultValue={data.assigned} required></input>
+                            <input type="text" class="form__input order add-input" id="assigned" onChange={handleChange} placeholder="Select employee" onClick={() => setDisplay(!display)} defaultValue={data.assigned} required></input>
+                            {
+                                display?(
+                                    <div className='selection-box project-sl'>
+                                        <ul>
+                                            {
+                                                users && users.map((user,i) => {
+                                                    return(
+                                                        <li onClick={() => {
+                                                            setData({
+                                                                ...data,
+                                                                assigned: user.user.name,
+                                                                emp_id: user.id
+                                                            })
+
+                                                            document.getElementById('assigned').value = user.user.name;
+                                                            setTimeout(() => {
+                                                                setDisplay(false);
+                                                            },500)
+                                                        }}>
+                                                        <span>{i+1}. </span>{user.user.name}</li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                    </div>
+                                ):null
+                            }
                         </div>
                         <div className='form-row'>
                             <p>Project Description :</p>

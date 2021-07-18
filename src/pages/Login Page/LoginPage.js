@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import imgCover from '../../assets/login-cover3.jpg'
 import firebase from '../../firebase';
 import { AuthContext } from '../../Auth';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
 
@@ -34,7 +35,7 @@ const LoginPage = () => {
             history.goForward();
         }
         firebase.firestore().collection('users').get().then((querySnap)  => {
-            setUsers(querySnap.docs.map(doc => (doc.data())));
+            setUsers(querySnap.docs.map(doc => ({id:doc.id, user: doc.data()})));
         })
     },[currentUser])
 
@@ -47,16 +48,23 @@ const LoginPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(email === '' || password === ''){
+            return toast.error('Enter login credentials.');
+        }
+        let success = false;
         for(var i=0; i<users.length; i++){
-            if(users[i].email === email){
-                if(users[i].password === password){
+            if(users[i].user.email === email){
+                if(users[i].user.password === password){
                     setCurrentUser(users[i]);
                     history.push('/dashboard/products');
+                    success = true
                 }
             }
         }
+        if(!success){
+            toast.error('Invalid username or password !');
+        }
     }
-
     return (
         <div className='login-page'>
              <div class="background">
@@ -84,8 +92,6 @@ const LoginPage = () => {
                         <label for="password" class="form__label">Password</label>
                     </div>
                     </div>
-                    {/* <Link to='/dashboard/products'><button className='btn btn-login'>Login</button></Link>
-                     */}
                      <button className='btn btn-login' onClick={handleSubmit}>Login</button>
                 </div>
                 <div class='cover-lg'>

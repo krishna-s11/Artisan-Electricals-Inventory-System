@@ -67,7 +67,7 @@ const LeftPane = ({mobileNav}) => {
                         }
                     </li></Link>
                     {
-                        currentUser && currentUser.users?(
+                        currentUser && currentUser.user.users?(
                             <Link to='/dashboard/manage-users'><li onClick={() => setFilter(4)} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>
                                 <span>
                                     <img alt='' src={manageUsers}></img>

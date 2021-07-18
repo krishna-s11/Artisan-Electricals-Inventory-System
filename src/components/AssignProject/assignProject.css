@@ -20,3 +20,16 @@
   flex-direction: column;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
+.project-sl {
+  width: 97.5%;
+}
+.project-sl li {
+  padding: 10px;
+  cursor: pointer;
+}
+.project-sl li:nth-child(odd) {
+  background-color: #eee;
+}
+.project-sl span {
+  margin-right: 5px;
+}

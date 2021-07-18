@@ -1,15 +1,18 @@
-import React,{useEffect, useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import './newOrder.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
 import tool1 from '../../assets/tool-1.jpg'
+import { toast } from 'react-toastify'
+import { AuthContext } from '../../Auth'
 
 const db = firebase.firestore();
 
 const NewOrder = ({close, id}) => {
 
     const [order,setOrder] = useState({
-        emp_name: 'Krishna Saxena',
+        emp_name: '',
+        emp_id: '',
         name: '',
         add1: '',
         add2: '',
@@ -26,6 +29,7 @@ const NewOrder = ({close, id}) => {
 
     const [products,setProducts] = useState([]);
     const[display,setDisplay] = useState(false);
+    const {currentUser} = useContext(AuthContext);
 
     const handleChange = (e) => {
         setOrder({
@@ -36,7 +40,7 @@ const NewOrder = ({close, id}) => {
 
     const handleQuantity = (e) => {
         if(order.material === ''){
-            console.log('select an item first')
+            toast.warning('Select an item first.');
         }
         else{
             setOrder({...order,[e.target.id]: e.target.value})
@@ -57,11 +61,17 @@ const NewOrder = ({close, id}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if(order.name === '' || order.material === '' || order.quantity === '' || order.add1 === '' ){
+            return toast.error('Fill all the required fields.');
+        }
         if(!id){
             await db.collection('orders').add(order);
-
+            toast.success('Order created successfully.');
+            close();
         }else{
             await db.collection('orders').doc(id).update(order);
+            toast.success('Order updated successfully.');
+            close();
         }
         if(order.outOfStock){
         await db.collection('notification').add({
@@ -84,8 +94,12 @@ const NewOrder = ({close, id}) => {
         })
         }
     }
-
     useEffect(() => {
+        setOrder({
+            ...order,
+            emp_id: currentUser.id,
+            emp_name: currentUser.user.name
+        })
         if(id){
             db.collection('orders').doc(id).get()
             .then((doc) => {
@@ -101,7 +115,7 @@ const NewOrder = ({close, id}) => {
             setProducts(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})));
         });
     },[id])
-
+    console.log(order);
     return (
         <div className='new-order'>
             <div className='new-order-card'>
@@ -159,7 +173,6 @@ const NewOrder = ({close, id}) => {
                                                     })
                                                     
                                                     document.getElementById('material').value = data.name;
-                                                    console.log(order);
                                                     setTimeout(() => {
                                                         setDisplay(false)
                                                     },500)

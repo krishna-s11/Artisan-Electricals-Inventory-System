@@ -13,11 +13,14 @@ const ProjectManagement = () => {
     const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
-        firebase.firestore().collection('projects').get()
-        .then(querySnap => {
+        firebase.firestore().collection('projects').onSnapshot(querySnap => {
             setProjects(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})));
         })
-    })
+    },[])
+
+    const deleteProjects = async (id) => {
+        await firebase.firestore().collection('projects').doc(id).delete();
+    }
 
     return (
         <div className='project-management'>
@@ -32,7 +35,7 @@ const ProjectManagement = () => {
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
                     {
-                        currentUser && currentUser.projects?(
+                        currentUser && currentUser.user.projects?(
                             <button className='btn btn-add_items' onClick={() => {setDisplay(true)}}>New +</button>
                         ):
                         null
@@ -49,7 +52,7 @@ const ProjectManagement = () => {
                         <th>Assigned to</th>
                         <th>Description</th>
                         {
-                            currentUser && currentUser.projects?(
+                            currentUser && currentUser.user.projects?(
                                 <th colSpan='2'>Actions</th>
                             ):
                             null
@@ -69,12 +72,12 @@ const ProjectManagement = () => {
                                     <td>{data.assigned}</td>
                                     <td>{data.description}</td>
                                     {
-                                        currentUser && currentUser.projects?(
-                                            <td><p className='btn-del'>Delete</p></td>
+                                        currentUser && currentUser.user.projects?(
+                                            <td onClick={(id) => {deleteProjects(project.id)}}><p className='btn-del'>Delete</p></td>
                                         ):null
                                     }
                                     {
-                                        currentUser && currentUser.projects?(
+                                        currentUser && currentUser.user.projects?(
                                             <td onClick={() => {setId(project.id);setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
                                         ):null
                                     }

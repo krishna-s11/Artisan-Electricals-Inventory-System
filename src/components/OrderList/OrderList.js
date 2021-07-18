@@ -17,7 +17,7 @@ const OrderList = () => {
 
     useEffect(() => {
         db.collection('orders')
-        .get().then(querySnap => {
+        .onSnapshot(querySnap => {
             setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
         })
     },[])
@@ -42,7 +42,7 @@ const OrderList = () => {
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
                     {
-                        currentUser && currentUser.order?(
+                        currentUser && currentUser.user.orders?(
                             <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
                         )
                         :null
@@ -62,8 +62,8 @@ const OrderList = () => {
                         <th>Notes</th>
                         <th>Status</th>
                         {
-                            currentUser && currentUser.order?(
-                                <th colspan='2'>Action</th>
+                            currentUser && currentUser.user.orders?(
+                                <th colSpan='2'>Action</th>
                             )
                             :null
                         }
@@ -85,13 +85,13 @@ const OrderList = () => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.note}</td>
                                     <td style={data.status==='declined'?(data.outOfStock?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(data.outOfStock?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
                                     {
-                                        currentUser && currentUser.order?(
+                                        currentUser && currentUser.user.orders?(
                                             <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={(id) => {deleteOrder(order.id)}} >Delete</td>
                                         )
                                         :null
                                     }
                                     {
-                                        currentUser && currentUser.order?(
+                                        currentUser && currentUser.user.orders?(
                                             <td className='btn-edit' style={data.outOfStock?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
                                         ):
                                         null

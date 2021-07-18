@@ -17,7 +17,7 @@ const ViewProducts = () => {
 
     useEffect(() => {
         firebase.firestore().collection('products')
-        .get().then((querySnap) => {
+        .onSnapshot((querySnap) => {
             setProducts(querySnap.docs.map(doc => ({data: doc.data(), id: doc.id})))
         })
     },[])
@@ -50,7 +50,7 @@ const ViewProducts = () => {
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div>
                     {
-                        currentUser && currentUser.inventory?
+                        currentUser && currentUser.user.inventory?
                         (<button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>)
                         :null
                     }
@@ -67,7 +67,7 @@ const ViewProducts = () => {
                         <th>Category</th>
                         <th>Serial No.</th>
                         {
-                            currentUser && currentUser.inventory?(
+                            currentUser && currentUser.user.inventory?(
                                 <th colSpan='2'>Action</th>
                             )
                             :null
@@ -90,12 +90,12 @@ const ViewProducts = () => {
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.category}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.serial}</td>
                                     {
-                                        currentUser && currentUser.inventory?(
+                                        currentUser && currentUser.user.inventory?(
                                         <td onClick={(id) => {setDetails(false); deleteProducts(product.id)}}><p className='btn-del'>Delete</p></td>       
                                         ):null
                                     }
                                     {
-                                        currentUser && currentUser.inventory?(
+                                        currentUser && currentUser.user.inventory?(
                                         <td onClick={(id) => {setDetails(false); setId(product.id); setDisplay(true)}}><p className='btn-edit'>Edit</p></td>
                                         ):null
                                     }
