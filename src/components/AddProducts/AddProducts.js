@@ -17,8 +17,15 @@ const AddProducts = ({close,id}) => {
         uom: '',
         ln: '',
         wd: '',
-        serial: ''
+        serial: '',
     })
+    const [images,setImages] = useState([]);
+    const [urls,setUrls] = useState([]);
+
+    const defaultBtn = () => {
+        const defaultBtn = document.querySelector('#choose-input');
+        defaultBtn.click();
+     };
 
     const handleChange = (e) => {
         setDetails({
@@ -27,9 +34,26 @@ const AddProducts = ({close,id}) => {
         });
     }
 
+    const handleUpload = (e) => {
+        for(var i=0; i<e.target.files.length;i++){
+            const newImage = e.target.files[i];
+            setImages((prevState) => [...prevState, newImage]);
+        }
+    }
+
+    console.log(urls);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(!id){
+            images.map(async (image,i) => {
+                const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
+                await storageRef.put(image)
+                await storageRef.getDownloadURL().then((url) => {
+                    setDetails(prevState => [...prevState, {downloadUrl: url}]);
+                });
+            })
+
             await db.collection('products').add(details);
             await db.collection('notification').add({
                 emp_id: '12345',
@@ -64,7 +88,7 @@ const AddProducts = ({close,id}) => {
         }
     },[id])
 
-    console.log(details);
+    console.log(images);
 
     return (
         <div className='add-products'>
@@ -75,10 +99,11 @@ const AddProducts = ({close,id}) => {
                 </div>
                 <div className='add-card-content'>
                     <div className='add-photo'>
-                        <div className='choose-photo'>
+                        <div className='choose-photo' onClick={defaultBtn}>
                             <RiImageAddFill id='photo-img'/>
                             <p>+ Choose Product's Photo</p>
                         </div>
+                        <input id="choose-input" onChange={handleUpload} type="file" multiple hidden></input>
                         <div style={{
                             marginLeft: '20px',
                             marginTop: '20px'
