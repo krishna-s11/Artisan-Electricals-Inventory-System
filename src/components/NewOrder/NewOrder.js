@@ -66,6 +66,7 @@ const NewOrder = ({close, id}) => {
         }
         if(!id){
             await db.collection('orders').add(order);
+            await db.collection('stats').doc('orders').update({requests: firebase.firestore.FieldValue.increment(1), pending: firebase.firestore.FieldValue.increment(1)})
             toast.success('Order created successfully.');
             close();
         }else{

@@ -5,6 +5,7 @@ import NewOrder from '../NewOrder/NewOrder'
 import firebase from '../../firebase'
 import OrderInfo from '../OrderInfo/OrderInfo'
 import { AuthContext } from '../../Auth'
+import DeleteBox from '../DeleteBox/DeleteBox'
 
 const db = firebase.firestore();
 
@@ -12,6 +13,7 @@ const OrderList = () => {
     const [display,setDisplay] = useState(false);
     const [orders,setOrders] = useState([]);
     const [id,setId] = useState('')
+    const [deleteDisplay,setDeleteDisplay] = useState(false)
     const [details,setDetails] = useState(false);
     const {currentUser} = useContext(AuthContext);
 
@@ -28,6 +30,9 @@ const OrderList = () => {
 
     return (
         <div className='order-list'>
+            {
+                deleteDisplay?<DeleteBox deleteFun={() => {deleteOrder(id)}} close={() => setDeleteDisplay(false)} />:null
+            }
             {
                 display?<NewOrder close={() => setDisplay(false)} id={id} />:null
             }
@@ -86,7 +91,7 @@ const OrderList = () => {
                                     <td style={data.status==='declined'?(data.outOfStock?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(data.outOfStock?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
                                     {
                                         currentUser && currentUser.user.orders?(
-                                            <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={(id) => {deleteOrder(order.id)}} >Delete</td>
+                                            <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
                                         )
                                         :null
                                     }

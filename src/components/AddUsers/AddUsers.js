@@ -72,7 +72,7 @@ const AddUsers = ({close, id}) => {
                     </div>
                     <div className='form-row'>
                         <p>Password:</p>
-                        <input type="password" class="form__input add-input" id="password" placeholder="Password" onChange={handleChange} defaultValue={userDetails.password} disabled={userDetails.password !== ''?true:null} required></input>
+                        <input type="password" class="form__input add-input" id="password" placeholder="Password" onChange={handleChange} defaultValue={userDetails.password} required></input>
                     </div>
                     <div className='form-row'>
                         <p>User Roles:</p>

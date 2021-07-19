@@ -24,7 +24,6 @@ const Notification = () => {
                     notifications && notifications.map((notification,i) => {
                         return(
                             <div key={i} className='nt-card'>
-                                <img src={userDp} alt=''></img>
                                 <p>{notification.emp_name}<span> {notification.mssg}</span></p>
                             </div>
                         )

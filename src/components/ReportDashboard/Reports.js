@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import './reports.css'
 import orderImg from '../../assets/order-ico.png'
 import approvedImg from '../../assets/order-approved.png'
@@ -6,6 +6,8 @@ import pendingImg from '../../assets/order-pending.png'
 import rejectedImg from '../../assets/order-rejected.png'
 import {Line} from 'react-chartjs-2'
 import {Doughnut} from 'react-chartjs-2'
+import firebase from '../../firebase';
+import { setCacheNameDetails } from 'workbox-core'
 
 const Reports = () => {
 
@@ -22,6 +24,8 @@ const Reports = () => {
         ],
       };
       
+      const [data,setData] = useState([])
+
       const lineOptions = {
         scales: {
           yAxes: [
@@ -62,6 +66,12 @@ const Reports = () => {
         ],
     };
 
+    useEffect(() => {
+        firebase.firestore().collection('stats').doc('orders').get().then(doc => {
+            setData(doc.data());
+        })
+    },[])
+
     return (
         <div className='reports-pg'>
             <div className='vp-top'>
@@ -71,28 +81,28 @@ const Reports = () => {
                 <div className='top-stats' id='order-req-stat'>
                     <div className='req-stat-top'>
                         <img alt='' src={orderImg}></img>
-                        <h1>129</h1>
+                        <h1>{data.requests}</h1>
                     </div>
                     <p>Total Order Request</p>
                 </div>
                 <div className='top-stats' id='approved-stat'>
                 <div className='req-stat-top'>
                         <img alt='' src={approvedImg}></img>
-                        <h1>75</h1>
+                        <h1>{data.approved}</h1>
                     </div>
                     <p>Total Approved Orders</p>
                 </div>
                 <div className='top-stats' id='pending-stat'>
                 <div className='req-stat-top'>
                         <img alt='' src={pendingImg}></img>
-                        <h1>27</h1>
+                        <h1>{data.pending}</h1>
                     </div>
                     <p>Total Pending Orders</p>
                 </div>
                 <div className='top-stats' id='rejected-stat'>
                     <div className='req-stat-top'>
                         <img alt='' src={rejectedImg}></img>
-                        <h1>12</h1>
+                        <h1>{data.rejected}</h1>
                     </div>
                     <p>Total Rejected Order</p>
                 </div>
@@ -102,6 +112,11 @@ const Reports = () => {
                     <Line data={lineData} options={lineOptions} />
                 </div>
                 <div className='doughnut-chart-container'>
+                    {/* <Doughnut data={doughnutData} options={{responsive:true, maintainAspectRatio:false}}/>  */}
+                </div>
+            </div>
+            <div className='chart-container'>
+            <div className='doughnut-chart-container'>
                     <Doughnut data={doughnutData} options={{responsive:true, maintainAspectRatio:false}}/> 
                 </div>
             </div>

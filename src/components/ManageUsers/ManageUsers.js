@@ -4,12 +4,14 @@ import {FaSearch} from 'react-icons/fa'
 import AddUsers from '../AddUsers/AddUsers';
 import firebase from '../../firebase';
 import { AuthContext } from '../../Auth';
+import DeleteBox from '../DeleteBox/DeleteBox'
 
 const ManageUsers = () => {
     
     const [display,setDisplay] = useState(false);
     const [users,setUsers] = useState([]);
     const [id,setId] = useState('');
+    const [deleteDisplay,setDeleteDisplay] = useState(false)
 
     useEffect(() => {
         firebase.firestore().collection('users').onSnapshot((querySnap) => {
@@ -23,6 +25,9 @@ const ManageUsers = () => {
 
     return (
         <div className='manage-users'>
+             {
+                deleteDisplay?<DeleteBox deleteFun={() => {deleteUsers(id)}} close={() => setDeleteDisplay(false)} />:null
+            }
             {
                 display?<AddUsers close={() => {setDisplay(false)}} id={id} />:null
             }
@@ -55,7 +60,7 @@ const ManageUsers = () => {
                                     <td>{user.user.name}</td>
                                     <td>{user.user.email}</td>
                                     <td>{user.user.inventory?'Inventory,':null} {user.user.orders?'Orders,': null} {user.user.projects?'Projects,': null} {user.user.users?'Users': null}</td>
-                                    <td><p className='btn-del' onClick={(id) => {deleteUsers(user.id)}}>Delete</p></td>
+                                    <td><p className='btn-del' onClick={() => {setId(user.id); setDeleteDisplay(true)}}>Delete</p></td>
                                     <td><p className='btn-edit' onClick={() => {setId(user.id); setDisplay(true)}}>Edit</p></td>
                                 </tr>
                                 )

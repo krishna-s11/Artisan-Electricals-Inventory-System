@@ -4,11 +4,13 @@ import {FaSearch} from 'react-icons/fa'
 import AssignProject from '../AssignProject/AssignProject'
 import firebase from '../../firebase'
 import { AuthContext } from '../../Auth'
+import DeleteBox from '../DeleteBox/DeleteBox'
 
 const ProjectManagement = () => {
 
     const [display,setDisplay] = useState(false);
     const [projects,setProjects] = useState([]);
+    const [deleteDisplay,setDeleteDisplay] = useState(false)
     const [id,setId] = useState('');
     const {currentUser} = useContext(AuthContext);
 
@@ -24,6 +26,9 @@ const ProjectManagement = () => {
 
     return (
         <div className='project-management'>
+        {
+            deleteDisplay?<DeleteBox deleteFun={() => {deleteProjects(id)}} close={() => setDeleteDisplay(false)} />:null
+        }
         {
             display?<AssignProject close={() => {setDisplay(false)}} id={id} />:null   
         }
@@ -73,7 +78,7 @@ const ProjectManagement = () => {
                                     <td>{data.description}</td>
                                     {
                                         currentUser && currentUser.user.projects?(
-                                            <td onClick={(id) => {deleteProjects(project.id)}}><p className='btn-del'>Delete</p></td>
+                                            <td onClick={() => {setId(project.id); setDeleteDisplay(true)}}><p className='btn-del'>Delete</p></td>
                                         ):null
                                     }
                                     {

@@ -6,13 +6,16 @@ import AddProducts from '../AddProducts/AddProducts'
 import ProductInfo from '../ProductInfo/ProductInfo'
 import firebase from '../../firebase'
 import {AuthContext} from '../../Auth';
+import DeleteBox from '../DeleteBox/DeleteBox'
 
 const ViewProducts = () => {
 
     const [display,setDisplay] = useState(false);
     const [details,setDetails] = useState(false);
     const [products,setProducts] = useState([]);
+    const [deleteDisplay,setDeleteDisplay] = useState(false)
     const [id,setId] = useState('');
+    const [name,setName] = useState('');
     const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
@@ -23,11 +26,10 @@ const ViewProducts = () => {
     },[])
 
     const deleteProducts = async (id) => {
-        await firebase.firestore().collection('products').doc(id).delete()
+        await firebase.firestore().collection('products').doc(id).delete();
         await firebase.firestore().collection('notification').add({
-            emp_id: '12345',
-            emp_name: 'Krishna Saxena',
-            emp_photoUrl: '',
+            emp_id: currentUser.id,
+            emp_name: currentUser.user.name,
             mssg: 'deleted an inventory',
             time: Date.now()
         })
@@ -36,6 +38,9 @@ const ViewProducts = () => {
 
     return (
         <div className='view-products'>
+            {
+                deleteDisplay?<DeleteBox deleteFun={() => {deleteProducts(id)}} close={() => setDeleteDisplay(false)} />:null
+            }
             {
                 display?<AddProducts close={() => {setDisplay(false)}} id={id} />:null
             }
@@ -91,7 +96,7 @@ const ViewProducts = () => {
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.serial}</td>
                                     {
                                         currentUser && currentUser.user.inventory?(
-                                        <td onClick={(id) => {setDetails(false); deleteProducts(product.id)}}><p className='btn-del'>Delete</p></td>       
+                                        <td onClick={() => {setId(product.id); setName(data.name); setDeleteDisplay(true) }}><p className='btn-del'>Delete</p></td>       
                                         ):null
                                     }
                                     {

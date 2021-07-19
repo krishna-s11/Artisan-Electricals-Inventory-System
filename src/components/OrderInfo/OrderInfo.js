@@ -20,13 +20,21 @@ const OrderInfo = ({close,id}) => {
     },[id])
 
     const acceptBtn = async () => {
-        firebase.firestore().collection('orders').doc(id).update({
+        await firebase.firestore().collection('orders').doc(id).update({
             status: 'accepted'
+        });
+        await firebase.firestore().collection('stats').doc('orders').update({
+            approved: firebase.firestore.FieldValue.increment(1),
+            pending: firebase.firestore.FieldValue.decrement(1)
         })
     }
     const declineBtn = async () => {
         firebase.firestore().collection('orders').doc(id).update({
             status: 'declined'
+        })
+        await firebase.firestore().collection('stats').doc('orders').update({
+            rejected: firebase.firestore.FieldValue.increment(1),
+            pending: firebase.firestore.FieldValue.decrement(1)
         })
     }
 
@@ -35,10 +43,10 @@ const OrderInfo = ({close,id}) => {
             <div className='product-info'>
                 <div className='pd-title-box'>
                     <AiOutlineClose className='btn-cross' onClick={close}/>
-                    <h3>Product Name</h3>
+                    <h3>{order.name}</h3>
                 </div>
                 <div className='pd-info-box' style={{marginTop: '50px'}}>
-                    <p>Employee Name: <span>Krishna Saxena</span></p>
+                    <p>Employee Name: <span>{order.emp_name}</span></p>
                     <p>Project Name: <span>{order.name}</span></p>
                     <p>Project Address: <span>{order.add1} {order.add2} {order.add3} </span></p>
                     <p>Required By: <span>{order.requiredBy} </span></p>
@@ -48,15 +56,15 @@ const OrderInfo = ({close,id}) => {
                     <p>Meterial SKU: <span>{order.sku} </span></p>
                     <p>Meterial ID: <span>{order.productId} </span></p>
                 </div>
-                {
-                    currentUser && currentUser.order?(
+                {/* { */}
+                    {/* currentUser && currentUser.orders?( */}
                         <div className='pd-info-action-container'>
                             <button className='btn btn-accept' onClick={acceptBtn}>Accept</button>
                             <button className='btn btn-decline' onClick={declineBtn}>Decline</button>
                         </div>
-                    )
-                    :null   
-                }
+                    {/* )
+                    :null    */}
+                {/* } */}
             </div>
         </div>
     )

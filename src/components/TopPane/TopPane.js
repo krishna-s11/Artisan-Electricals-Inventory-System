@@ -39,9 +39,6 @@ const TopPane = ({setView}) => {
                     }
                 </div>
                 <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
-                    <div className='user-dp'>
-                        <img alt='' src={userDp}></img>
-                    </div>
                     <div className='user-info'>
                         <p>{currentUser.user.name.slice(' ')}</p>
                         <p>Admin</p>

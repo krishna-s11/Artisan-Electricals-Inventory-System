@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './assignProject.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../Auth';
 
 const db = firebase.firestore();
 
@@ -20,6 +21,7 @@ const AssignProject = ({ close, id}) => {
 
     const [users,setUsers] = useState([]);
     const [display,setDisplay] = useState(false);
+    const {currentUser} = useContext(AuthContext);
 
     const handleChange = (e) => {
         setData({
@@ -41,8 +43,8 @@ const AssignProject = ({ close, id}) => {
         }
         await firebase.firestore().collection('notification').add({
             emp_id: data.emp_id,
-            emp_name: data.assigned,
-            mssg: 'assigned an project to Shelock',
+            emp_name: currentUser.user.name,
+            mssg: `assigned an project to ${data.assigned}`,
             time: Date.now()
         })
     }

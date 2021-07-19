@@ -6,7 +6,7 @@ import { AuthContext } from '../../Auth'
 import {Redirect, useHistory} from 'react-router-dom'
 
 const Dashboard = () => {
-    const [mobileNav,setMobileNav] = useState(false);
+    const [mobileNav,setMobileNav] = useState(true);
     const {currentUser} = useContext(AuthContext);
 
     const history = useHistory();
@@ -23,7 +23,7 @@ const Dashboard = () => {
     if(currentUser){
     return (
         <div className='dashboard'>
-            <LeftPane mobileNav={mobileNav} />
+            <LeftPane mobileNav={mobileNav} setMobile={() => setMobileNav(true)} />
             <RightPane setView={() => setMobileNav(!mobileNav)} />
         </div>
     )
