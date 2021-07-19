@@ -52,19 +52,20 @@ const LoginPage = () => {
             return toast.error('Enter login credentials.');
         }
         // let success = false;
-        for(var i=0; i<users.length; i++){
-            if(users[i].user.email === email){
-                if(users[i].user.password === password){
-                    setCurrentUser(users[i]);
-                    history.push('/dashboard/products');
-                    // success = true
-                    // return ;
-                }
-            }
-        }
+        // for(var i=0; i<users.length; i++){
+        //     if(users[i].user.email === email){
+        //         if(users[i].user.password === password){
+        //             setCurrentUser(users[i]);
+        //             history.push('/dashboard/products');
+        //             // success = true
+        //             // return ;
+        //         }
+        //     }
+        // }
         // if(!success){
         //     toast.error('Invalid username or password !');
         // }
+        history.push('/dashboard/products');    
     }
     return (
         <div className='login-page'>
