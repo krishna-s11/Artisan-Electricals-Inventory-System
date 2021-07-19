@@ -52,6 +52,7 @@ const LoginPage = () => {
         if(email === '' || password === ''){
             return toast.error('Enter login credentials.');
         }
+        history.push('/dashboard/products');
         // let success = false;
         // for(var i=0; i<users.length; i++){
         //     if(users[i].user.email === email){
