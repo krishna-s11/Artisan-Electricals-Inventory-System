@@ -37,6 +37,7 @@ const LoginPage = () => {
         firebase.firestore().collection('users').get().then((querySnap)  => {
             setUsers(querySnap.docs.map(doc => ({id:doc.id, user: doc.data()})));
         })
+        toast.success(users);
     },[currentUser,history])
 
     const handleEmail = (e) => {
