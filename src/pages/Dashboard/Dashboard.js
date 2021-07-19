@@ -12,12 +12,12 @@ const Dashboard = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if(currentUser){
-            console.log('user found');
-        }
-        else{
-            history.push('/');
-        }
+        // if(currentUser){
+        //     console.log('user found');
+        // }
+        // else{
+        //     history.push('/');
+        // }
     },[])
 
     if(currentUser){
