@@ -51,20 +51,20 @@ const LoginPage = () => {
         if(email === '' || password === ''){
             return toast.error('Enter login credentials.');
         }
-        let success = false;
+        // let success = false;
         for(var i=0; i<users.length; i++){
             if(users[i].user.email === email){
                 if(users[i].user.password === password){
                     setCurrentUser(users[i]);
                     history.push('/dashboard/products');
-                    success = true
-                    return ;
+                    // success = true
+                    // return ;
                 }
             }
         }
-        if(!success){
-            toast.error('Invalid username or password !');
-        }
+        // if(!success){
+        //     toast.error('Invalid username or password !');
+        // }
     }
     return (
         <div className='login-page'>
