@@ -40,7 +40,7 @@ const TopPane = ({setView}) => {
                 </div>
                 <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-info'>
-                        {/* <p>{currentUser.user.name.slice(' ')}</p> */}
+                        <p>{currentUser.user.name.slice(' ')}</p>
                         <p>Admin</p>
                     </div>
                         <IoMdArrowDropdown style={{fontSize:'20px'}}/>
