@@ -58,6 +58,7 @@ const LoginPage = () => {
                     setCurrentUser(users[i]);
                     history.push('/dashboard/products');
                     success = true
+                    return ;
                 }
             }
         }
