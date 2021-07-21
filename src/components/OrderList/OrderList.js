@@ -61,9 +61,8 @@ const OrderList = () => {
                         <th>Employee Name</th>
                         <th>Project Name</th>
                         <th>Project Address</th>
+                        <th>Requested on</th>
                         <th>Required by</th>
-                        <th>Material Item</th>
-                        <th>Quantity</th>
                         <th>Notes</th>
                         <th>Status</th>
                         {
@@ -84,9 +83,8 @@ const OrderList = () => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.emp_name}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.name}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.add1} {data.add2}</td>
+                                    <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requested}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requiredBy}</td>
-                                    <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.material}</td>
-                                    <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.quantity}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.note}</td>
                                     <td style={data.status==='declined'?(data.outOfStock?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(data.outOfStock?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
                                     {

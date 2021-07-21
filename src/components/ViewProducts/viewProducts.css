@@ -104,9 +104,10 @@
   height: 60px;
   object-fit: contain;
   transition: all 0.3s;
+  z-index: 1000;
 }
 .product-preview:hover {
-  transform: scale(8);
+  transform: scale(8) translateX(10px);
 }
 .btn-del {
   color: #f71f20;

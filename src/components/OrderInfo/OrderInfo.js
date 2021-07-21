@@ -50,9 +50,18 @@ const OrderInfo = ({close,id}) => {
                     <p>Project Name: <span>{order.name}</span></p>
                     <p>Project Address: <span>{order.add1} {order.add2} {order.add3} </span></p>
                     <p>Required By: <span>{order.requiredBy} </span></p>
-                    <p>Quantity: <span>{order.quantity} </span></p>
                     <p>Extra note: <span>{order.note} </span></p>
-                    <p>Material: <span>{order.material} </span></p>
+                    <p>Material:
+                        <ul>
+                            <li style={{fontWeight: '600'}}>Products<span style={{fontWeight: '600'}}>Quantity</span></li>
+                            <li>{order.material1} <span>{order.quantity1}</span></li>
+                            <li>{order.material2} <span>{order.quantity2}</span></li>
+                            <li>{order.material3} <span>{order.quantity3}</span></li>
+                            <li>{order.material4} <span>{order.quantity4}</span></li>
+                            <li>{order.material5} <span>{order.quantity5}</span></li>
+                            <li>{order.material6} <span>{order.quantity6}</span></li>
+                        </ul>
+                    </p>
                     <p>Meterial SKU: <span>{order.sku} </span></p>
                     <p>Meterial ID: <span>{order.productId} </span></p>
                 </div>

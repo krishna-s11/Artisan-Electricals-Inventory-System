@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import './loginPage.css'
 import { useHistory } from 'react-router-dom';
 import imgCover from '../../assets/login-cover3.jpg'
+import logo from '../../assets/logo.png'
 import firebase from '../../firebase';
 import { AuthContext } from '../../Auth';
 import { toast } from 'react-toastify';
@@ -38,6 +39,8 @@ const LoginPage = () => {
             setUsers(querySnap.docs.map(doc => ({id:doc.id, user: doc.data()})));
         })
     },[currentUser,history])
+
+    console.log(users);
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -96,8 +99,9 @@ const LoginPage = () => {
                      <button className='btn btn-login' onClick={handleSubmit}>Login</button>
                 </div>
                 <div class='cover-lg'>
-                        <img alt='' src={imgCover} className='cover-img'></img>
-                        <h3>Artisan inventory system</h3>
+                        {/* <img alt='' src={imgCover} className='cover-img'></img> */}
+                        {/* <h3>Artisan inventory system</h3> */}
+                        <img src={logo} alt=''></img>
                 </div>
             </div>
         </div>

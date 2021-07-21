@@ -17,3 +17,17 @@
   color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.pd-info-box ul {
+  list-style: none;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+.pd-info-box ul span {
+  margin-left: 20px;
+}
+.pd-info-box li {
+  font-weight: 400;
+}
+.pd-info-box li:first-child {
+  margin-bottom: 5px;
+}

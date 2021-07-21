@@ -58,14 +58,14 @@ const LeftPane = ({mobileNav,setMobile}) => {
                             !mobileNav?<p>Reports</p>:null
                         }
                     </li></Link>
-                    <Link to='/dashboard/manage-projects'><li onClick={() => {setFilter(3); setMobile()}} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
+                    {/* <Link to='/dashboard/manage-projects'><li onClick={() => {setFilter(3); setMobile()}} style={{backgroundColor: filter === 3 ? '#2e538a' : null}}>
                         <span>
                             <img alt='' src={projects}></img>
                         </span>
                         {
                             !mobileNav?<p>Projects</p>:null
                         }
-                    </li></Link>
+                    </li></Link> */}
                     {
                         currentUser && currentUser.user.users?(
                             <Link to='/dashboard/manage-users'><li onClick={() => {setFilter(4); setMobile()}} style={{backgroundColor: filter === 4 ? '#2e538a' : null}}>

@@ -75,8 +75,8 @@
   justify-content: center;
 }
 .doughnut-chart-container {
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 100% 400px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,5 +85,24 @@
 @media only screen and (max-width: 850px) {
   .stat-top-sec {
     flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .reports-pg {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .reports-pg {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .doughnut-chart-container {
+    width: 100%;
+    height: 100% 400px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

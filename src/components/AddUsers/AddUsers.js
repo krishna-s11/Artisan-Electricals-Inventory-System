@@ -64,15 +64,15 @@ const AddUsers = ({close, id}) => {
                 <div className='add-user-content'>
                     <div className='form-row'>
                         <p>Name:</p>
-                        <input type="text" class="form__input add-input" id="name" placeholder="Full Name" onChange={handleChange} defaultValue={userDetails.name} required></input>
+                        <input type="text" class="form__input add-input user" id="name" placeholder="Full Name" onChange={handleChange} defaultValue={userDetails.name} required></input>
                     </div>
                     <div className='form-row'>
                         <p>Email:</p>
-                        <input type="text" class="form__input add-input" id="email" placeholder="Email address" onChange={handleChange} defaultValue={userDetails.email} required></input>
+                        <input type="text" class="form__input add-input user" id="email" placeholder="Email address" onChange={handleChange} defaultValue={userDetails.email} required></input>
                     </div>
                     <div className='form-row'>
                         <p>Password:</p>
-                        <input type="password" class="form__input add-input" id="password" placeholder="Password" onChange={handleChange} defaultValue={userDetails.password} required></input>
+                        <input type="password" class="form__input add-input user" id="password" placeholder="Password" onChange={handleChange} defaultValue={userDetails.password} required></input>
                     </div>
                     <div className='form-row'>
                         <p>User Roles:</p>

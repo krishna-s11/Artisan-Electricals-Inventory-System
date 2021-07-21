@@ -56,7 +56,7 @@
   padding-left: 10px;
   padding-right: 7px;
 }
-#material {
+.material {
   width: 100% !important;
 }
 .pd-index {
@@ -124,4 +124,64 @@
   background-color: #4fc3a1;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   color: #fff;
+}
+.bt-row-container {
+  width: 100%;
+  display: flex;
+}
+.bt {
+  width: 70%;
+}
+.qt {
+  width: 30%;
+}
+.quantity {
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 700px) {
+  .new-order-card {
+    width: 350px;
+    height: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  }
+  .add-col-2 {
+    width: 100%;
+    padding-top: 0px;
+  }
+  .add-col-1 {
+    width: 100%;
+    padding-top: 30px;
+    padding-left: 0;
+  }
+  .btn-place-order {
+    padding: 0;
+  }
+  .bottom-cd-container {
+    padding-left: 0;
+    padding-right: 7px;
+  }
+  .bt-row-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .bt {
+    width: 100%;
+  }
+  .qt {
+    width: 100%;
+  }
+  .btn-place-order {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4fc3a1;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    color: #fff;
+  }
 }
