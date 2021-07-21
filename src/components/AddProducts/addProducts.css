@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 999;
 }
 .add-products-card {
   width: 700px;
@@ -112,6 +112,7 @@
 @media only screen and (max-width: 700px) {
   .add-products-card {
     width: 350px;
+    height: 500px;
   }
   .add-card-content {
     width: 100%;
