@@ -47,8 +47,7 @@ const TopPane = ({setView}) => {
                     <div className='drop-down' style={display?{display:'block'}:null}>
                         <ul>
                             <Link to='/dashboard/profile'><li><img alt='' src={userDrop}></img>Profile</li></Link>
-                            <li><img alt='' src={orderDrop}></img>My orders</li>
-                            <li><img alt='' src={projectDrop}></img>My projects</li>
+                            <Link to='/dashboard/my-orders'><li><img alt='' src={orderDrop}></img>My orders</li></Link>
                             <li onClick={signOut}><img alt='' src={signout}></img>Sign out</li>
                         </ul>
                     </div>

@@ -49,14 +49,16 @@ const AddProducts = ({ close, id }) => {
         }
         if (!id) {
             let imgLink = [];
-            images.map(async (image, i) => {
-                const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
-                await storageRef.put(image)
-                const downloadLink = storageRef.getDownloadURL();
-                imgLink.push(downloadLink);
-            })
-
-            await db.collection('products').add(details, imgLink);
+            imgLink =  await Promise.all(
+                images.map(async (image, i) => {
+                    const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
+                    await storageRef.put(image)
+                    const downloadLink = storageRef.getDownloadURL();
+                    return downloadLink;
+                })   
+            )
+            
+            await db.collection('products').add(details,imgLink);
 
             await db.collection('notification').add({
                 emp_id: '12345',

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import './orderList.css'
+import React, {useState, useEffect, useContext} from 'react'
+import './myOrders.css';
 import {FaSearch} from 'react-icons/fa'
 import NewOrder from '../NewOrder/NewOrder'
 import firebase from '../../firebase'
@@ -9,7 +9,7 @@ import DeleteBox from '../DeleteBox/DeleteBox'
 
 const db = firebase.firestore();
 
-const OrderList = () => {
+const MyOrders = () => {
     const [display,setDisplay] = useState(false);
     const [orders,setOrders] = useState([]);
     const [id,setId] = useState('')
@@ -18,12 +18,11 @@ const OrderList = () => {
     const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
-        db.collection('orders')
-        .onSnapshot(querySnap => {
+        db.collection('orders').where('emp_id', '==', currentUser.id).onSnapshot(querySnap => {
             setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
         })
     },[])
-
+    
     const deleteOrder = async (id) => {
         await firebase.firestore().collection('orders').doc(id).delete();
     }
@@ -55,7 +54,7 @@ const OrderList = () => {
                 </div>
             </div>
             <table class="fl-table">
-                    <thead id='thead'>
+                    <thead>
                     <tr>
                         <th></th>
                         <th>Employee Name</th>
@@ -110,4 +109,4 @@ const OrderList = () => {
     )
 }
 
-export default OrderList
+export default MyOrders

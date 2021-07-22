@@ -1,6 +1,7 @@
 .left-pane {
   width: 300px;
   background-color: #3c6198;
+  z-index: inherit;
 }
 .company-logo-lp {
   width: 100%;
@@ -35,6 +36,3 @@
 .side-nav li:hover {
   background-color: #2e538a;
 }
-/* .side-nav li:first-child {
-  background-color: #2e538a;
-} */
