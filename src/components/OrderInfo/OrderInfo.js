@@ -23,19 +23,19 @@ const OrderInfo = ({close,id}) => {
         await firebase.firestore().collection('orders').doc(id).update({
             status: 'accepted'
         });
-        await firebase.firestore().collection('stats').doc('orders').update({
-            approved: firebase.firestore.FieldValue.increment(1),
-            pending: firebase.firestore.FieldValue.decrement(1)
-        })
+        // await firebase.firestore().collection('stats').doc('orders').update({
+        //     approved: firebase.firestore.FieldValue.increment(1),
+        //     pending: firebase.firestore.FieldValue.decrement(1)
+        // })
     }
     const declineBtn = async () => {
         firebase.firestore().collection('orders').doc(id).update({
             status: 'declined'
         })
-        await firebase.firestore().collection('stats').doc('orders').update({
-            rejected: firebase.firestore.FieldValue.increment(1),
-            pending: firebase.firestore.FieldValue.decrement(1)
-        })
+        // await firebase.firestore().collection('stats').doc('orders').update({
+        //     rejected: firebase.firestore.FieldValue.increment(1),
+        //     pending: firebase.firestore.FieldValue.decrement(1)
+        // })
     }
 
     return (
@@ -60,10 +60,24 @@ const OrderInfo = ({close,id}) => {
                             <li>{order.material4} <span>{order.quantity4}</span></li>
                             <li>{order.material5} <span>{order.quantity5}</span></li>
                             <li>{order.material6} <span>{order.quantity6}</span></li>
+                            <li>{order.material7} <span>{order.quantity7}</span></li>
+                            <li>{order.material8} <span>{order.quantity8}</span></li>
+                            <li>{order.material9} <span>{order.quantity9}</span></li>
+                            <li>{order.material10} <span>{order.quantity10}</span></li>
+                            <li>{order.material11} <span>{order.quantity11}</span></li>
+                            <li>{order.material12} <span>{order.quantity12}</span></li>
+                            <li>{order.material13} <span>{order.quantity13}</span></li>
+                            <li>{order.material14} <span>{order.quantity14}</span></li>
+                            {/* <li>{order.material15} <span>{order.quantity15}</span></li>
+                            <li>{order.material16} <span>{order.quantity16}</span></li>
+                            <li>{order.material17} <span>{order.quantity17}</span></li>
+                            <li>{order.material18} <span>{order.quantity18}</span></li>
+                            <li>{order.material19} <span>{order.quantity19}</span></li>
+                            <li>{order.material20} <span>{order.quantity20}</span></li> */}
                         </ul>
                     </p>
-                    <p>Meterial SKU: <span>{order.sku} </span></p>
-                    <p>Meterial ID: <span>{order.productId} </span></p>
+                    {/* <p>Meterial SKU: <span>{order.sku1} </span></p>
+                    <p>Meterial ID: <span>{order.productId1} </span></p> */}
                 </div>
                 {/* { */}
                     {/* currentUser && currentUser.orders?( */}

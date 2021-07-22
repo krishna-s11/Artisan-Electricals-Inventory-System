@@ -129,6 +129,12 @@
   width: 100%;
   display: flex;
 }
+.bt-row-content {
+  display: none;
+}
+.first {
+  display: block !important;
+}
 .bt {
   width: 70%;
 }

@@ -78,7 +78,7 @@ const OrderList = () => {
                         orders && orders.map((order,i) => {
                             const data = order.data;
                             return(
-                                <tr key={i} style={data.outOfStock?{backgroundColor:'#F88379'}:null}>
+                                <tr key={i} style={false?{backgroundColor:'#F88379'}:null}>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{i+1}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.emp_name}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.name}</td>
@@ -86,16 +86,16 @@ const OrderList = () => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requested}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requiredBy}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.note}</td>
-                                    <td style={data.status==='declined'?(data.outOfStock?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(data.outOfStock?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
+                                    <td style={data.status==='declined'?(false?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(false?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
                                     {
                                         currentUser && currentUser.user.orders?(
-                                            <td className='btn-del' style={data.outOfStock?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
+                                            <td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
                                         )
                                         :null
                                     }
                                     {
                                         currentUser && currentUser.user.orders?(
-                                            <td className='btn-edit' style={data.outOfStock?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
+                                            <td className='btn-edit' style={false?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
                                         ):
                                         null
                                     }
