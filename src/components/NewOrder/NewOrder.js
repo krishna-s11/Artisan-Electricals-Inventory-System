@@ -283,7 +283,8 @@ const NewOrder = ({close, id}) => {
                                         <div className='selection-box' >
                                             {
                                                 products && products.map((product,i) => {
-                                                    const data = product.data;
+                                                    const data = product.data.details;
+                                                    const img = product.data.imgLink[0];
                                                     return(
                                                         <div className='product-selection-container' key={i} onClick={() => {
                                                             setOrder({
@@ -305,7 +306,7 @@ const NewOrder = ({close, id}) => {
                                                                 <p className='sl-info'>Available: {data.quantity}</p>
                                                             </div>
                                                         </div>
-                                                        <img src={tool1} alt=''></img>
+                                                        <img src={img} alt=''></img>
                                                     </div>
                                                     )
                                                 })   
@@ -331,7 +332,8 @@ const NewOrder = ({close, id}) => {
                                         <div className='selection-box' >
                                             {
                                                 products && products.map((product,i) => {
-                                                    const data = product.data;
+                                                    const data = product.data.details;
+                                                    const img = product.data.imgLink[0];
                                                     return(
                                                         <div className='product-selection-container' key={i} onClick={() => {
                                                             setOrder({
@@ -353,7 +355,7 @@ const NewOrder = ({close, id}) => {
                                                                 <p className='sl-info'>Available: {data.quantity}</p>
                                                             </div>
                                                         </div>
-                                                        <img src={tool1} alt=''></img>
+                                                        <img src={img} alt=''></img>
                                                     </div>
                                                     )
                                                 })   
@@ -379,7 +381,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -401,7 +404,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -427,7 +430,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -449,7 +453,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -475,7 +479,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -497,7 +502,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -523,7 +528,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -545,7 +551,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -571,7 +577,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -593,7 +600,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -619,7 +626,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -641,7 +649,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -667,7 +675,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -689,7 +698,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -715,7 +724,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -737,7 +747,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -763,7 +773,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -785,7 +796,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -811,7 +822,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -833,7 +845,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -859,7 +871,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -881,7 +894,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -907,7 +920,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -929,7 +943,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -955,7 +969,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -977,7 +992,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -1003,7 +1018,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -1025,7 +1041,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -1051,7 +1067,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -1073,7 +1090,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -1099,7 +1116,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -1121,7 +1139,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -1147,7 +1165,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -1169,7 +1188,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   
@@ -1195,7 +1214,8 @@ const NewOrder = ({close, id}) => {
                                     <div className='selection-box' >
                                         {
                                             products && products.map((product,i) => {
-                                                const data = product.data;
+                                                const data = product.data.details;
+                                                const img = product.data.imgLink[0];
                                                 return(
                                                     <div className='product-selection-container' key={i} onClick={() => {
                                                         setOrder({
@@ -1217,7 +1237,7 @@ const NewOrder = ({close, id}) => {
                                                             <p className='sl-info'>Available: {data.quantity}</p>
                                                         </div>
                                                     </div>
-                                                    <img src={tool1} alt=''></img>
+                                                    <img src={img} alt=''></img>
                                                 </div>
                                                 )
                                             })   

@@ -3,6 +3,7 @@ import './orderInfo.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase'
 import { AuthContext } from '../../Auth'
+import { toast } from 'react-toastify'
 
 const OrderInfo = ({close,id}) => {
 
@@ -23,19 +24,23 @@ const OrderInfo = ({close,id}) => {
         await firebase.firestore().collection('orders').doc(id).update({
             status: 'accepted'
         });
-        // await firebase.firestore().collection('stats').doc('orders').update({
-        //     approved: firebase.firestore.FieldValue.increment(1),
-        //     pending: firebase.firestore.FieldValue.decrement(1)
-        // })
+        await firebase.firestore().collection('stats').doc('orders').update({
+            approved: firebase.firestore.FieldValue.increment(1),
+            pending: firebase.firestore.FieldValue.increment(-1)
+        })
+        toast.success('Order accepted !');
+        close();
     }
     const declineBtn = async () => {
-        firebase.firestore().collection('orders').doc(id).update({
+        await firebase.firestore().collection('orders').doc(id).update({
             status: 'declined'
         })
-        // await firebase.firestore().collection('stats').doc('orders').update({
-        //     rejected: firebase.firestore.FieldValue.increment(1),
-        //     pending: firebase.firestore.FieldValue.decrement(1)
-        // })
+        await firebase.firestore().collection('stats').doc('orders').update({
+            rejected: firebase.firestore().FieldValue.increment(1),
+            pending: firebase.firestore().FieldValue.decrement(1)
+        })
+        toast.error('Order rejected !');
+        close();
     }
 
     return (
