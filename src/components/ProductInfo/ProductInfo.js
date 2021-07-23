@@ -19,6 +19,8 @@ const ProductInfo = ({close, id}) => {
         })
     },[id])
 
+    console.log(product);
+    if(product.imgLink){
     return (
         <div className='product-info-pg'>
         <div className='product-info'>
@@ -29,30 +31,34 @@ const ProductInfo = ({close, id}) => {
             <div className='pd-img-container'>
                 <p>Product Images:</p>
                 <div className='pd-img-box'>
-                    <img alt='' src={img1}></img>
-                    <img alt='' src={img2}></img>
-                    <img alt='' src={img3}></img>
-                    <img alt='' src={img1}></img>
-                    <img alt='' src={img2}></img>
-                    <img alt='' src={img3}></img>
-                    <img alt='' src={img1}></img>
-                    <img alt='' src={img2}></img>
-                    <img alt='' src={img3}></img>
+                    {
+                        product.imgLink.map && product.imgLink.map((image,i) => {
+                            return(
+                            <img alt='' src={image} key={i}></img>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <div className='pd-info-box'>
-                <p>Name: <span>{product.name}</span></p>
-                <p>SKU: <span>{product.sku}</span></p>
-                <p>Category: <span>{product.category}</span></p>
-                <p>Sub-category: <span>{product.subCategory} </span></p>
-                <p>Quantity: <span>{product.quantity} </span></p>
-                <p>Units of measurement: <span>{product.uom}</span></p>
-                <p>Dimensions: <span>{product.ln} x {product.wd}</span> </p>
-                <p>Serial number: <span>{product.serial}</span> </p>
+                <p>Name: <span>{product.details.name}</span></p>
+                <p>SKU: <span>{product.details.sku}</span></p>
+                <p>Category: <span>{product.details.category}</span></p>
+                <p>Sub-category: <span>{product.details.subCategory} </span></p>
+                <p>Quantity: <span>{product.details.quantity} </span></p>
+                <p>Units of measurement: <span>{product.details.uom}</span></p>
+                <p>Dimensions: <span>{product.details.ln} x {product.details.wd}</span> </p>
+                <p>Serial number: <span>{product.details.serial}</span> </p>
             </div>
         </div>
         </div>
     )
+    }
+    else{
+        return(
+            <center>Loading...</center>
+        )
+    }
 }
 
 export default ProductInfo

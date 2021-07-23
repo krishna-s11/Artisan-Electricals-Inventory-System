@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { RiImageAddFill } from 'react-icons/ri'
 import firebase from '../../firebase';
 import { toast } from 'react-toastify';
+import Loading from '../Loading/Loading';
 
 const db = firebase.firestore();
 
@@ -22,6 +23,7 @@ const AddProducts = ({ close, id }) => {
         images: []
     })
     const [images, setImages] = useState([]);
+    const [loading,setLoading] = useState(false);
 
     const defaultBtn = () => {
         const defaultBtn = document.querySelector('#choose-input');
@@ -47,6 +49,7 @@ const AddProducts = ({ close, id }) => {
         if (details.name === '' || details.sku === '' || details.category === '' || details.subCategory === '' || details.quantity === '' || details.uom === '' || details.ln === '' || details.wd === '') {
             return toast.error('Fill all the required fields');
         }
+        setLoading(true);
         if (!id) {
             let imgLink = [];
             imgLink =  await Promise.all(
@@ -58,7 +61,7 @@ const AddProducts = ({ close, id }) => {
                 })   
             )
             
-            await db.collection('products').add(details,imgLink);
+            await db.collection('products').add({details,imgLink});
 
             await db.collection('notification').add({
                 emp_id: '12345',
@@ -67,9 +70,12 @@ const AddProducts = ({ close, id }) => {
                 mssg: 'added a new inventory',
                 time: Date.now()
             })
+            setLoading(false);
             toast.success('Product successfully added. ')
             close();
         }
+
+        // 7457000518
         else {
             await db.collection('products').doc(id).update(details)
             await db.collection('notification').add({
@@ -96,11 +102,16 @@ const AddProducts = ({ close, id }) => {
                 })
         }
     }, [id])
-
-    console.log(images);
+    console.log(details);
 
     return (
         <div className='add-products'>
+            {
+                loading?(
+                    <Loading />
+                )
+                :null
+            }
             <div className='add-products-card'>
                 <div className='add-card-top'>
                     <h2>Add Product</h2>

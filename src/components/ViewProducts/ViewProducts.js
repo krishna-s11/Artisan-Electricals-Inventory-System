@@ -82,12 +82,13 @@ const ViewProducts = () => {
                     <tbody>
                     {
                         products && products.map((product,i) => {
-                            const data = product.data;
+                            const data = product.data.details;
+                            const img = product.data.imgLink[0];
                             return(
                                 <tr key={i}>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}} >{i+1}</td>
                                     <td>
-                                        <img alt='' src={tool1} className='product-preview'></img>
+                                        <img alt='' src={img} className='product-preview'></img>
                                     </td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.name}</td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.sku}</td>
