@@ -88,7 +88,7 @@ const AddUsers = ({close, id}) => {
                         </form>
                     </div>
                     <div className='user-action-box'>
-                        <button className='btn btn-user' onClick={handleSubmit}>Create</button>
+                        <button className='btn btn-user' onClick={handleSubmit}>{id?'Update':'Create'}</button>
                     </div>
                 </div>
             </div>

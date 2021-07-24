@@ -1344,7 +1344,7 @@ const NewOrder = ({close, id}) => {
                             }} />
                         </div>
                         <div style={{width: '100%', display:'flex', justifyContent: 'center'}}>
-                            <button className='btn btn-place-order' onClick={handleSubmit} >Place Order</button>
+                            <button className='btn btn-place-order' onClick={handleSubmit}>{id?'Update Order':'Place Order'}</button>
                         </div>
                     </div>
                 </div>

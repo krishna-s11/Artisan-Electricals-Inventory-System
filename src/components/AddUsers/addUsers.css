@@ -12,15 +12,15 @@
 }
 .add-users-card {
   width: 400px;
-  height: 650px;
+  height: 550px;
   background-color: #fff;
-  overflow: hidden;
+  overflow: auto;
+  padding-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
 }
 .add-user-content {
-  margin-top: 10px;
-  overflow-y: auto;
+  padding-top: 10px;
 }
 .add-user-content form {
   margin-top: 8px;

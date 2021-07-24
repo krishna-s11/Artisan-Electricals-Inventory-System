@@ -135,46 +135,46 @@ const AddProducts = ({ close, id }) => {
                     <div className='add-content'>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Name:</p>
-                            <input type="text" class="form__input add-input" id="name" onChange={handleChange} placeholder="Product's Name" defaultValue={details.name} required></input>
+                            <input type="text" class="form__input add-input" id="name" onChange={handleChange} placeholder="Product's Name" defaultValue={details.details?details.details.name:null} required></input>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>SKU:</p>
-                            <input type="text" class="form__input add-input" id="sku" onChange={handleChange} placeholder="SKU" defaultValue={details.sku} required></input>
+                            <input type="text" class="form__input add-input" id="sku" onChange={handleChange} placeholder="SKU" defaultValue={details.details?details.details.sku:null} required></input>
                         </div>
                         <div className='add-group sub-category'>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Category:</p>
-                                <input type="text" class="form__input add-input" id="category" onChange={handleChange} placeholder="Category" defaultValue={details.category} required></input>
+                                <input type="text" class="form__input add-input" id="category" onChange={handleChange} placeholder="Category" defaultValue={details.details?details.details.category:null} required></input>
                             </div>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Sub-category:</p>
-                                <input type="text" class="form__input add-input" id="subCategory" onChange={handleChange} placeholder="Sub-category" defaultValue={details.subCategory} required></input>
+                                <input type="text" class="form__input add-input" id="subCategory" onChange={handleChange} placeholder="Sub-category" defaultValue={details.details?details.details.subCategory:null} required></input>
                             </div>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Quantity:</p>
-                            <input type="text" class="form__input add-input" id="quantity" onChange={handleChange} placeholder="Quantity" defaultValue={details.quantity} required></input>
+                            <input type="text" class="form__input add-input" id="quantity" onChange={handleChange} placeholder="Quantity" defaultValue={details.details?details.details.quantity:null} required></input>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Units of measurement:</p>
-                            <input type="text" class="form__input add-input" id="uom" onChange={handleChange} placeholder="Unit" defaultValue={details.uom} required></input>
+                            <input type="text" class="form__input add-input" id="uom" onChange={handleChange} placeholder="Unit" defaultValue={details.details?details.details.uom:null} required></input>
                         </div>
                         <div className='add-group sub-category'>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Length:</p>
-                                <input type="text" class="form__input add-input" id="ln" onChange={handleChange} placeholder="Length" defaultValue={details.ln} required></input>
+                                <input type="text" class="form__input add-input" id="ln" onChange={handleChange} placeholder="Length" defaultValue={details.details?details.details.ln:null} required></input>
                             </div>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Width:</p>
-                                <input type="text" class="form__input add-input" id="wd" onChange={handleChange} placeholder="Width" defaultValue={details.wd} required></input>
+                                <input type="text" class="form__input add-input" id="wd" onChange={handleChange} placeholder="Width" defaultValue={details.details?details.details.wd:null} required></input>
                             </div>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Serial Number:</p>
-                            <input type="text" class="form__input add-input" id="serial" onChange={handleChange} placeholder="Serial Number" defaultValue={details.serial} required></input>
+                            <input type="text" class="form__input add-input" id="serial" onChange={handleChange} placeholder="Serial Number" defaultValue={details.details?details.details.serial:null} required></input>
                         </div>
                         <div style={{ width: '350px', display: 'flex', justifyContent: 'center' }}>
-                            <button className='btn btn-add-product' onClick={handleSubmit}>Submit</button>
+                            <button className='btn btn-add-product' onClick={handleSubmit}>{id?'Update':'Add Product'}</button>
                         </div>
                     </div>
                 </div>

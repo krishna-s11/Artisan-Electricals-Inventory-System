@@ -33,10 +33,10 @@ const ManageUsers = () => {
             <div className='vp-top'>
                 <h2>Manage Users</h2>
                 <div className='vp-action-bar'>
-                    <div class="search-box">
+                    {/* <div class="search-box">
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
-                    </div>
+                    </div> */}
                     <button className='btn btn-add_items' onClick={() => {setDisplay(true)}}>New +</button>
                 </div>
             </div>

@@ -49,10 +49,10 @@ const ViewProducts = () => {
             <div className='vp-top'>
                 <h2>Inventory list</h2>
                 <div className='vp-action-bar'>
-                    <div class="search-box">
+                    {/* <div class="search-box">
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
-                    </div>
+                    </div> */}
                     {
                         currentUser && currentUser.user.inventory?
                         (<button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>)
