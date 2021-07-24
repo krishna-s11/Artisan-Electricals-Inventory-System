@@ -6,6 +6,7 @@ import firebase from '../../firebase'
 import tool1 from '../../assets/tool-1.jpg'
 import { toast } from 'react-toastify'
 import { AuthContext } from '../../Auth'
+import Loading from '../Loading/Loading'
 
 const db = firebase.firestore();
 
@@ -147,6 +148,7 @@ const NewOrder = ({close, id}) => {
     const[display20,setDisplay20] = useState(false);
     const {currentUser} = useContext(AuthContext);
     const [show,setShow] = useState(1);
+    const [loading,setLoading] = useState(false);
 
     const handleChange = (e) => {
         setOrder({
@@ -155,25 +157,23 @@ const NewOrder = ({close, id}) => {
         })
     }
 
-    const handleQuantity = (e,productId,stockWarn) => {
-        if(order.material === ''){
-            toast.warning('Select an item first.');
-        }
-        else{
+    const handleQuantity = (e,productId,stockWarn,quant) => {
             setOrder({...order,[e.target.id]: e.target.value})
             const ids = products.map(item => {return item.id})
+            console.log(ids);
             const productID = ids.find(element => element === productId);
+            console.log(productId);
             let product = [];
             for (let i = 0; i < products.length; i++){
                 if(products[i].id === productID){
                     product.push(products[i]);
                 }
             }
-            let stock = parseInt(product[0].data.quantity);
+            console.log(product);
+            let stock = parseInt(product[0].data.details.quantity);
             console.log(stock);
             if(e.target.value > stock){document.getElementById(stockWarn).style.display = 'block'; setOrder({...order,outOfStock:true})}
             else document.getElementById(stockWarn).style.display = 'none';
-        }
     }
 
     const handleSubmit = async (e) => {
@@ -181,13 +181,16 @@ const NewOrder = ({close, id}) => {
         if(order.name === '' || order.material1 === '' || order.quantity1 === '' || order.add1 === '' ){
             return toast.error('Fill all the required fields.');
         }
+        setLoading(true);
         if(!id){
             await db.collection('orders').add(order);
             await db.collection('stats').doc('orders').update({requests: firebase.firestore.FieldValue.increment(1), pending: firebase.firestore.FieldValue.increment(1)})
+            setLoading(false);
             toast.success('Order created successfully.');
             close();
         }else{
             await db.collection('orders').doc(id).update(order);
+            setLoading(false);
             toast.success('Order updated successfully.');
             close();
         }
@@ -228,15 +231,33 @@ const NewOrder = ({close, id}) => {
                     console.log('no data found');
                 }
             })
+            db.collection('products').get().then((querySnap) => {
+                setProducts(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})));
+                querySnap.docs.map((doc,i) => {
+                    setOrder({
+                        ...order,
+                        [`productId${i}`]: doc.id
+                    })
+                })
+            })
         }
+        else{
         db.collection('products').get()
         .then((querySnap) => {
             setProducts(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})));
         });
+        }
+
     },[id])
     console.log(order);
     return (
         <div className='new-order'>
+            {
+                loading?(
+                    <Loading />
+                )
+                :null
+            }
             <div className='new-order-card'>
                 <div className='add-card-top'>
                     <h2>New Order</h2>
@@ -278,7 +299,7 @@ const NewOrder = ({close, id}) => {
                             <div className='bt-row-container'>
                                 <div className='form-row bt'>
                                     <p>Material 1:</p>
-                                    <input type="text" class="form__input add-input material" id="material1" onChange={handleChange} onClick={() => {setDisplay1(!display1)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                    <input type="text" class="form__input add-input material" id="material1" onChange={handleChange} onClick={() => {setDisplay1(!display1)}} placeholder="Choose material" defaultValue={order.material1} required></input>
                                         { display1?(
                                         <div className='selection-box' >
                                             {
@@ -317,7 +338,7 @@ const NewOrder = ({close, id}) => {
                                     <div className='form-row qt'>
                                         <p>Quantity:</p>
                                         <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                            <input type="text" class="form__input add-input quantity" id="quantity1" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId1,'stock-warn1','outOfStock1')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                            <input type="text" class="form__input add-input quantity" id="quantity1" onChange={(e,productId,stockWarn,outOS,quant) => handleQuantity(e,order.productId1,'stock-warn1','outOfStock1','quantity1')} placeholder="Quantity" defaultValue={order.quantity1} required disabled={order.material1 === ''?true:false} ></input>
                                         </div>
                                     </div>  
                                 </div>
@@ -327,7 +348,7 @@ const NewOrder = ({close, id}) => {
                             <div className='bt-row-container'>
                                 <div className='form-row bt'>
                                     <p>Material 2:</p>
-                                    <input type="text" class="form__input add-input material" id="material2" onChange={handleChange} onClick={() => {setDisplay2(!display2)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                    <input type="text" class="form__input add-input material" id="material2" onChange={handleChange} onClick={() => {setDisplay2(!display2)}} placeholder="Choose material" defaultValue={order.material2} required></input>
                                         { display2?(
                                         <div className='selection-box' >
                                             {
@@ -366,7 +387,7 @@ const NewOrder = ({close, id}) => {
                                     <div className='form-row qt'>
                                         <p>Quantity:</p>
                                         <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                            <input type="text" class="form__input add-input quantity" id="quantity2" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId2,'stock-warn2','outOfStock2')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                            <input type="text" class="form__input add-input quantity" id="quantity2" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId2,'stock-warn2','outOfStock2')} placeholder="Quantity" defaultValue={order.quantity2} required disabled={order.material2 === ''?true:false} ></input>
                                         </div>
                                     </div>  
                                 </div>
@@ -376,7 +397,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 3:</p>
-                                <input type="text" class="form__input add-input material" id="material3" onChange={handleChange} onClick={() => {setDisplay3(!display3)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material3" onChange={handleChange} onClick={() => {setDisplay3(!display3)}} placeholder="Choose material" defaultValue={order.material3} required></input>
                                     { display3?(
                                     <div className='selection-box' >
                                         {
@@ -415,7 +436,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity3" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId3,'stock-warn2','outOfStock3')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity3" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId3,'stock-warn2','outOfStock3')} placeholder="Quantity" defaultValue={order.quantity3} required disabled={order.material3 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -425,7 +446,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 4:</p>
-                                <input type="text" class="form__input add-input material" id="material4" onChange={handleChange} onClick={() => {setDisplay4(!display4)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material4" onChange={handleChange} onClick={() => {setDisplay4(!display4)}} placeholder="Choose material" defaultValue={order.material4} required></input>
                                     { display4?(
                                     <div className='selection-box' >
                                         {
@@ -464,7 +485,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity4" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId4,'stock-warn2','outOfStock4')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity4" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId4,'stock-warn2','outOfStock4')} placeholder="Quantity" defaultValue={order.quantity4} required disabled={order.material4 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -474,7 +495,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 5:</p>
-                                <input type="text" class="form__input add-input material" id="material5" onChange={handleChange} onClick={() => {setDisplay5(!display5)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material5" onChange={handleChange} onClick={() => {setDisplay5(!display5)}} placeholder="Choose material" defaultValue={order.material5} required></input>
                                     { display5?(
                                     <div className='selection-box' >
                                         {
@@ -513,7 +534,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity5" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId5,'stock-warn5','outOfStock5')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity5" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId5,'stock-warn5','outOfStock5')} placeholder="Quantity" defaultValue={order.quantity5} required disabled={order.material5 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -523,7 +544,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 6:</p>
-                                <input type="text" class="form__input add-input material" id="material6" onChange={handleChange} onClick={() => {setDisplay6(!display6)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material6" onChange={handleChange} onClick={() => {setDisplay6(!display6)}} placeholder="Choose material" defaultValue={order.material6} required></input>
                                     { display6?(
                                     <div className='selection-box' >
                                         {
@@ -562,7 +583,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity6" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId6,'stock-warn6','outOfStock6')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity6" onChange={(e,productId,stockWarn,outOS) => handleQuantity(e,order.productId6,'stock-warn6','outOfStock6')} placeholder="Quantity" defaultValue={order.quantity6} required disabled={order.material6 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -572,7 +593,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 7:</p>
-                                <input type="text" class="form__input add-input material" id="material7" onChange={handleChange} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material7" onChange={handleChange} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material7} required></input>
                                     { display7?(
                                     <div className='selection-box' >
                                         {
@@ -611,7 +632,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity7" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId7,'stock-warn7')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity7" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId7,'stock-warn7')} placeholder="Quantity" defaultValue={order.quantity7} required disabled={order.material7 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -621,7 +642,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 8:</p>
-                                <input type="text" class="form__input add-input material" id="material8" onChange={handleChange} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material8" onChange={handleChange} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material8} required></input>
                                     { display8?(
                                     <div className='selection-box' >
                                         {
@@ -660,7 +681,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity8" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId8,'stock-warn8')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity8" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId8,'stock-warn8')} placeholder="Quantity" defaultValue={order.quantity8} required disabled={order.material8 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -670,7 +691,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 9:</p>
-                                <input type="text" class="form__input add-input material" id="material9" onChange={handleChange} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material9" onChange={handleChange} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material9} required></input>
                                     { display9?(
                                     <div className='selection-box' >
                                         {
@@ -709,7 +730,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity9" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId9,'stock-warn9')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity9" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId9,'stock-warn9')} placeholder="Quantity" defaultValue={order.quantity9} required disabled={order.material9 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -719,7 +740,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 10:</p>
-                                <input type="text" class="form__input add-input material" id="material10" onChange={handleChange} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material10" onChange={handleChange} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material10} required></input>
                                     { display10?(
                                     <div className='selection-box' >
                                         {
@@ -758,7 +779,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity10" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId10,'stock-warn10')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity10" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId10,'stock-warn10')} placeholder="Quantity" defaultValue={order.quantity10} required disabled={order.material10 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -768,7 +789,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 11:</p>
-                                <input type="text" class="form__input add-input material" id="material11" onChange={handleChange} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material11" onChange={handleChange} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material11} required></input>
                                     { display11?(
                                     <div className='selection-box' >
                                         {
@@ -807,7 +828,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity11" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId11,'stock-warn11')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity11" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId11,'stock-warn11')} placeholder="Quantity" defaultValue={order.quantity11} required disabled={order.material11 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -817,7 +838,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 12:</p>
-                                <input type="text" class="form__input add-input material" id="material12" onChange={handleChange} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material12" onChange={handleChange} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material12} required></input>
                                     { display12?(
                                     <div className='selection-box' >
                                         {
@@ -856,7 +877,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity12" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId12,'stock-warn12')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity12" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId12,'stock-warn12')} placeholder="Quantity" defaultValue={order.quantity12} required disabled={order.material12 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -866,7 +887,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 13:</p>
-                                <input type="text" class="form__input add-input material" id="material13" onChange={handleChange} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material13" onChange={handleChange} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material13} required></input>
                                     { display13?(
                                     <div className='selection-box' >
                                         {
@@ -905,7 +926,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity13" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId13,'stock-warn13')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity13" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId13,'stock-warn13')} placeholder="Quantity" defaultValue={order.quantity13} required disabled={order.material13 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -915,7 +936,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 14:</p>
-                                <input type="text" class="form__input add-input material" id="material14" onChange={handleChange} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material14" onChange={handleChange} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material14} required></input>
                                     { display14?(
                                     <div className='selection-box' >
                                         {
@@ -954,7 +975,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity14" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId14,'stock-warn14')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity14" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId14,'stock-warn14')} placeholder="Quantity" defaultValue={order.quantity14} required disabled={order.material14 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -964,7 +985,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 15:</p>
-                                <input type="text" class="form__input add-input material" id="material15" onChange={handleChange} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material15" onChange={handleChange} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material15} required></input>
                                     { display15?(
                                     <div className='selection-box' >
                                         {
@@ -1003,7 +1024,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity15" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId15,'stock-warn15')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity15" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId15,'stock-warn15')} placeholder="Quantity" defaultValue={order.quantity15} required disabled={order.material15 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -1013,7 +1034,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 16:</p>
-                                <input type="text" class="form__input add-input material" id="material16" onChange={handleChange} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material16" onChange={handleChange} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material16} required></input>
                                     { display16?(
                                     <div className='selection-box' >
                                         {
@@ -1052,7 +1073,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity16" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId16,'stock-warn16')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity16" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId16,'stock-warn16')} placeholder="Quantity" defaultValue={order.quantity16} required disabled={order.material16 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -1062,7 +1083,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 17:</p>
-                                <input type="text" class="form__input add-input material" id="material17" onChange={handleChange} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material17" onChange={handleChange} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material17} required></input>
                                     { display17?(
                                     <div className='selection-box' >
                                         {
@@ -1101,7 +1122,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity17" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId17,'stock-warn17')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity17" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId17,'stock-warn17')} placeholder="Quantity" defaultValue={order.quantity17} required disabled={order.material17 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -1111,7 +1132,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 18:</p>
-                                <input type="text" class="form__input add-input material" id="material18" onChange={handleChange} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material18" onChange={handleChange} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material18} required></input>
                                     { display18?(
                                     <div className='selection-box' >
                                         {
@@ -1150,7 +1171,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity18" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId18,'stock-warn18')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity18" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId18,'stock-warn18')} placeholder="Quantity" defaultValue={order.quantity18} required disabled={order.material18 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -1160,7 +1181,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 19:</p>
-                                <input type="text" class="form__input add-input material" id="material19" onChange={handleChange} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material19" onChange={handleChange} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material19} required></input>
                                     { display19?(
                                     <div className='selection-box' >
                                         {
@@ -1199,7 +1220,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity19" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId19,'stock-warn19')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity19" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId19,'stock-warn19')} placeholder="Quantity" defaultValue={order.quantity19} required disabled={order.material19 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>
@@ -1209,7 +1230,7 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 20:</p>
-                                <input type="text" class="form__input add-input material" id="material20" onChange={handleChange} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material} required></input>
+                                <input type="text" class="form__input add-input material" id="material20" onChange={handleChange} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material20} required></input>
                                     { display20?(
                                     <div className='selection-box' >
                                         {
@@ -1248,7 +1269,7 @@ const NewOrder = ({close, id}) => {
                                 <div className='form-row qt'>
                                     <p>Quantity:</p>
                                     <div style={{width: '100%', display: 'flex', alignItems: 'center'}}>
-                                        <input type="text" class="form__input add-input quantity" id="quantity20" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId20,'stock-warn20')} placeholder="Quantity" defaultValue={order.quantity} required disabled={order.material === ''?true:false} ></input>
+                                        <input type="text" class="form__input add-input quantity" id="quantity20" onChange={(e,productId,stockWarn) => handleQuantity(e,order.productId20,'stock-warn20')} placeholder="Quantity" defaultValue={order.quantity20} required disabled={order.material20 === ''?true:false} ></input>
                                     </div>
                                 </div>  
                             </div>

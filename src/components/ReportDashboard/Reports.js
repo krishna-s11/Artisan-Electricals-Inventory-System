@@ -123,7 +123,7 @@ const Reports = () => {
                 <div className='line-chart-container'>
                     <Line data={lineData} options={lineOptions} />
                 </div>
-                <div className='doughnut-chart-container'>
+                <div className='dummy-chart-container'>
                     {/* <Doughnut data={doughnutData} options={{responsive:true, maintainAspectRatio:false}}/>  */}
                 </div>
             </div>

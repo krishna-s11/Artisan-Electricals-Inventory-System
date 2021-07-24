@@ -74,6 +74,13 @@
   align-items: center;
   justify-content: center;
 }
+.dummy-chart-container {
+  width: 100%;
+  height: 100% 400px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .doughnut-chart-container {
   width: 600px;
   height: 100% 400px !important;

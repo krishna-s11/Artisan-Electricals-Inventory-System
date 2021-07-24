@@ -4,10 +4,8 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdNotificationsNone} from 'react-icons/md'
 import {IoMdArrowDropdown} from 'react-icons/io'
 import { Link, useHistory } from 'react-router-dom'
-import userDp from '../../assets/user-dp.jpg'
 import userDrop from '../../assets/user-drop.png'
 import orderDrop from '../../assets/myorders-drop.png'
-import projectDrop from '../../assets/myprojects-drop.png'
 import signout from '../../assets/sign-out.png'
 import Notification from '../Notification/Notification'
 import { AuthContext } from '../../Auth'
@@ -32,6 +30,7 @@ const TopPane = ({setView}) => {
             <div className='top-right-sec'>
                 <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification)}}>
                     <MdNotificationsNone/>
+                    <div className='noti-circle'></div>
                     {
                         notification?(
                             <Notification/>

@@ -42,10 +42,10 @@ const OrderList = () => {
             <div className='ol-top'>
                 <h2>Order list</h2>
                 <div className='vp-action-bar'>
-                    <div class="search-box">
+                    {/* <div class="search-box">
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
-                    </div>
+                    </div> */}
                     {
                         currentUser && currentUser.user.orders?(
                             <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
@@ -86,7 +86,7 @@ const OrderList = () => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requested}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.requiredBy}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{data.note}</td>
-                                    <td style={data.status==='declined'?(false?{color:'#fff'}:{color: '#f71f20', fontWeight: '600'}):(false?{color:'#fff'}:{color: '#22a6b3', fontWeight: '600'})}>{data.status}</td>
+                                    <td style={data.status==='declined'?({color: '#f71f20', fontWeight: '600'}):(data.status === 'processing'?({color: '#22a6b3', fontWeight: '600'}):({color: '#3CB371', fontWeight: '600'}))}>{data.status}</td>
                                     {
                                         currentUser && currentUser.user.orders?(
                                             <td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
