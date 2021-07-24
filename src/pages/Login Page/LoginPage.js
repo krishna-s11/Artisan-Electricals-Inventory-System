@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import './loginPage.css'
 import { useHistory } from 'react-router-dom';
-import imgCover from '../../assets/login-cover3.jpg'
 import logo from '../../assets/logo.png'
 import firebase from '../../firebase';
 import { AuthContext } from '../../Auth';

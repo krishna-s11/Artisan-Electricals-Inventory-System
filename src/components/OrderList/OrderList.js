@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './orderList.css'
-import {FaSearch} from 'react-icons/fa'
 import NewOrder from '../NewOrder/NewOrder'
 import firebase from '../../firebase'
 import OrderInfo from '../OrderInfo/OrderInfo'

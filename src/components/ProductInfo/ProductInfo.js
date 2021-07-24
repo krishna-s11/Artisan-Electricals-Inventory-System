@@ -1,8 +1,5 @@
 import React, { useEffect,useState } from 'react'
 import './productInfo.css'
-import img1 from '../../assets/tool-1.jpg'
-import img2 from '../../assets/tool-2.jpg'
-import img3 from '../../assets/login-cover3.jpg'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase';
 

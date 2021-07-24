@@ -1,7 +1,6 @@
 import React,{useContext, useEffect, useState} from 'react'
 import './viewProducts.css'
 import {FaSearch} from 'react-icons/fa'
-import tool1 from '../../assets/tool-1.jpg'
 import AddProducts from '../AddProducts/AddProducts'
 import ProductInfo from '../ProductInfo/ProductInfo'
 import firebase from '../../firebase'

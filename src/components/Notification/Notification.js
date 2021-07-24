@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import userDp from '../../assets/user-dp.jpg'
 import './notification.css';
 import firebase from '../../firebase';
 

@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 const OrderInfo = ({close,id}) => {
 
     const [order,setOrder] = useState([]);
-    const {currentUser} = useContext(AuthContext);
 
     console.log(id);
     useEffect(() => {

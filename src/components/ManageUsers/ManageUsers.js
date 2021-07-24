@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './manageUsers.css'
 import {FaSearch} from 'react-icons/fa'
 import AddUsers from '../AddUsers/AddUsers';
 import firebase from '../../firebase';
-import { AuthContext } from '../../Auth';
 import DeleteBox from '../DeleteBox/DeleteBox'
 
 const ManageUsers = () => {

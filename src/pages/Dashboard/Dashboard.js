@@ -18,13 +18,19 @@ const Dashboard = () => {
         else{
             history.push('/');
         }
+        if(window.innerWidth < 600){
+            console.log(window.innerWidth);
+        }
     },[])
 
     if(currentUser){
     return (
         <div className='dashboard'>
-            <LeftPane mobileNav={mobileNav} setMobile={() => setMobileNav(true)} />
-            <RightPane setView={() => setMobileNav(!mobileNav)} />
+            {
+                window.innerWidth > 600?<LeftPane mobileNav={mobileNav} setMobile={() => setMobileNav(true)} />:
+                <LeftPane mobileNav={mobileNav} mob={true} setMobile={() => setMobileNav(true)} />
+            }
+            <RightPane setView={() => setMobileNav(!mobileNav)} mob={true}/>
         </div>
     )
     }

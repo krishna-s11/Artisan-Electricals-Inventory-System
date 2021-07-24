@@ -10,10 +10,10 @@ import ProjectManagement from '../ProjectManagement/ProjectManagement'
 import ManageUsers from '../ManageUsers/ManageUsers'
 import MyOrders from '../MyOrders/MyOrders'
 
-const RightPane = ({setView}) => {
+const RightPane = ({setView,mob}) => {
     return (
         <div className='right-pane'>
-            <TopPane setView={setView} />
+            <TopPane setView={setView} mob={true} />
             <Switch>
                 <Route
                     exact

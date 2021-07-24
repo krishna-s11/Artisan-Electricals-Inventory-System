@@ -10,7 +10,7 @@ import signout from '../../assets/sign-out.png'
 import Notification from '../Notification/Notification'
 import { AuthContext } from '../../Auth'
 
-const TopPane = ({setView}) => {
+const TopPane = ({setView,mob}) => {
 
     const [display,setDisplay] = useState(false);
     const [notification,setNotification] = useState(false);
@@ -21,7 +21,7 @@ const TopPane = ({setView}) => {
         setCurrentUser(null);
         history.push('/')
     }
-
+    
     return (
         <div className='top-pane'>
             <div className='ham-container' onClick={() => setView()}>
