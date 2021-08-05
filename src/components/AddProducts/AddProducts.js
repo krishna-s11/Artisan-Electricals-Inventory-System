@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './addProducts.css'
 import { AiOutlineClose } from 'react-icons/ai'
 import { RiImageAddFill } from 'react-icons/ri'
 import firebase from '../../firebase';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
+import { AuthContext } from '../../Auth';
 
 const db = firebase.firestore();
 
@@ -24,6 +25,7 @@ const AddProducts = ({ close, id }) => {
     })
     const [images, setImages] = useState([]);
     const [loading,setLoading] = useState(false);
+    const {currentUser} = useContext(AuthContext);
 
     const defaultBtn = () => {
         const defaultBtn = document.querySelector('#choose-input');
@@ -64,8 +66,8 @@ const AddProducts = ({ close, id }) => {
             await db.collection('products').add({details,imgLink});
 
             await db.collection('notification').add({
-                emp_id: '12345',
-                emp_name: 'Krishna Saxena',
+                emp_id: currentUser.id,
+                emp_name: currentUser.user.name,
                 emp_photoUrl: '',
                 mssg: 'added a new inventory',
                 time: Date.now()

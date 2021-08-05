@@ -19,13 +19,19 @@ const OrderList = () => {
     useEffect(() => {
         db.collection('orders')
         .onSnapshot(querySnap => {
-            setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
+            setOrders(
+                querySnap.docs
+                .map(doc => ({id: doc.id, data: doc.data()}))
+                .sort(function(x,y){return y.data.timestamp - x.data.timestamp;})
+                )
         })
     },[])
 
     const deleteOrder = async (id) => {
         await firebase.firestore().collection('orders').doc(id).delete();
     }
+
+    console.log(orders);
 
     return (
         <div className='order-list'>

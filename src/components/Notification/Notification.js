@@ -8,7 +8,9 @@ const Notification = () => {
 
     useEffect(() => {
         firebase.firestore().collection('notification').onSnapshot((snapshot) => {
-            setNotifications(snapshot.docs.map(doc => (doc.data())));
+            setNotifications(snapshot.docs
+                .map(doc => (doc.data()))
+                .sort(function(x,y){return y.time - x.time}));
         })
     },[])
     console.log(notifications)
