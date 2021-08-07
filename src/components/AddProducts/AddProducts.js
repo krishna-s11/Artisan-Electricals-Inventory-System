@@ -24,6 +24,7 @@ const AddProducts = ({ close, id }) => {
         images: []
     })
     const [images, setImages] = useState([]);
+    const [imgL,setImgL] = useState('');
     const [loading,setLoading] = useState(false);
     const {currentUser} = useContext(AuthContext);
 
@@ -48,21 +49,21 @@ const AddProducts = ({ close, id }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (details.name === '' || details.sku === '' || details.category === '' || details.subCategory === '' || details.quantity === '' || details.uom === '' || details.ln === '' || details.wd === '') {
+        if (details.name === '') {
             return toast.error('Fill all the required fields');
         }
         setLoading(true);
+        let imgLink = [];
+        imgLink =  await Promise.all(
+            images.map(async (image, i) => {
+                const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
+                await storageRef.put(image)
+                const downloadLink = storageRef.getDownloadURL();
+                return downloadLink;
+            })
+        ) || imgL ;
+        
         if (!id) {
-            let imgLink = [];
-            imgLink =  await Promise.all(
-                images.map(async (image, i) => {
-                    const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
-                    await storageRef.put(image)
-                    const downloadLink = storageRef.getDownloadURL();
-                    return downloadLink;
-                })   
-            )
-            
             await db.collection('products').add({details,imgLink});
 
             await db.collection('notification').add({
@@ -76,10 +77,8 @@ const AddProducts = ({ close, id }) => {
             toast.success('Product successfully added. ')
             close();
         }
-
-        // 7457000518
         else {
-            await db.collection('products').doc(id).update(details)
+            await db.collection('products').doc(id).update({details,imgLink})
             await db.collection('notification').add({
                 emp_id: '12345',
                 emp_name: 'Krishna Saxena',
@@ -91,20 +90,20 @@ const AddProducts = ({ close, id }) => {
             close();
         }
     }
-
+    console.log(details);
     useEffect(() => {
         if (id) {
             db.collection('products').doc(id).get()
                 .then((doc) => {
                     if (doc.exists) {
-                        setDetails(doc.data());
+                        setDetails(doc.data().details);
+                        setImgL(doc.data().imgLink);
                     } else {
                         console.log('no data found');
                     }
                 })
         }
     }, [id])
-    console.log(details);
 
     return (
         <div className='add-products'>
@@ -137,43 +136,43 @@ const AddProducts = ({ close, id }) => {
                     <div className='add-content'>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Name:</p>
-                            <input type="text" class="form__input add-input" id="name" onChange={handleChange} placeholder="Product's Name" defaultValue={details.details?details.details.name:null} required></input>
+                            <input type="text" class="form__input add-input" id="name" onChange={handleChange} placeholder="Product's Name" defaultValue={details?details.name:null} required></input>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>SKU:</p>
-                            <input type="text" class="form__input add-input" id="sku" onChange={handleChange} placeholder="SKU" defaultValue={details.details?details.details.sku:null} required></input>
+                            <input type="text" class="form__input add-input" id="sku" onChange={handleChange} placeholder="SKU" defaultValue={details?details.sku:null} required></input>
                         </div>
                         <div className='add-group sub-category'>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Category:</p>
-                                <input type="text" class="form__input add-input" id="category" onChange={handleChange} placeholder="Category" defaultValue={details.details?details.details.category:null} required></input>
+                                <input type="text" class="form__input add-input" id="category" onChange={handleChange} placeholder="Category" defaultValue={details?details.category:null} required></input>
                             </div>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Sub-category:</p>
-                                <input type="text" class="form__input add-input" id="subCategory" onChange={handleChange} placeholder="Sub-category" defaultValue={details.details?details.details.subCategory:null} required></input>
+                                <input type="text" class="form__input add-input" id="subCategory" onChange={handleChange} placeholder="Sub-category" defaultValue={details?details.subCategory:null} required></input>
                             </div>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Quantity:</p>
-                            <input type="text" class="form__input add-input" id="quantity" onChange={handleChange} placeholder="Quantity" defaultValue={details.details?details.details.quantity:null} required></input>
+                            <input type="text" class="form__input add-input" id="quantity" onChange={handleChange} placeholder="Quantity" defaultValue={details?details.quantity:null} required></input>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Units of measurement:</p>
-                            <input type="text" class="form__input add-input" id="uom" onChange={handleChange} placeholder="Unit" defaultValue={details.details?details.details.uom:null} required></input>
+                            <input type="text" class="form__input add-input" id="uom" onChange={handleChange} placeholder="Unit" defaultValue={details?details.uom:null} required></input>
                         </div>
                         <div className='add-group sub-category'>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Length:</p>
-                                <input type="text" class="form__input add-input" id="ln" onChange={handleChange} placeholder="Length" defaultValue={details.details?details.details.ln:null} required></input>
+                                <input type="text" class="form__input add-input" id="ln" onChange={handleChange} placeholder="Length" defaultValue={details?details.ln:null} required></input>
                             </div>
                             <div>
                                 <p style={{ fontWeight: '600' }}>Width:</p>
-                                <input type="text" class="form__input add-input" id="wd" onChange={handleChange} placeholder="Width" defaultValue={details.details?details.details.wd:null} required></input>
+                                <input type="text" class="form__input add-input" id="wd" onChange={handleChange} placeholder="Width" defaultValue={details?details.wd:null} required></input>
                             </div>
                         </div>
                         <div className='add-group'>
                             <p style={{ fontWeight: '600' }}>Serial Number:</p>
-                            <input type="text" class="form__input add-input" id="serial" onChange={handleChange} placeholder="Serial Number" defaultValue={details.details?details.details.serial:null} required></input>
+                            <input type="text" class="form__input add-input" id="serial" onChange={handleChange} placeholder="Serial Number" defaultValue={details?details.serial:null} required></input>
                         </div>
                         <div style={{ width: '350px', display: 'flex', justifyContent: 'center' }}>
                             <button className='btn btn-add-product' onClick={handleSubmit}>{id?'Update':'Add Product'}</button>
