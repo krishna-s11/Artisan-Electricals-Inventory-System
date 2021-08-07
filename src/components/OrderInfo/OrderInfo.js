@@ -59,25 +59,63 @@ const OrderInfo = ({close,id}) => {
                         <ul>
                             <li style={{fontWeight: '600'}}>Products<span style={{fontWeight: '600'}}>Quantity</span></li>
                             <li>{order.material1} <span>{order.quantity1}</span></li>
-                            <li>{order.material2} <span>{order.quantity2}</span></li>
-                            <li>{order.material3} <span>{order.quantity3}</span></li>
-                            <li>{order.material4} <span>{order.quantity4}</span></li>
-                            <li>{order.material5} <span>{order.quantity5}</span></li>
-                            <li>{order.material6} <span>{order.quantity6}</span></li>
-                            <li>{order.material7} <span>{order.quantity7}</span></li>
-                            <li>{order.material8} <span>{order.quantity8}</span></li>
-                            <li>{order.material9} <span>{order.quantity9}</span></li>
-                            <li>{order.material10} <span>{order.quantity10}</span></li>
-                            <li>{order.material11} <span>{order.quantity11}</span></li>
-                            <li>{order.material12} <span>{order.quantity12}</span></li>
-                            <li>{order.material13} <span>{order.quantity13}</span></li>
-                            <li>{order.material14} <span>{order.quantity14}</span></li>
-                            {/* <li>{order.material15} <span>{order.quantity15}</span></li>
-                            <li>{order.material16} <span>{order.quantity16}</span></li>
-                            <li>{order.material17} <span>{order.quantity17}</span></li>
-                            <li>{order.material18} <span>{order.quantity18}</span></li>
-                            <li>{order.material19} <span>{order.quantity19}</span></li>
-                            <li>{order.material20} <span>{order.quantity20}</span></li> */}
+                            {
+                                order.material2?<li>{order.material2} <span>{order.quantity2}</span></li>:null
+                            }
+                            {
+                                order.material3?<li>{order.material3} <span>{order.quantity3}</span></li>:null
+                            }
+                            {
+                                order.material4?<li>{order.material4} <span>{order.quantity4}</span></li>:null
+                            }
+                            {
+                                order.material5?<li>{order.material5} <span>{order.quantity5}</span></li>:null
+                            }
+                            {
+                                order.material6?<li>{order.material6} <span>{order.quantity6}</span></li>:null
+                            }
+                            {
+                                order.material7?<li>{order.material7} <span>{order.quantity7}</span></li>:null
+                            }
+                            {
+                                order.material8?<li>{order.material8} <span>{order.quantity8}</span></li>:null
+                            }
+                            {
+                                order.material9?<li>{order.material9} <span>{order.quantity9}</span></li>:null
+                            }
+                            {
+                                order.material10?<li>{order.material10} <span>{order.quantity10}</span></li>:null
+                            }
+                            {
+                                order.material11?<li>{order.material11} <span>{order.quantity11}</span></li>:null
+                            }
+                            {
+                                order.material12?<li>{order.material12} <span>{order.quantity12}</span></li>:null
+                            }
+                            {
+                                order.material13?<li>{order.material13} <span>{order.quantity13}</span></li>:null
+                            }
+                            {
+                                order.material14?<li>{order.material14} <span>{order.quantity14}</span></li>:null
+                            }
+                            {
+                                order.material15?<li>{order.material15} <span>{order.quantity15}</span></li>:null
+                            }
+                            {
+                                order.material16?<li>{order.material16} <span>{order.quantity16}</span></li>:null
+                            }
+                            {
+                                order.material17?<li>{order.material17} <span>{order.quantity17}</span></li>:null
+                            }
+                            {
+                                order.material18?<li>{order.material18} <span>{order.quantity18}</span></li>:null
+                            }
+                            {
+                                order.material19?<li>{order.material19} <span>{order.quantity19}</span></li>:null
+                            }
+                            {
+                                order.material20?<li>{order.material20} <span>{order.quantity20}</span></li>:null
+                            }
                         </ul>
                     </p>
                     {/* <p>Meterial SKU: <span>{order.sku1} </span></p>
