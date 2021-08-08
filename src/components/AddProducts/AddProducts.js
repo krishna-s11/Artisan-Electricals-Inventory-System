@@ -25,6 +25,7 @@ const AddProducts = ({ close, id }) => {
     })
     const [images, setImages] = useState([]);
     const [imgL,setImgL] = useState('');
+    const [pictureLinks, setPictureLinks] = useState([]);
     const [loading,setLoading] = useState(false);
     const {currentUser} = useContext(AuthContext);
 
@@ -54,14 +55,14 @@ const AddProducts = ({ close, id }) => {
         }
         setLoading(true);
         let imgLink = [];
-        imgLink =  await Promise.all(
+        imgLink =  (await Promise.all(
             images.map(async (image, i) => {
                 const storageRef = firebase.storage().ref(`inventory/${details.name}/${i}`);
                 await storageRef.put(image)
                 const downloadLink = storageRef.getDownloadURL();
                 return downloadLink;
             })
-        ) || imgL ;
+        ) && pictureLinks) || imgL ;
         
         if (!id) {
             await db.collection('products').add({details,imgLink});
@@ -90,7 +91,7 @@ const AddProducts = ({ close, id }) => {
             close();
         }
     }
-    console.log(details);
+    console.log(pictureLinks);
     useEffect(() => {
         if (id) {
             db.collection('products').doc(id).get()
@@ -132,6 +133,14 @@ const AddProducts = ({ close, id }) => {
                             <p style={{ fontWeight: '600' }}>Upload Photo</p>
                             <p style={{ fontSize: '14px', color: '#777' }}>You can choose upto 10 images.</p>
                         </div>
+                        <input type='text' className='form__input' id='img_url' placeholder='Picture URL'></input>
+                        <button className='btn btn-upload' onClick={() => {
+                            let value = document.getElementById('img_url').value;
+                            setPictureLinks(prevState => [...prevState, value]);
+                            document.getElementById('img_url').value = '';
+                            document.getElementById('cnf-text').style.display = 'block'
+                        }}>Upload</button>
+                        <p style={{fontSize:'14px', marginTop:'20px', color:'#4fc3a1',display:'none'}} id='cnf-text'>Uploaded successfully</p>
                     </div>
                     <div className='add-content'>
                         <div className='add-group'>
