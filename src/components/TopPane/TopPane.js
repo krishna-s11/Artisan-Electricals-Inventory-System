@@ -22,14 +22,14 @@ const TopPane = ({setView,mob}) => {
         history.push('/')
     }
 
-    // window.addEventListener('click', function(e){
-    //     if(e.target.parentElement.id === 'nt-container'){
-    //         console.log('inside');
-    //     }
-    //     else{
-    //         setNotification(false);
-    //     }
-    // })
+    window.addEventListener('click', function(e){
+        if(e.target.parentElement.id === 'nt-container'){
+            console.log('inside');
+        }
+        else{
+            setNotification(false);
+        }
+    })
 
     return (
         <div className='top-pane'>
