@@ -121,6 +121,8 @@
 .fl-table td {
   border-right: 1px solid #f8f8f8;
   font-size: 14px;
+  max-width: 400px;
+  overflow-x: auto;
 }
 
 .fl-table thead th {
