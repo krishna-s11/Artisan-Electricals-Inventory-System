@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './topPane.css'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {MdNotificationsNone} from 'react-icons/md'
@@ -21,7 +21,16 @@ const TopPane = ({setView,mob}) => {
         setCurrentUser(null);
         history.push('/')
     }
-    
+
+    // window.addEventListener('click', function(e){
+    //     if(e.target.parentElement.id === 'nt-container'){
+    //         console.log('inside');
+    //     }
+    //     else{
+    //         setNotification(false);
+    //     }
+    // })
+
     return (
         <div className='top-pane'>
             <div className='ham-container' onClick={() => setView()}>
