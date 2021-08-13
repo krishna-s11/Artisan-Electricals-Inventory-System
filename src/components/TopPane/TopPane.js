@@ -10,7 +10,7 @@ import signout from '../../assets/sign-out.png'
 import Notification from '../Notification/Notification'
 import { AuthContext } from '../../Auth'
 
-const TopPane = ({setView,mob}) => {
+const TopPane = ({setView,mob,notify,setNotify}) => {
 
     const [display,setDisplay] = useState(false);
     const [notification,setNotification] = useState(false);
@@ -22,14 +22,21 @@ const TopPane = ({setView,mob}) => {
         history.push('/')
     }
 
-    window.addEventListener('click', function(e){
-        if(e.target.parentElement.id === 'nt-container'){
-            console.log('inside');
+    useEffect(() => {
+        console.log(notify);
+        if(!notify){
+            setNotification(false)
         }
-        else{
-            setNotification(false);
-        }
-    })
+    },[notify])
+
+    // window.addEventListener('click', function(e){
+    //     if(e.target.parentElement.id === 'nt-container'){
+    //         console.log('inside');
+    //     }
+    //     else{
+    //         setNotification(false);
+    //     }
+    // })
 
     return (
         <div className='top-pane'>
@@ -37,7 +44,7 @@ const TopPane = ({setView,mob}) => {
                     <GiHamburgerMenu/>
             </div>
             <div className='top-right-sec'>
-                <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification)}}>
+                <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification); setNotify()}}>
                     <MdNotificationsNone/>
                     <div className='noti-circle'></div>
                     {

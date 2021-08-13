@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import './rightPane.css'
 import {Switch,Route} from 'react-router-dom'
 import TopPane from '../TopPane/TopPane'
@@ -11,19 +11,29 @@ import ManageUsers from '../ManageUsers/ManageUsers'
 import MyOrders from '../MyOrders/MyOrders'
 
 const RightPane = ({setView,mob}) => {
+
+    const [notify,setNotify] = useState(true);
+
     return (
         <div className='right-pane'>
-            <TopPane setView={setView} mob={true} />
+            <TopPane setView={setView} mob={true} notify={notify} setNotify={() => {setNotify(true)}} />
             <Switch>
                 <Route
-                    exact
-                    path='/dashboard/products'
-                    component={ViewProducts}
-                />
+                    path="/dashboard/products"
+                    render={() => (
+                       <Fragment>
+                          <ViewProducts setNotify={() => {setNotify(false)}} />
+                       </Fragment>
+                    )}
+                 />
                 <Route
                     exact
                     path='/dashboard/orders'
-                    component={OrderList}
+                    render={() => (
+                   <Fragment>
+                      <OrderList setNotify={() => {setNotify(false)}} />
+                   </Fragment>
+                )}
                 />
                 <Route
                     exact

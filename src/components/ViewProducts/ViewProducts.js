@@ -7,7 +7,7 @@ import firebase from '../../firebase'
 import {AuthContext} from '../../Auth';
 import DeleteBox from '../DeleteBox/DeleteBox'
 
-const ViewProducts = () => {
+const ViewProducts = ({setNotify}) => {
 
     const [display,setDisplay] = useState(false);
     const [details,setDetails] = useState(false);
@@ -85,15 +85,15 @@ const ViewProducts = () => {
                             const img = product.data.imgLink[0];
                             return(
                                 <tr key={i}>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}} >{i+1}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify()}} >{i+1}</td>
                                     <td>
                                         <img alt='' src={img} className='product-preview'></img>
                                     </td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.name}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.sku}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.quantity}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.category}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true)}}>{data.serial}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.name}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.sku}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.quantity}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.category}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.serial}</td>
                                     {
                                         currentUser && currentUser.user.inventory?(
                                         <td onClick={() => {setId(product.id); setName(data.name); setDeleteDisplay(true) }}><p className='btn-del'>Delete</p></td>       
