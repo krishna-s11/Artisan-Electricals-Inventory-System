@@ -3,6 +3,7 @@ import './addUsers.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase';
 import { toast } from 'react-toastify';
+import emailjs from 'emailjs-com'
 
 const AddUsers = ({close, id}) => {
 
@@ -30,13 +31,31 @@ const AddUsers = ({close, id}) => {
         })
     }
 
+    function sendEmail(e,templateParams) {
+        e.preventDefault(); 
+        emailjs.send('artisan_gmail', 'template_8uiccl8',templateParams, 'user_FtV3um8ZNdBMv9ZOPVXZP')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if(userDetails.name !== '' && userDetails.email !== '' && userDetails.password !== ''){
             if(!id){
+                var templateParams = {
+                    message: `A new user (${userDetails.name}) is added .`
+                }
                 await firebase.firestore().collection('users').add(userDetails);
+                sendEmail(e,templateParams);
             }else{
+                var templateParamselse = {
+                    message: `(${userDetails.name})'s privilages has been changed .`
+                }
                 await firebase.firestore().collection('users').doc(id).update(userDetails);
+                sendEmail(e,templateParamselse)
             }
             toast.success('Successfully updated');
             close();

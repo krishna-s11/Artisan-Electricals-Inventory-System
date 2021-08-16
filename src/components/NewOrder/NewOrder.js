@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { AuthContext } from '../../Auth'
 import Loading from '../Loading/Loading'
 import SimpleLoading from '../SimpleLoading/SimpleLoading'
+import emailjs from 'emailjs-com'
 
 const db = firebase.firestore();
 
@@ -193,6 +194,9 @@ const NewOrder = ({close, id}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        var templateParams = {
+            message: `There is a new order from ${currentUser.user.name}`
+        }
         if(order.name === '' || order.material1 === '' || order.quantity1 === '' || order.add1 === '' ){
             return toast.error('Fill all the required fields.');
         }
@@ -200,6 +204,7 @@ const NewOrder = ({close, id}) => {
         if(!id){
             await db.collection('orders').add(order);
             await db.collection('stats').doc('orders').update({requests: firebase.firestore.FieldValue.increment(1), pending: firebase.firestore.FieldValue.increment(1)})
+            sendEmail(e,templateParams);
             setLoading(false);
             toast.success('Order created successfully.');
             close();
@@ -264,7 +269,17 @@ const NewOrder = ({close, id}) => {
         }
 
     },[id])
-    console.log(order);
+
+    function sendEmail(e,templateParams) {
+        e.preventDefault(); 
+        emailjs.send('artisan_gmail', 'template_8uiccl8',templateParams, 'user_FtV3um8ZNdBMv9ZOPVXZP')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+      }
+
     return (
         <div className='new-order'>
             {

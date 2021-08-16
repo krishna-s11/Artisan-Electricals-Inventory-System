@@ -6,6 +6,7 @@ import firebase from '../../firebase';
 import { toast } from 'react-toastify';
 import Loading from '../Loading/Loading';
 import { AuthContext } from '../../Auth';
+import emailjs from 'emailjs-com'
 
 const db = firebase.firestore();
 
@@ -48,8 +49,21 @@ const AddProducts = ({ close, id }) => {
         }
     }
 
+    function sendEmail(e,templateParams) {
+        e.preventDefault(); 
+        emailjs.send('artisan_gmail', 'template_8uiccl8',templateParams, 'user_FtV3um8ZNdBMv9ZOPVXZP')
+          .then((result) => {
+              console.log(result.text);
+          }, (error) => {
+              console.log(error.text);
+          });
+      }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        var templateParams = {
+            message: `A new inventory is added by ${currentUser.user.name}`
+        }
         if (details.name === '') {
             return toast.error('Fill all the required fields');
         }
@@ -74,6 +88,7 @@ const AddProducts = ({ close, id }) => {
                 mssg: 'added a new inventory',
                 time: Date.now()
             })
+            sendEmail(e,templateParams);
             setLoading(false);
             toast.success('Product successfully added. ')
             close();
@@ -87,6 +102,7 @@ const AddProducts = ({ close, id }) => {
                 mssg: 'updated an inventory',
                 time: Date.now()
             })
+            sendEmail(e,templateParams);
             toast.success('Product successfully updated');
             close();
         }
