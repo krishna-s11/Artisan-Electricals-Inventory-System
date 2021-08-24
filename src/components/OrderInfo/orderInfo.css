@@ -4,6 +4,12 @@
   display: flex;
   justify-content: center;
 }
+.od-info {
+  width: 340px !important;
+}
+.od-data {
+  max-width: 100px !important;
+}
 .btn-accept {
   padding: 10px 20px;
   background-color: #4fc3a1;

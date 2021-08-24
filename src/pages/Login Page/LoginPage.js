@@ -39,8 +39,6 @@ const LoginPage = () => {
         })
     },[currentUser,history])
 
-    console.log(users);
-
     const handleEmail = (e) => {
         setEmail(e.target.value);
     }

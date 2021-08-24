@@ -123,6 +123,26 @@ const NewOrder = ({close, id}) => {
         sku20: '',
         productId20: '',
         outOfStock20: false,
+        img1: '',
+        img2: '',
+        img3: '',
+        img4: '',
+        img5: '',
+        img6: '',
+        img7: '',
+        img8: '',
+        img9: '',
+        img10: '',
+        img11: '',
+        img12: '',
+        img13: '',
+        img14: '',
+        img15: '',
+        img16: '',
+        img17: '',
+        img18: '',
+        img19: '',
+        img20: '',
         note: '',
         status: 'processing'
     });
@@ -346,7 +366,8 @@ const NewOrder = ({close, id}) => {
                                                                 ...order,
                                                                 sku1: data.sku,
                                                                 material1: data.name,
-                                                                productId1: product.id
+                                                                productId1: product.id,
+                                                                img1: img
                                                             })
                                                             
                                                             document.getElementById('material1').value = data.name;
@@ -398,7 +419,8 @@ const NewOrder = ({close, id}) => {
                                                                 ...order,
                                                                 sku2: data.sku,
                                                                 material2: data.name,
-                                                                productId2: product.id
+                                                                productId2: product.id,
+                                                                img2: img
                                                             })
                                                             
                                                             document.getElementById('material2').value = data.name;
@@ -451,7 +473,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku3: data.sku,
                                                             material3: data.name,
-                                                            productId3: product.id
+                                                            productId3: product.id,
+                                                            img3: img
                                                         })
                                                             
                                                         document.getElementById('material3').value = data.name;
@@ -504,7 +527,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku4: data.sku,
                                                             material4: data.name,
-                                                            productId4: product.id
+                                                            productId4: product.id,
+                                                            img4: img
                                                         })
                                                             
                                                         document.getElementById('material4').value = data.name;
@@ -557,7 +581,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku5: data.sku,
                                                             material5: data.name,
-                                                            productId5: product.id
+                                                            productId5: product.id,
+                                                            img5: img
                                                         })
                                                             
                                                         document.getElementById('material5').value = data.name;
@@ -610,7 +635,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku6: data.sku,
                                                             material6: data.name,
-                                                            productId6: product.id
+                                                            productId6: product.id,
+                                                            img6: img
                                                         })
                                                             
                                                         document.getElementById('material6').value = data.name;
@@ -663,7 +689,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku7: data.sku,
                                                             material7: data.name,
-                                                            productId7: product.id
+                                                            productId7: product.id,
+                                                            img7: img
                                                         })
                                                             
                                                         document.getElementById('material7').value = data.name;
@@ -714,7 +741,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku8: data.sku,
                                                             material8: data.name,
-                                                            productId8: product.id
+                                                            productId8: product.id,
+                                                            img8: img
                                                         })
                                                             
                                                         document.getElementById('material8').value = data.name;
@@ -765,7 +793,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku9: data.sku,
                                                             material9: data.name,
-                                                            productId9: product.id
+                                                            productId9: product.id,
+                                                            img9: img
                                                         })
                                                             
                                                         document.getElementById('material9').value = data.name;
@@ -816,7 +845,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku10: data.sku,
                                                             material10: data.name,
-                                                            productId10: product.id
+                                                            productId10: product.id,
+                                                            img10: img
                                                         })
                                                             
                                                         document.getElementById('material10').value = data.name;
@@ -867,7 +897,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku11: data.sku,
                                                             material11: data.name,
-                                                            productId11: product.id
+                                                            productId11: product.id,
+                                                            img11: img
                                                         })
                                                             
                                                         document.getElementById('material11').value = data.name;
@@ -918,7 +949,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku12: data.sku,
                                                             material12: data.name,
-                                                            productId12: product.id
+                                                            productId12: product.id,
+                                                            img12: img
                                                         })
                                                             
                                                         document.getElementById('material12').value = data.name;
@@ -969,7 +1001,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku13: data.sku,
                                                             material13: data.name,
-                                                            productId13: product.id
+                                                            productId13: product.id,
+                                                            img13: img
                                                         })
                                                             
                                                         document.getElementById('material13').value = data.name;
@@ -1020,7 +1053,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku14: data.sku,
                                                             material14: data.name,
-                                                            productId14: product.id
+                                                            productId14: product.id,
+                                                            img14: img
                                                         })
                                                             
                                                         document.getElementById('material14').value = data.name;
@@ -1071,7 +1105,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku15: data.sku,
                                                             material15: data.name,
-                                                            productId15: product.id
+                                                            productId15: product.id,
+                                                            img15: img
                                                         })
                                                             
                                                         document.getElementById('material15').value = data.name;
@@ -1122,7 +1157,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku16: data.sku,
                                                             material16: data.name,
-                                                            productId16: product.id
+                                                            productId16: product.id,
+                                                            img16: img
                                                         })
                                                             
                                                         document.getElementById('material16').value = data.name;
@@ -1173,7 +1209,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku17: data.sku,
                                                             material17: data.name,
-                                                            productId17: product.id
+                                                            productId17: product.id,
+                                                            img17: img
                                                         })
                                                             
                                                         document.getElementById('material17').value = data.name;
@@ -1224,7 +1261,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku18: data.sku,
                                                             material18: data.name,
-                                                            productId18: product.id
+                                                            productId18: product.id,
+                                                            img18: img
                                                         })
                                                             
                                                         document.getElementById('material18').value = data.name;
@@ -1275,7 +1313,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku19: data.sku,
                                                             material19: data.name,
-                                                            productId19: product.id
+                                                            productId19: product.id,
+                                                            img19: img
                                                         })
                                                             
                                                         document.getElementById('material19').value = data.name;
@@ -1326,7 +1365,8 @@ const NewOrder = ({close, id}) => {
                                                             ...order,
                                                             sku20: data.sku,
                                                             material20: data.name,
-                                                            productId20: product.id
+                                                            productId20: product.id,
+                                                            img20: img
                                                         })
                                                             
                                                         document.getElementById('material20').value = data.name;
