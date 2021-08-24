@@ -106,9 +106,9 @@
   transition: all 0.3s;
   z-index: 1000;
 }
-.product-preview:hover {
+/* .product-preview:hover {
   transform: scale(8) translateX(10px);
-}
+} */
 .btn-del {
   color: #f71f20;
   cursor: pointer;

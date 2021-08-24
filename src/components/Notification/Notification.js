@@ -13,7 +13,7 @@ const Notification = () => {
                 .sort(function(x,y){return y.time - x.time}));
         })
     },[])
-    console.log(notifications)
+    
     return (
         <div className='notification-drop' id='nt-drop'>
             <div id='triangle'></div>

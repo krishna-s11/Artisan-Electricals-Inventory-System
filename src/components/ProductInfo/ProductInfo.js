@@ -2,10 +2,13 @@ import React, { useEffect,useState } from 'react'
 import './productInfo.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import firebase from '../../firebase';
+import ImageViewer from '../ImageViewer/ImageViewer'
 
 const ProductInfo = ({close, id}) => {
 
-    const [product,setProduct] = useState([])
+    const [product,setProduct] = useState([]);
+    const [imgSrc,setImgSrc] = useState('');
+    const [imagePreview, setImagePreview] = useState(false);
     
     useEffect(() => {
         firebase.firestore().collection('products').doc(id).get()
@@ -15,11 +18,12 @@ const ProductInfo = ({close, id}) => {
             }
         })
     },[id])
-
-    console.log(product);
     if(product.imgLink){
     return (
         <div className='product-info-pg'>
+         {
+            imagePreview? <ImageViewer image={imgSrc} close={() => {setImagePreview(false)}}/>:null
+        }
         <div className='product-info'>
             <div className='pd-title-box'>
                 <AiOutlineClose className='btn-cross' onClick={close} />
@@ -31,7 +35,7 @@ const ProductInfo = ({close, id}) => {
                     {
                         product.imgLink.map && product.imgLink.map((image,i) => {
                             return(
-                            <img alt='' src={image} key={i}></img>
+                            <img alt='' onClick={() => {setImgSrc(image); setImagePreview(true); }} style={{cursor: 'pointer'}} src={image} key={i}></img>
                             )
                         })
                     }

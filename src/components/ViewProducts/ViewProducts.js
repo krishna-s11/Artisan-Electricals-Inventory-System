@@ -6,6 +6,7 @@ import ProductInfo from '../ProductInfo/ProductInfo'
 import firebase from '../../firebase'
 import {AuthContext} from '../../Auth';
 import DeleteBox from '../DeleteBox/DeleteBox'
+import ImageViewer from '../ImageViewer/ImageViewer'
 
 const ViewProducts = ({setNotify}) => {
 
@@ -15,6 +16,8 @@ const ViewProducts = ({setNotify}) => {
     const [deleteDisplay,setDeleteDisplay] = useState(false)
     const [id,setId] = useState('');
     const [name,setName] = useState('');
+    const [imgSrc,setImgSrc] = useState('');
+    const [imagePreview, setImagePreview] = useState(false);
     const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
@@ -37,6 +40,9 @@ const ViewProducts = ({setNotify}) => {
 
     return (
         <div className='view-products'>
+            {
+                imagePreview? <ImageViewer image={imgSrc} close={() => {setImagePreview(false)}}/>:null
+            }
             {
                 deleteDisplay?<DeleteBox deleteFun={() => {deleteProducts(id)}} close={() => setDeleteDisplay(false)} />:null
             }
@@ -86,7 +92,7 @@ const ViewProducts = ({setNotify}) => {
                             return(
                                 <tr key={i}>
                                     <td onClick={() => {setId(product.id) ;setDetails(true); setNotify()}} >{i+1}</td>
-                                    <td>
+                                    <td onClick={() => {setImgSrc(img); setImagePreview(true)}}>
                                         <img alt='' src={img} className='product-preview'></img>
                                     </td>
                                     <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.name}</td>

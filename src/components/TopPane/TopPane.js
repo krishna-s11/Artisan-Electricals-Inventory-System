@@ -29,15 +29,6 @@ const TopPane = ({setView,mob,notify,setNotify}) => {
         }
     },[notify])
 
-    // window.addEventListener('click', function(e){
-    //     if(e.target.parentElement.id === 'nt-container'){
-    //         console.log('inside');
-    //     }
-    //     else{
-    //         setNotification(false);
-    //     }
-    // })
-
     return (
         <div className='top-pane'>
             <div className='ham-container' onClick={() => setView()}>
@@ -56,7 +47,7 @@ const TopPane = ({setView,mob,notify,setNotify}) => {
                 <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-info'>
                         <p>{currentUser.user.name.slice(' ')}</p>
-                        <p>Admin</p>
+                        {currentUser.id === 'JfO82Y4NKvhvDYd1O5vJ'?<p>Admin</p>:<p>Employee</p>}
                     </div>
                         <IoMdArrowDropdown style={{fontSize:'20px'}}/>
                     <div className='drop-down' style={display?{display:'block'}:null}>
