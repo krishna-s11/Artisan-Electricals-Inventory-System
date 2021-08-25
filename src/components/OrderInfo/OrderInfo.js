@@ -36,11 +36,11 @@ const OrderInfo = ({close,id}) => {
     const declineBtn = async () => {
         await firebase.firestore().collection('orders').doc(id).update({
             status: 'declined'
-        })
+        });
         await firebase.firestore().collection('stats').doc('orders').update({
-            rejected: firebase.firestore().FieldValue.increment(1),
-            pending: firebase.firestore().FieldValue.decrement(1)
-        })
+            rejected: firebase.firestore.FieldValue.increment(1),
+            pending: firebase.firestore.FieldValue.increment(-1)
+        });
         toast.error('Order rejected !');
         close();
     }

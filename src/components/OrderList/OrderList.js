@@ -51,12 +51,7 @@ const OrderList = ({setNotify}) => {
                         <button class="btn-search"><FaSearch/></button>
                         <input type="text" class="input-search" placeholder="Type to Search..."></input>
                     </div> */}
-                    {
-                        currentUser && currentUser.user.orders?(
-                            <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
-                        )
-                        :null
-                    }
+                    <button className='btn btn-add_items' onClick={() => {setId('');setDisplay(true)}}>New +</button>
                 </div>
             </div>
             <table class="fl-table">
@@ -92,19 +87,8 @@ const OrderList = ({setNotify}) => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true); setNotify()}}>{data.requiredBy}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true); setNotify()}}>{data.note}</td>
                                     <td style={data.status==='declined'?({color: '#f71f20', fontWeight: '600'}):(data.status === 'processing'?({color: '#22a6b3', fontWeight: '600'}):({color: '#3CB371', fontWeight: '600'}))}>{data.status}</td>
-                                    {
-                                        currentUser && currentUser.user.orders?(
-                                            <td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
-                                        )
-                                        :null
-                                    }
-                                    {
-                                        currentUser && currentUser.user.orders?(
-                                            <td className='btn-edit' style={false?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
-                                        ):
-                                        null
-                                    }
-                                    
+                                    <td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
+                                    <td className='btn-edit' style={false?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
                                 </tr>
                             )
                         })

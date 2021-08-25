@@ -47,6 +47,7 @@ const AddProducts = ({ close, id }) => {
             const newImage = e.target.files[i];
             setImages((prevState) => [...prevState, newImage]);
         }
+        console.log(images);
     }
 
     function sendEmail(e,templateParams) {
@@ -76,8 +77,7 @@ const AddProducts = ({ close, id }) => {
                 const downloadLink = storageRef.getDownloadURL();
                 return downloadLink;
             })
-        ) && pictureLinks) || imgL ;
-        
+        )) || imgL ;
         if (!id) {
             await db.collection('products').add({details,imgLink});
 
@@ -107,7 +107,6 @@ const AddProducts = ({ close, id }) => {
             close();
         }
     }
-    console.log(pictureLinks);
     useEffect(() => {
         if (id) {
             db.collection('products').doc(id).get()
