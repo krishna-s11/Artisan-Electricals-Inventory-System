@@ -11,6 +11,7 @@ const OrderInfo = ({close,id}) => {
     const [order,setOrder] = useState([]);
     const [imgSrc,setImgSrc] = useState('');
     const [imagePreview, setImagePreview] = useState(false);
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         firebase.firestore().collection('orders').doc(id).get()
@@ -43,25 +44,25 @@ const OrderInfo = ({close,id}) => {
         toast.error('Order rejected !');
         close();
     }
-
+    console.log(currentUser);
     return (
         <div className='product-info-pg'>
             {
                 imagePreview? <ImageViewer image={imgSrc} close={() => {setImagePreview(false)}}/>:null
             }
-            <div className='product-info'>
+            <div className='product-info od-info-pane'>
                 <div className='pd-title-box'>
                     <AiOutlineClose className='btn-cross' onClick={close}/>
                     <h3>{order.name}</h3>
                 </div>
-                <div className='pd-info-box od-info' style={{marginTop: '50px'}}>
+                <div className='pd-info-box' style={{marginTop: '50px'}}>
                     <p>Employee Name: <span>{order.emp_name}</span></p>
                     <p>Project Name: <span>{order.name}</span></p>
                     <p>Project Address: <span>{order.add1} {order.add2} {order.add3} </span></p>
                     <p>Required By: <span>{order.requiredBy} </span></p>
                     <p>Extra note: <span>{order.note} </span></p>
                     <p>Material:</p>
-                    <table class="fl-table">
+                    <table class="od-table order-info">
                         <thead>
                         <tr>
                             <th>Preview</th>
@@ -175,15 +176,15 @@ const OrderInfo = ({close,id}) => {
                     {/* <p>Meterial SKU: <span>{order.sku1} </span></p>
                     <p>Meterial ID: <span>{order.productId1} </span></p> */}
                 </div>
-                {/* { */}
-                    {/* currentUser && currentUser.orders?( */}
+                {
+                    currentUser && currentUser.user.orders?(
                         <div className='pd-info-action-container'>
                             <button className='btn btn-accept' onClick={acceptBtn}>Accept</button>
                             <button className='btn btn-decline' onClick={declineBtn}>Decline</button>
                         </div>
-                    {/* )
-                    :null    */}
-                {/* } */}
+                    )
+                    :null   
+                }
             </div>
         </div>
     )

@@ -590,7 +590,7 @@ const NewOrder = ({close, id}) => {
 
                                                         setTimeout(() => {
                                                             setDisplay5(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -644,7 +644,7 @@ const NewOrder = ({close, id}) => {
                                                         
                                                         setTimeout(() => {
                                                             setDisplay6(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -675,11 +675,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 7:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material7" onChange={handleChange} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material7} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material7" onChange={searchFunc} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material7} required></input>
                                     { display7?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -696,7 +696,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material7').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay7(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -727,11 +727,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 8:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material8" onChange={handleChange} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material8} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material8" onChange={searchFunc} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material8} required></input>
                                     { display8?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -748,7 +748,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material8').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay8(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -779,11 +779,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 9:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material9" onChange={handleChange} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material9} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material9" onChange={searchFunc} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material9} required></input>
                                     { display9?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -800,7 +800,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material9').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay9(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -831,11 +831,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 10:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material10" onChange={handleChange} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material10} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material10" onChange={searchFunc} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material10} required></input>
                                     { display10?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -852,7 +852,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material10').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay10(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -883,11 +883,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 11:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material11" onChange={handleChange} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material11} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material11" onChange={searchFunc} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material11} required></input>
                                     { display11?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -904,7 +904,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material11').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay11(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -935,11 +935,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 12:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material12" onChange={handleChange} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material12} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material12" onChange={searchFunc} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material12} required></input>
                                     { display12?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -956,7 +956,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material12').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay12(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -987,11 +987,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 13:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material13" onChange={handleChange} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material13} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material13" onChange={searchFunc} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material13} required></input>
                                     { display13?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1008,7 +1008,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material13').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay13(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1039,11 +1039,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 14:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material14" onChange={handleChange} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material14} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material14" onChange={searchFunc} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material14} required></input>
                                     { display14?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1060,7 +1060,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material14').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay14(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1091,11 +1091,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 15:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material15" onChange={handleChange} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material15} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material15" onChange={searchFunc} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material15} required></input>
                                     { display15?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1112,7 +1112,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material15').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay15(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1143,11 +1143,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 16:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material16" onChange={handleChange} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material16} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material16" onChange={searchFunc} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material16} required></input>
                                     { display16?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1164,7 +1164,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material16').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay16(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1195,11 +1195,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 17:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material17" onChange={handleChange} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material17} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material17" onChange={searchFunc} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material17} required></input>
                                     { display17?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1216,7 +1216,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material17').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay17(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1247,11 +1247,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 18:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material18" onChange={handleChange} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material18} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material18" onChange={searchFunc} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material18} required></input>
                                     { display18?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1268,7 +1268,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material18').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay18(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1299,11 +1299,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 19:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material19" onChange={handleChange} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material19} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material19" onChange={searchFunc} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material19} required></input>
                                     { display19?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1320,7 +1320,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material19').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay19(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>
@@ -1351,11 +1351,11 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 20:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material20" onChange={handleChange} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material20} required></input>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material20" onChange={searchFunc} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material20} required></input>
                                     { display20?(
                                     <div className='selection-box' >
                                         {
-                                            products && products.map((product,i) => {
+                                            filterData && filterData.map((product,i) => {
                                                 const data = product.data.details;
                                                 const img = product.data.imgLink[0];
                                                 return(
@@ -1372,7 +1372,7 @@ const NewOrder = ({close, id}) => {
                                                         document.getElementById('material20').value = data.name;
                                                         setTimeout(() => {
                                                             setDisplay20(false)
-                                                            setLoader(true);
+                                                            setLoader(false);
                                                         },500)
                                                     }}>
                                                     <div>

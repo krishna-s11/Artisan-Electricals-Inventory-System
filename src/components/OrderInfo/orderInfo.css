@@ -4,8 +4,48 @@
   display: flex;
   justify-content: center;
 }
+.od-info-pane {
+  max-width: 800px;
+  width: 800px;
+  min-width: 340px;
+}
 .od-info {
-  width: 340px !important;
+  min-width: 340px;
+}
+.od-table {
+  border-radius: 5px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+.od-table tbody tr {
+  cursor: pointer;
+  overflow-x: auto;
+}
+.od-table td,
+.od-table th {
+  text-align: center;
+  padding: 15px;
+  overflow-x: auto;
+}
+.od-table td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 14px;
+  max-width: 400px;
+  overflow-x: auto;
+}
+.od-table thead th {
+  color: #ffffff;
+  background: #4fc3a1;
+}
+.od-table tr:nth-child(even) {
+  background: #f8f8f8;
 }
 .od-data {
   max-width: 100px !important;
@@ -36,4 +76,19 @@
 }
 .pd-info-box li:first-child {
   margin-bottom: 5px;
+}
+
+@media only screen and (max-width: 900px) {
+  .od-info-pane {
+    max-width: 600px;
+    width: 600px;
+    min-width: 340px;
+  }
+}
+@media only screen and (max-width: 660px) {
+  .od-info-pane {
+    max-width: 340px;
+    width: 340px;
+    min-width: 340px;
+  }
 }
