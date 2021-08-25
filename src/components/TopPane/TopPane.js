@@ -10,7 +10,7 @@ import signout from '../../assets/sign-out.png'
 import Notification from '../Notification/Notification'
 import { AuthContext } from '../../Auth'
 
-const TopPane = ({setView,mob,notify,setNotify}) => {
+const TopPane = ({setView,mob,notify,setNotify,profileDrop,setProfileDrop}) => {
 
     const [display,setDisplay] = useState(false);
     const [notification,setNotification] = useState(false);
@@ -23,11 +23,13 @@ const TopPane = ({setView,mob,notify,setNotify}) => {
     }
 
     useEffect(() => {
-        console.log(notify);
         if(!notify){
             setNotification(false)
         }
-    },[notify])
+        if(!profileDrop){
+            setDisplay(false);
+        }
+    },[notify,profileDrop])
 
     return (
         <div className='top-pane'>
@@ -44,7 +46,7 @@ const TopPane = ({setView,mob,notify,setNotify}) => {
                         ):null
                     }
                 </div>
-                <div className='top-user' onClick={() => setDisplay(!display)} style={display?{borderBottom: '2px solid salmon'}:null}>
+                <div className='top-user' onClick={() => {setDisplay(!display); setProfileDrop()}} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-info'>
                         <p>{currentUser.user.name.slice(' ')}</p>
                         {currentUser.id === 'JfO82Y4NKvhvDYd1O5vJ'?<p>Admin</p>:<p>Employee</p>}

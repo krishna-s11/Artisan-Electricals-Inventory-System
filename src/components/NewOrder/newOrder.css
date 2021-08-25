@@ -20,6 +20,10 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   overflow: auto;
 }
+/* .ot {
+  width: 93.8% !important;
+  margin-left: auto !important;
+} */
 .product-selection-container {
   width: 100%;
   padding: 10px;

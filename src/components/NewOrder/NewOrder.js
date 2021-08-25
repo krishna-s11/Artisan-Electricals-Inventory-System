@@ -2,6 +2,7 @@ import React,{useContext, useEffect, useState} from 'react'
 import './newOrder.css'
 import {AiOutlineClose} from 'react-icons/ai'
 import {AiOutlinePlusCircle} from 'react-icons/ai'
+import {AiOutlineMinusCircle} from 'react-icons/ai'
 import firebase from '../../firebase'
 import { toast } from 'react-toastify'
 import { AuthContext } from '../../Auth'
@@ -405,9 +406,11 @@ const NewOrder = ({close, id}) => {
                             <div className='bt-row-container'>
                                 <div className='form-row bt'>
                                     <p>Material 2:</p>
-                                    <input type="text" autoComplete='off' class="form__input add-input material" id="material2" onChange={searchFunc} onClick={() => {setDisplay2(!display2)}} placeholder="Choose material" defaultValue={order.material2} required></input>
+                                    <div style={{display: 'flex', alignItems:'center'}}>
+                                    <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku2:'',material2:'',productId2:'',img2:''}); document.getElementById('second').style.display = 'none'; setShow(1)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                    <input type="text" autoComplete='off' class="form__input add-input material" id="material2" onChange={searchFunc} onClick={() => {setDisplay2(!display2)}} placeholder="Choose material" defaultValue={order.material2} required></input></div>
                                         { display2?(
-                                        <div className='selection-box' >
+                                        <div className='selection-box ot' >
                                             {
                                                 filterData && filterData.map((product,i) => {
                                                     const data = product.data.details;
@@ -459,7 +462,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 3:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material3" onChange={searchFunc} onClick={() => {setDisplay3(!display3)}} placeholder="Choose material" defaultValue={order.material3} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku3:'',material3:'',productId3:'',img3:''}); document.getElementById('third').style.display = 'none'; setShow(2)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material3" onChange={searchFunc} onClick={() => {setDisplay3(!display3)}} placeholder="Choose material" defaultValue={order.material3} required></input></div>
                                     { display3?(
                                     <div className='selection-box' >
                                         {
@@ -513,7 +518,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 4:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material4" onChange={searchFunc} onClick={() => {setDisplay4(!display4)}} placeholder="Choose material" defaultValue={order.material4} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku4:'',material4:'',productId4:'',img4:''}); document.getElementById('fourth').style.display = 'none'; setShow(3)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material4" onChange={searchFunc} onClick={() => {setDisplay4(!display4)}} placeholder="Choose material" defaultValue={order.material4} required></input></div>
                                     { display4?(
                                     <div className='selection-box' >
                                         {
@@ -567,7 +574,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 5:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material5" onChange={searchFunc} onClick={() => {setDisplay5(!display5)}} placeholder="Choose material" defaultValue={order.material5} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku5:'',material5:'',productId5:'',img5:''}); document.getElementById('fifth').style.display = 'none'; setShow(4)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material5" onChange={searchFunc} onClick={() => {setDisplay5(!display5)}} placeholder="Choose material" defaultValue={order.material5} required></input></div>
                                     { display5?(
                                     <div className='selection-box' >
                                         {
@@ -621,7 +630,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 6:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material6" onChange={searchFunc} onClick={() => {setDisplay6(!display6)}} placeholder="Choose material" defaultValue={order.material6} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku6:'',material6:'',productId6:'',img6:''}); document.getElementById('sixth').style.display = 'none'; setShow(5)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material6" onChange={searchFunc} onClick={() => {setDisplay6(!display6)}} placeholder="Choose material" defaultValue={order.material6} required></input></div>
                                     { display6?(
                                     <div className='selection-box' >
                                         {
@@ -675,7 +686,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 7:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material7" onChange={searchFunc} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material7} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku7:'',material7:'',productId7:'',img7:''}); document.getElementById('seventh').style.display = 'none'; setShow(6)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material7" onChange={searchFunc} onClick={() => {setDisplay7(!display7)}} placeholder="Choose material" defaultValue={order.material7} required></input></div>
                                     { display7?(
                                     <div className='selection-box' >
                                         {
@@ -727,7 +740,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 8:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material8" onChange={searchFunc} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material8} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku8:'',material8:'',productId8:'',img8:''}); document.getElementById('eigth').style.display = 'none'; setShow(7)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material8" onChange={searchFunc} onClick={() => {setDisplay8(!display8)}} placeholder="Choose material" defaultValue={order.material8} required></input></div>
                                     { display8?(
                                     <div className='selection-box' >
                                         {
@@ -779,7 +794,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 9:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material9" onChange={searchFunc} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material9} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku9:'',material9:'',productId9:'',img9:''}); document.getElementById('ninth').style.display = 'none'; setShow(8)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material9" onChange={searchFunc} onClick={() => {setDisplay9(!display9)}} placeholder="Choose material" defaultValue={order.material9} required></input></div>
                                     { display9?(
                                     <div className='selection-box' >
                                         {
@@ -831,7 +848,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 10:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material10" onChange={searchFunc} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material10} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku10:'',material10:'',productId10:'',img10:''}); document.getElementById('tenth').style.display = 'none'; setShow(9)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material10" onChange={searchFunc} onClick={() => {setDisplay10(!display10)}} placeholder="Choose material" defaultValue={order.material10} required></input></div>
                                     { display10?(
                                     <div className='selection-box' >
                                         {
@@ -883,7 +902,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 11:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material11" onChange={searchFunc} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material11} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku11:'',material11:'',productId11:'',img11:''}); document.getElementById('eleventh').style.display = 'none'; setShow(10)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material11" onChange={searchFunc} onClick={() => {setDisplay11(!display11)}} placeholder="Choose material" defaultValue={order.material11} required></input></div>
                                     { display11?(
                                     <div className='selection-box' >
                                         {
@@ -935,7 +956,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 12:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material12" onChange={searchFunc} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material12} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku12:'',material12:'',productId12:'',img12:''}); document.getElementById('twelth').style.display = 'none'; setShow(11)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material12" onChange={searchFunc} onClick={() => {setDisplay12(!display12)}} placeholder="Choose material" defaultValue={order.material12} required></input></div>
                                     { display12?(
                                     <div className='selection-box' >
                                         {
@@ -987,7 +1010,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 13:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material13" onChange={searchFunc} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material13} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku13:'',material13:'',productId13:'',img13:''}); document.getElementById('thirteenth').style.display = 'none'; setShow(12)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material13" onChange={searchFunc} onClick={() => {setDisplay13(!display13)}} placeholder="Choose material" defaultValue={order.material13} required></input></div>
                                     { display13?(
                                     <div className='selection-box' >
                                         {
@@ -1039,7 +1064,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 14:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material14" onChange={searchFunc} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material14} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku14:'',material14:'',productId14:'',img14:''}); document.getElementById('forteenth').style.display = 'none'; setShow(13)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material14" onChange={searchFunc} onClick={() => {setDisplay14(!display14)}} placeholder="Choose material" defaultValue={order.material14} required></input></div>
                                     { display14?(
                                     <div className='selection-box' >
                                         {
@@ -1091,7 +1118,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 15:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material15" onChange={searchFunc} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material15} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku15:'',material15:'',productId15:'',img15:''}); document.getElementById('fifteenth').style.display = 'none'; setShow(14)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material15" onChange={searchFunc} onClick={() => {setDisplay15(!display15)}} placeholder="Choose material" defaultValue={order.material15} required></input></div>
                                     { display15?(
                                     <div className='selection-box' >
                                         {
@@ -1143,7 +1172,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 16:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material16" onChange={searchFunc} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material16} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku16:'',material16:'',productId16:'',img16:''}); document.getElementById('sixteenth').style.display = 'none'; setShow(15)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material16" onChange={searchFunc} onClick={() => {setDisplay16(!display16)}} placeholder="Choose material" defaultValue={order.material16} required></input></div>
                                     { display16?(
                                     <div className='selection-box' >
                                         {
@@ -1195,7 +1226,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 17:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material17" onChange={searchFunc} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material17} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku17:'',material17:'',productId17:'',img17:''}); document.getElementById('seventeenth').style.display = 'none'; setShow(16)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material17" onChange={searchFunc} onClick={() => {setDisplay17(!display17)}} placeholder="Choose material" defaultValue={order.material17} required></input></div>
                                     { display17?(
                                     <div className='selection-box' >
                                         {
@@ -1247,7 +1280,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 18:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material18" onChange={searchFunc} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material18} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku18:'',material18:'',productId18:'',img18:''}); document.getElementById('eighteenth').style.display = 'none'; setShow(17)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material18" onChange={searchFunc} onClick={() => {setDisplay18(!display18)}} placeholder="Choose material" defaultValue={order.material18} required></input></div>
                                     { display18?(
                                     <div className='selection-box' >
                                         {
@@ -1299,7 +1334,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 19:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material19" onChange={searchFunc} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material19} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku19:'',material19:'',productId19:'',img19:''}); document.getElementById('ninteenth').style.display = 'none'; setShow(18)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material19" onChange={searchFunc} onClick={() => {setDisplay19(!display19)}} placeholder="Choose material" defaultValue={order.material19} required></input></div>
                                     { display19?(
                                     <div className='selection-box' >
                                         {
@@ -1351,7 +1388,9 @@ const NewOrder = ({close, id}) => {
                         <div className='bt-row-container'>
                             <div className='form-row bt'>
                                 <p>Material 20:</p>
-                                <input type="text" autoComplete='off' class="form__input add-input material" id="material20" onChange={searchFunc} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material20} required></input>
+                                <div style={{display: 'flex', alignItems:'center'}}>
+                                <AiOutlineMinusCircle onClick={() => {setOrder({...order,sku20:'',material20:'',productId20:'',img20:''}); document.getElementById('twentieth').style.display = 'none'; setShow(19)}} style={{marginRight: '10px', cursor:'pointer', transform:'translateY(4px)',fontWeight:'700', fontSize:'18px'}}/>
+                                <input type="text" autoComplete='off' class="form__input add-input material" id="material20" onChange={searchFunc} onClick={() => {setDisplay20(!display20)}} placeholder="Choose material" defaultValue={order.material20} required></input></div>
                                     { display20?(
                                     <div className='selection-box' >
                                         {

@@ -8,7 +8,7 @@ import {AuthContext} from '../../Auth';
 import DeleteBox from '../DeleteBox/DeleteBox'
 import ImageViewer from '../ImageViewer/ImageViewer'
 
-const ViewProducts = ({setNotify}) => {
+const ViewProducts = ({setNotify,setProfileDrop}) => {
 
     const [display,setDisplay] = useState(false);
     const [details,setDetails] = useState(false);
@@ -91,15 +91,15 @@ const ViewProducts = ({setNotify}) => {
                             const img = product.data.imgLink[0];
                             return(
                                 <tr key={i}>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify()}} >{i+1}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop()}} >{i+1}</td>
                                     <td onClick={() => {setImgSrc(img); setImagePreview(true)}}>
                                         <img alt='' src={img} className='product-preview'></img>
                                     </td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.name}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.sku}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.quantity}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.category}</td>
-                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify() }}>{data.serial}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop() }}>{data.name}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop() }}>{data.sku}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop() }}>{data.quantity}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop() }}>{data.category}</td>
+                                    <td onClick={() => {setId(product.id) ;setDetails(true); setNotify(); setProfileDrop() }}>{data.serial}</td>
                                     {
                                         currentUser && currentUser.user.inventory?(
                                         <td onClick={() => {setId(product.id); setName(data.name); setDeleteDisplay(true) }}><p className='btn-del'>Delete</p></td>       

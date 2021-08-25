@@ -13,16 +13,23 @@ import MyOrders from '../MyOrders/MyOrders'
 const RightPane = ({setView,mob}) => {
 
     const [notify,setNotify] = useState(true);
+    const [profileDrop,setProfileDrop] = useState(true);
 
     return (
         <div className='right-pane'>
-            <TopPane setView={setView} mob={true} notify={notify} setNotify={() => {setNotify(true)}} />
+            <TopPane setView={setView} 
+                    mob={true} 
+                    notify={notify} 
+                    setNotify={() => {setNotify(true)}} 
+                    profileDrop={profileDrop} 
+                    setProfileDrop={() => {setNotify(true)}} 
+            />
             <Switch>
                 <Route
                     path="/dashboard/products"
                     render={() => (
                        <Fragment>
-                          <ViewProducts setNotify={() => {setNotify(false)}} />
+                          <ViewProducts setNotify={() => {setNotify(false)}} setProfileDrop={() => {setProfileDrop(false)}} />
                        </Fragment>
                     )}
                  />
@@ -31,7 +38,7 @@ const RightPane = ({setView,mob}) => {
                     path='/dashboard/orders'
                     render={() => (
                    <Fragment>
-                      <OrderList setNotify={() => {setNotify(false)}} />
+                      <OrderList setNotify={() => {setNotify(false)}} setProfileDrop={() => {setProfileDrop(false)}} />
                    </Fragment>
                 )}
                 />

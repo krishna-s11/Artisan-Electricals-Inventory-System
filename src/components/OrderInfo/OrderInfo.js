@@ -44,7 +44,7 @@ const OrderInfo = ({close,id}) => {
         toast.error('Order rejected !');
         close();
     }
-    console.log(currentUser);
+
     return (
         <div className='product-info-pg'>
             {
