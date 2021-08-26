@@ -13,7 +13,7 @@ import MyOrders from '../MyOrders/MyOrders'
 const RightPane = ({setView,mob}) => {
 
     const [notify,setNotify] = useState(true);
-    const [profileDrop,setProfileDrop] = useState(true);
+    const [profileDrop,setProfileDrop] = useState(false);
 
     return (
         <div className='right-pane'>
@@ -22,7 +22,7 @@ const RightPane = ({setView,mob}) => {
                     notify={notify} 
                     setNotify={() => {setNotify(true)}} 
                     profileDrop={profileDrop} 
-                    setProfileDrop={() => {setNotify(true)}} 
+                    setProfileDrop={() => {setProfileDrop(true)}} 
             />
             <Switch>
                 <Route

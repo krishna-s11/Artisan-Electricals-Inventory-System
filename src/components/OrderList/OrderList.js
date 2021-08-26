@@ -87,8 +87,13 @@ const OrderList = ({setNotify, setProfileDrop}) => {
                                     <td onClick={() => {setId(order.id) ;setDetails(true); setNotify(); setProfileDrop()}}>{data.requiredBy}</td>
                                     <td onClick={() => {setId(order.id) ;setDetails(true); setNotify(); setProfileDrop()}}>{data.note}</td>
                                     <td style={data.status==='declined'?({color: '#f71f20', fontWeight: '600'}):(data.status === 'processing'?({color: '#22a6b3', fontWeight: '600'}):({color: '#3CB371', fontWeight: '600'}))}>{data.status}</td>
-                                    <td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>
-                                    <td className='btn-edit' style={false?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>
+                                    {
+                                        currentUser && currentUser.user.orders?<td className='btn-del' style={false?{color:'#FFFF00'}:null} onClick={() => {setId(order.id); setDeleteDisplay(true)}} >Delete</td>:null
+                                    }
+                                    {
+                                        currentUser && currentUser.user.orders?<td className='btn-edit' style={false?{color: '#fff',fontWeight: '600'}:null} onClick={(id) => {setId(order.id); setDisplay(true)}}>Edit</td>:null
+                                    }
+                                    
                                 </tr>
                             )
                         })

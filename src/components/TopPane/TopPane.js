@@ -30,7 +30,8 @@ const TopPane = ({setView,mob,notify,setNotify,profileDrop,setProfileDrop}) => {
             setDisplay(false);
         }
     },[notify,profileDrop])
-
+    console.log('profileDrop:',profileDrop);
+    console.log('display:',display);
     return (
         <div className='top-pane'>
             <div className='ham-container' onClick={() => setView()}>
