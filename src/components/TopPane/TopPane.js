@@ -38,7 +38,7 @@ const TopPane = ({setView,mob,notify,setNotify,profileDrop,setProfileDrop}) => {
                     <GiHamburgerMenu/>
             </div>
             <div className='top-right-sec'>
-                <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification); setNotify()}}>
+                <div className='notification-container' id='nt-container' onClick={() => {setNotification(!notification); setNotify();setDisplay(false)}}>
                     <MdNotificationsNone/>
                     <div className='noti-circle'></div>
                     {
@@ -47,7 +47,7 @@ const TopPane = ({setView,mob,notify,setNotify,profileDrop,setProfileDrop}) => {
                         ):null
                     }
                 </div>
-                <div className='top-user' onClick={() => {setDisplay(!display); setProfileDrop()}} style={display?{borderBottom: '2px solid salmon'}:null}>
+                <div className='top-user' onClick={() => {setDisplay(!display); setProfileDrop();setNotification(false)}} style={display?{borderBottom: '2px solid salmon'}:null}>
                     <div className='user-info'>
                         <p>{currentUser.user.name.slice(' ')}</p>
                         {currentUser.id === 'JfO82Y4NKvhvDYd1O5vJ'?<p>Admin</p>:<p>Employee</p>}

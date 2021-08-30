@@ -192,8 +192,6 @@ const NewOrder = ({close, id}) => {
         )
     })
 
-    console.log(filterData);
-
     const handleQuantity = (e,productId,stockWarn,quant) => {
             setOrder({...order,[e.target.id]: e.target.value})
             const ids = products.map(item => {return item.id})
@@ -230,7 +228,8 @@ const NewOrder = ({close, id}) => {
             toast.success('Order created successfully.');
             close();
         }else{
-            await db.collection('orders').doc(id).update(order);
+            await db.collection('orders').doc(id).delete();
+            await db.collection('orders').add(order);
             setLoading(false);
             toast.success('Order updated successfully.');
             close();
