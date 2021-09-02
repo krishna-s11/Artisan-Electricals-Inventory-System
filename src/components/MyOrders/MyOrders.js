@@ -19,13 +19,17 @@ const MyOrders = () => {
 
     useEffect(() => {
         db.collection('orders').where('emp_id', '==', currentUser.id).onSnapshot(querySnap => {
-            setOrders(querySnap.docs.map(doc => ({id: doc.id, data: doc.data()})))
+            setOrders(
+                querySnap.docs
+                .map(doc => ({id: doc.id, data: doc.data()})))
         })
     },[])
     
     const deleteOrder = async (id) => {
         await firebase.firestore().collection('orders').doc(id).delete();
     }
+
+    let sortedData = orders.sort(function(x,y){return y.data.timestamp - x.data.timestamp;})
 
     return (
         <div className='order-list'>
@@ -69,8 +73,8 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                     {
-                        orders && orders.map((order,i) => {
-                            const data = order.data;
+                        sortedData && sortedData.map((order,i) => {
+                            const data = order.data
                             return(
                                 <tr key={i} style={false?{backgroundColor:'#F88379'}:null}>
                                     <td onClick={() => {setId(order.id) ;setDetails(true)}}>{i+1}</td>
