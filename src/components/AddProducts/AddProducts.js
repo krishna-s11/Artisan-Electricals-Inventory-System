@@ -52,7 +52,7 @@ const AddProducts = ({ close, id }) => {
 
     function sendEmail(e,templateParams) {
         e.preventDefault(); 
-        emailjs.send('artisan_gmail', 'template_8uiccl8',templateParams, 'user_FtV3um8ZNdBMv9ZOPVXZP')
+        emailjs.send('service_aul62y7', 'template_g12ea4f',templateParams, 'user_9tuZAmDdmzn1rAs5z4gPD')
           .then((result) => {
               console.log(result.text);
           }, (error) => {
