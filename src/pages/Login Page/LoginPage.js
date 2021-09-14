@@ -56,7 +56,7 @@ const LoginPage = () => {
             if(users[i].user.email === email){
                 if(users[i].user.password === password){
                     setCurrentUser(users[i]);
-                    history.push('/dashboard/products');
+                    history.push('/dashboard/orders');
                     success = true
                     return ;
                 }
@@ -77,12 +77,12 @@ const LoginPage = () => {
             </div>
             <div class="content">
                 <div class='login-lg'>
-                    <h2>Member Login</h2>
-                    <div class='login-role'>
+                    <h2 style={{marginBottom: '100px'}}>Member Login</h2>
+                    {/* <div class='login-role'>
                         <div className='select-box' style={start?employee:admin}></div>
                         <p style={start?{color:'#000'}:{color:'#fff'}} onClick={() => setStart(false)}>I am admin</p>
                         <p style={start?{color:'#fff'}:{color:'#000'}} onClick={() => setStart(true)}>I am employee</p>
-                    </div>
+                    </div> */}
                     <div>
                     <div class="form__group">
                         <input type="text" class="form__input" id="text" onChange={handleEmail} placeholder="Username" required></input>
