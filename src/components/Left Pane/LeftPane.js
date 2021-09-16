@@ -24,7 +24,7 @@ const LeftPane = ({mobileNav,setMobile,mob}) => {
     }
 
     
-    const [filter,setFilter] = useState(0);
+    const [filter,setFilter] = useState(1);
     const {currentUser} = useContext(AuthContext);
 
     return (
